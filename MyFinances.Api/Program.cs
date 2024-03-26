@@ -10,8 +10,7 @@ namespace MyFinances.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwagger();
 
             var app = builder.Build();
 
@@ -19,8 +18,14 @@ namespace MyFinances.Api
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "MyFinances Swagger v1.0");
+                    options.RoutePrefix = string.Empty;
+                });
             }
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
