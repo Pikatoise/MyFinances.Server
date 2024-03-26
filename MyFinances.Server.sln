@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFinances.Api", "MyFinances.Api\MyFinances.Api.csproj", "{FE90A2F1-1BC4-476B-9F3B-08DEE54A7582}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFinances.Domain", "MyFinances.Domain\MyFinances.Domain.csproj", "{67E776F1-F2F7-4C79-94DB-EB68F24F996C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,12 +23,17 @@ Global
 		{FE90A2F1-1BC4-476B-9F3B-08DEE54A7582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE90A2F1-1BC4-476B-9F3B-08DEE54A7582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE90A2F1-1BC4-476B-9F3B-08DEE54A7582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67E776F1-F2F7-4C79-94DB-EB68F24F996C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67E776F1-F2F7-4C79-94DB-EB68F24F996C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67E776F1-F2F7-4C79-94DB-EB68F24F996C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67E776F1-F2F7-4C79-94DB-EB68F24F996C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FE90A2F1-1BC4-476B-9F3B-08DEE54A7582} = {2E9ECA2E-CCA2-4E73-B9F9-6BE4BB2954A7}
+		{67E776F1-F2F7-4C79-94DB-EB68F24F996C} = {6A2A04BB-CAC7-4FAA-80B7-AA94D48109BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9EF8D691-8E87-4F65-B866-3FC18DFFAA8F}
