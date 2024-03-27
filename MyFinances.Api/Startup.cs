@@ -8,14 +8,17 @@ namespace MyFinances.Api
     {
         public static void AddSwagger(this IServiceCollection services)
         {
-            services.AddApiVersioning()
-                .AddApiExplorer(options =>
-                {
-                    options.DefaultApiVersion = new ApiVersion(1, 0);
-                    options.GroupNameFormat = "'v'VVV";
-                    options.SubstituteApiVersionInUrl = true;
-                    options.AssumeDefaultVersionWhenUnspecified = true;
-                });
+            services.AddApiVersioning(options =>
+            {
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+            })
+            .AddApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(options =>

@@ -1,8 +1,10 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyFinances.Api.Controllers
 {
     [ApiController]
+    [ApiVersion("1.0")]
     [Route("[controller]")]
     public class TempController: ControllerBase
     {
