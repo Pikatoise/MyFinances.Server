@@ -4,8 +4,15 @@ using System.Reflection;
 
 namespace MyFinances.Api
 {
+    /// <summary>
+    /// DI services
+    /// </summary>
     public static class Startup
     {
+        /// <summary>
+        /// Enable swagger versioning and documentation
+        /// </summary>
+        /// <param name="services">Collection of services for DI container</param>
         public static void AddSwagger(this IServiceCollection services)
         {
             services.AddApiVersioning(options =>

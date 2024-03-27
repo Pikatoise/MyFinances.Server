@@ -1,8 +1,15 @@
 
 namespace MyFinances.Api
 {
+    /// <summary>
+    /// Main class
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Entry point
+        /// </summary>
+        /// <param name="args">Exec console args</param>
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
