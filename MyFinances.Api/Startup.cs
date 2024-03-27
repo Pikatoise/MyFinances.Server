@@ -35,31 +35,10 @@ namespace MyFinances.Api
                     }
                 });
 
-                //options.OperationFilter<SwaggerDefaultValues>();
-
                 var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
             });
         }
     }
-
-    /*public class SwaggerDefaultValues: IOperationFilter
-    {
-        public void Apply(OpenApiOperation operation, OperationFilterContext context)
-        {
-            var apiDescription = context.ApiDescription;
-            operation.Parameters ??= new List<OpenApiParameter>();
-
-            // Добавляем параметр с текущей версией API в тело запроса
-            operation.Parameters.Add(new OpenApiParameter
-            {
-                Name = "api-version",
-                In = ParameterLocation.Query,
-                Required = true,
-                Schema = new OpenApiSchema { Type = "string" },
-                Description = "API version",
-            });
-        }
-    }*/
 }

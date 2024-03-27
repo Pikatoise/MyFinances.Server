@@ -18,6 +18,8 @@ namespace MyFinances.Api.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
+            _logger.LogDebug($"Get request --- {DateTime.Now.ToShortTimeString()}");
+
             return Ok("Success");
         }
     }
