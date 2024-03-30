@@ -3,7 +3,7 @@
 namespace MyFinances.Domain.Entity
 {
     /// <summary>
-    /// User of system
+    /// User entity
     /// </summary>
     public class User: IEntityId<int>, IAuditable
     {
