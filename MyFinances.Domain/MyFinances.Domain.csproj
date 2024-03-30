@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="DTO\" />
-    <Folder Include="Enum\" />
     <Folder Include="Interfaces\Services\" />
     <Folder Include="Interfaces\Repositories\" />
     <Folder Include="Result\" />
