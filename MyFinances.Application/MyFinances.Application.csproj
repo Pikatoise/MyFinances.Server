@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DI\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Validations\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>
