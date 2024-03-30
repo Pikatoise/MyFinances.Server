@@ -1,5 +1,8 @@
 ﻿namespace MyFinances.Domain.Enum
 {
+    /// <summary>
+    /// User roles
+    /// </summary>
     public enum Roles
     {
         User = 1,

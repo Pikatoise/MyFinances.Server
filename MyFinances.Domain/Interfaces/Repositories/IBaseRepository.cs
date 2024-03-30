@@ -1,5 +1,9 @@
 ﻿namespace MyFinances.Domain.Interfaces.Repositories
 {
+    /// <summary>
+    /// Repository with base functions for database communication
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public interface IBaseRepository<TEntity>
     {
         IQueryable<TEntity> GetAll();

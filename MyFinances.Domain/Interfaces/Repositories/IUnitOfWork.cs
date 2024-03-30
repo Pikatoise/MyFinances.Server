@@ -3,6 +3,9 @@ using MyFinances.Domain.Entity;
 
 namespace MyFinances.Domain.Interfaces.Repositories
 {
+    /// <summary>
+    /// The general context for repositories and database work
+    /// </summary>
     public interface IUnitOfWork
     {
         Task<IDbContextTransaction> BeginTransactionAsync();
