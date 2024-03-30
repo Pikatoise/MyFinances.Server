@@ -7,7 +7,6 @@ namespace MyFinances.Domain.Entity
     /// </summary>
     public class User: IEntityId<int>, IAuditable
     {
-        /// <inheritdoc/>
         public int Id { get; set; }
 
         public required string Login { get; set; }
@@ -22,10 +21,8 @@ namespace MyFinances.Domain.Entity
 
         public UserToken UserToken { get; set; } = null!;
 
-        /// <inheritdoc/>
         public DateTime CreatedAt { get; set; }
 
-        /// <inheritdoc/>
         public DateTime? UpdatedAt { get; set; }
     }
 }
