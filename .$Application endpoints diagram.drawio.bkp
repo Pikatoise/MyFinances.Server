@@ -1,0 +1,22 @@
+<mxfile host="Electron" modified="2024-04-01T11:47:45.990Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="q8bEVIjjthfJBmao4FDa" version="24.1.0" type="device">
+  <diagram name="Страница — 1" id="nBO8ZvvXv2-mYGk7u215">
+    <mxGraphModel dx="977" dy="679" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4c0wdn8axScRKglJY8u8-1" value="Начальная загрузка" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="320" y="160" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="4c0wdn8axScRKglJY8u8-2" value="Диаграмма" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="120" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="4c0wdn8axScRKglJY8u8-3" value="Курс валюты" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="320" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="4c0wdn8axScRKglJY8u8-4" value="Операции текущего периода" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="520" y="280" width="160" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
