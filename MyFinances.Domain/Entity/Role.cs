@@ -1,4 +1,4 @@
-﻿using MyFinances.Domain.Interfaces.Validations;
+﻿using MyFinances.Domain.Interfaces;
 
 namespace MyFinances.Domain.Entity
 {

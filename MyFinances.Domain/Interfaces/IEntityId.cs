@@ -1,4 +1,4 @@
-﻿namespace MyFinances.Domain.Interfaces.Validations
+﻿namespace MyFinances.Domain.Interfaces
 {
     /// <summary>
     /// 
