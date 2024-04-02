@@ -1,5 +1,4 @@
-﻿using MyFinances.Domain.DTO.Operation;
-using MyFinances.Domain.Result;
+﻿using MyFinances.Domain.Result;
 
 namespace MyFinances.Domain.Interfaces.Services
 {
@@ -9,12 +8,13 @@ namespace MyFinances.Domain.Interfaces.Services
     public interface IOperationService
     {
         /// <summary>
-        /// Get all operations of period, which grouped by type
+        /// Group operations by type and get sums of groups
+        /// <para><c>Method for diagrams</c></para>
         /// </summary>
         /// <param name="periodId">Period identificator</param>
         /// <returns>
-        /// Collection of groups with operations
+        /// Collection of sums
         /// </returns>
-        Task<CollectionResult<IEnumerable<OperationDto>>> GroupByType(int periodId);
+        Task<CollectionResult<int>> GroupByTypeAndSum(int periodId);
     }
 }
