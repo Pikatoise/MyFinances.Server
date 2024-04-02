@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-04-02T12:15:23.038Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="L4IjpqQHNjAaDjFKlVZx" version="24.1.0" type="device">
+<mxfile host="Electron" modified="2024-04-02T12:21:29.083Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="yc1aT52KwEEzui3FxoAg" version="24.1.0" type="device">
   <diagram name="Страница — 1" id="nBO8ZvvXv2-mYGk7u215">
-    <mxGraphModel dx="1690" dy="3886" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1549" dy="3715" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -30,7 +30,7 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="920" y="40" />
-              <mxPoint x="290" y="40" />
+              <mxPoint x="280" y="40" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -344,14 +344,14 @@
           <mxGeometry x="-560" y="-1570" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="OfqJtT3u4iOqPH99aG8D-30" value="Траты текущего периода" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="210" y="160" width="160" height="80" as="geometry" />
+          <mxGeometry x="200" y="160" width="160" height="80" as="geometry" />
         </mxCell>
         <mxCell id="OfqJtT3u4iOqPH99aG8D-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="OfqJtT3u4iOqPH99aG8D-33">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="280" y="240" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="OfqJtT3u4iOqPH99aG8D-33" value="operation&lt;div style=&quot;font-size: 11px;&quot;&gt;/get&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;/ProfitOfPeriod&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;/{periodId}&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+        <mxCell id="OfqJtT3u4iOqPH99aG8D-33" value="&lt;div style=&quot;font-size: 11px;&quot;&gt;period&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;/get&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;/ProfitOfPeriod&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;/{periodId}&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
           <mxGeometry x="160" y="320" width="240" height="80" as="geometry" />
         </mxCell>
       </root>
