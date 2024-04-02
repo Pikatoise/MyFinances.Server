@@ -13,10 +13,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// </summary>
         /// <param name="currencyName">Abbreviation of currency</param>
         /// <returns>
-        /// CurrencyDto:
-        /// {
-        ///     "Value": double
-        /// }
+        /// Value of currency
         /// </returns>
         Task<BaseResult<CurrencyDto>> GetCurrencyValue(string currencyName);
 
@@ -24,6 +21,6 @@ namespace MyFinances.Domain.Interfaces.Services
         /// Update server stored value of available currency
         /// </summary>
         /// <returns>A boolean value that indicates whether the update is successful</returns>
-        Task<BaseResult<bool>> UpdateCurrency();
+        Task<BaseResult<bool>> UpdateCurrencies();
     }
 }
