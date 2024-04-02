@@ -15,7 +15,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <returns>
         /// CurrencyDto:
         /// {
-        ///     "Value": double converted to string
+        ///     "Value": double
         /// }
         /// </returns>
         Task<BaseResult<CurrencyDto>> GetCurrencyValue(string currencyName);
