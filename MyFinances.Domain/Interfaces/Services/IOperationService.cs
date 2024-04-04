@@ -37,7 +37,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="dto">Data for new operation</param>
         /// <returns><c>OperationDto</c>: created operation if success
         /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<OperationDto?>> AddOperation(CreateOperationDto dto);
+        Task<BaseResult<OperationDto?>> CreateOperation(CreateOperationDto dto);
 
         /// <summary>
         /// Update operation
