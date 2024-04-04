@@ -20,6 +20,10 @@ namespace MyFinances.Domain.Entity
 
         public int TypeId { get; set; }
 
+        public int UserId { get; set; }
+
+        public User User { get; set; } = null!;
+
         public OperationType Type { get; set; } = null!;
 
         public DateTime CreatedAt { get; set; }
