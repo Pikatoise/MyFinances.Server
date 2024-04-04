@@ -24,10 +24,10 @@ namespace MyFinances.Domain.Interfaces.Services
 
 
         /// <summary>
-        /// Generate new period for user
+        /// Create new period for user
         /// </summary>
         /// <param name="userId">User identificator</param>
         /// <returns><c>PeriodDto</c>: New user period</returns>
-        Task<BaseResult<PeriodDto>> GenerateNewPeriod(int userId);
+        Task<BaseResult<PeriodDto>> CreateNewPeriod(int userId);
     }
 }
