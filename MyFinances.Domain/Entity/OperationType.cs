@@ -9,7 +9,7 @@ namespace MyFinances.Domain.Entity
     {
         public int Id { get; set; }
 
-        public required string Icon { get; set; }
+        public required string IconSrc { get; set; }
 
         public List<TypeAssociation> Associations { get; set; } = [];
 
