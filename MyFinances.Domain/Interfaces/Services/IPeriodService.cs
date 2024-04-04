@@ -12,14 +12,15 @@ namespace MyFinances.Domain.Interfaces.Services
         /// Get profit of all operations by period
         /// </summary>
         /// <param name="periodId">Period identificator</param>
-        /// <returns><c>double</c>: Profit of period</returns>
+        /// <returns><c>double</c>: profit of period</returns>
         Task<BaseResult<double>> ProfitOfPeriod(int periodId);
 
         /// <summary>
         /// Get current user period 
         /// </summary>
         /// <param name="userId">User identificator</param>
-        /// <returns><c>PeriodDto</c>: Current user period if not expired, null otherwise</returns>
+        /// <returns><c>PeriodDto</c>: current user period if not expired
+        /// <para><c>null</c>: otherwise</para></returns>
         Task<BaseResult<PeriodDto?>> CurrentPeriodByUserId(int userId);
 
 
@@ -27,7 +28,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// Create new period for user
         /// </summary>
         /// <param name="userId">User identificator</param>
-        /// <returns><c>PeriodDto</c>: New user period</returns>
+        /// <returns><c>PeriodDto</c>: new user period</returns>
         Task<BaseResult<PeriodDto>> CreateNewPeriod(int userId);
     }
 }

@@ -12,15 +12,13 @@ namespace MyFinances.Domain.Interfaces.Services
         /// Get value of requested currency
         /// </summary>
         /// <param name="currencyName">Abbreviation of currency</param>
-        /// <returns>
-        /// Value of currency
-        /// </returns>
+        /// <returns><c>CurrencyDto</c>: value of requested currency</returns>
         Task<BaseResult<CurrencyDto>> GetCurrencyValue(string currencyName);
 
         /// <summary>
         /// Update server stored value of available currency
         /// </summary>
-        /// <returns>A boolean value that indicates whether the update is successful</returns>
+        /// <returns><c>Boolean</c>: a value that indicates whether the update is successful</returns>
         Task<BaseResult<bool>> UpdateCurrencies();
     }
 }
