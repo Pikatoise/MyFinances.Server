@@ -15,5 +15,20 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="userId">User identificator</param>
         /// <returns><c>IEnumerable of PlanDto</c>: user plans</returns>
         Task<CollectionResult<PlanDto>> GetPlansByUserId(int userId);
+
+        /// <summary>
+        /// Delete user plan
+        /// </summary>
+        /// <param name="planId">Plan identificator</param>
+        /// <returns><c>PlanDto</c>: deleted plan if success
+        /// <para><c>null</c>: null otherwise</para></returns>
+        Task<BaseResult<PlanDto?>> DeletePlan(int planId);
+
+        /// <summary>
+        /// Change plan state to opposite
+        /// </summary>
+        /// <param name="planId">Plan identificator</param>
+        /// <returns><c>bool</c>: current plan state</returns>
+        Task<BaseResult<int>> ChangePlanStatus(int planId);
     }
 }

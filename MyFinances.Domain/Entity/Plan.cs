@@ -13,7 +13,10 @@ namespace MyFinances.Domain.Entity
 
         public DateTime FinalDate { get; set; }
 
-        public bool Status { get; set; }
+        /// <summary>
+        /// Represented in enum <c>PlanStatuses</c>
+        /// </summary>
+        public int Status { get; set; }
 
         public int TypeId { get; set; }
 
