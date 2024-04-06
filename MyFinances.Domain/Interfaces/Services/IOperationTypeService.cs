@@ -14,5 +14,11 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="association">User input association</param>
         /// <returns><c>Collection of OperationTypeDto</c>: type with id and image source</returns>
         Task<CollectionResult<OperationTypeDto>> GetTypeByAssociation(string association);
+
+        /// <summary>
+        /// Get all available types of operation
+        /// </summary>
+        /// <returns><c>Collection of OperationTypeDto</c>: type with id and image source</returns>
+        Task<CollectionResult<OperationTypeDto>> GetAllTypes();
     }
 }
