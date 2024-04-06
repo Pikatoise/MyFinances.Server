@@ -37,5 +37,24 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <returns><c>PeriodDto</c>: deleted period if success
         /// <para><c>null</c>: otherwise</para></returns>
         Task<BaseResult<PeriodDto?>> DeletePeriod(int periodId);
+
+
+        /// <summary>
+        /// Get specific period by year and month
+        /// </summary>
+        /// <param name="year">Year of requsted period</param>
+        /// <param name="month">Month of requsted period</param>
+        /// <returns><c>PeriodDto</c>: specific period if exist
+        /// <para><c>null</c>: otherwise</para></returns>
+        Task<BaseResult<PeriodDto?>> GetByYearAndMonth(int year, int month);
+
+        /// <summary>
+        /// Get periods with pagination and ascending or descending sort
+        /// </summary>
+        /// <param name="currentPage">Start period</param>
+        /// <param name="step">Count of periods</param>
+        /// <param name="order">Order of collection</param>
+        /// <returns><c>Collection of PeriodDto</c>: section of periods</returns>
+        Task<CollectionResult<PeriodDto>> PeriodsPaging(int currentPage, int step, string order = "asc");
     }
 }
