@@ -1,4 +1,5 @@
 ﻿using MyFinances.Domain.DTO.Operation;
+using MyFinances.Domain.Entity;
 using MyFinances.Domain.Result;
 
 namespace MyFinances.Domain.Interfaces.Services
@@ -13,15 +14,31 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <para><c>Method for diagrams</c></para>
         /// </summary>
         /// <param name="periodId">Period identificator</param>
-        /// <returns><c>IEnumerable of ints</c>: collection of sums </returns>
+        /// <returns><c>Collection of ints</c>: collection of sums </returns>
         Task<CollectionResult<int>> GroupByTypeAndSum(int periodId);
 
         /// <summary>
         /// Get all operations by period
         /// </summary>
         /// <param name="periodId">Period identificator</param>
-        /// <returns><c>IEnumerable of OperationDto</c>: collection of operations</returns>
+        /// <returns><c>Collection of OperationDto</c>: collection of operations</returns>
         Task<CollectionResult<OperationDto>> GetOperationsByPeriod(int periodId);
+
+        /// <summary>
+        /// Filter operations by type
+        /// </summary>
+        /// <param name="operations">Operations to filter</param>
+        /// <param name="typeFilter">Type for filter</param>
+        /// <returns><c>Collection of OperationDto</c>: filtered operations</returns>
+        Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, OperationType typeFilter);
+
+        /// <summary>
+        /// Filter operations by profitability or unprofitability
+        /// </summary>
+        /// <param name="operations">Operations to filter</param>
+        /// <param name="isProfit">profitability filter</param>
+        /// <returns><c>Collection of OperationDto</c>: filtered operations</returns>
+        Task<CollectionResult<OperationDto>> FilterOperationsByProfit(IEnumerable<OperationDto> operations, bool isProfit);
 
         /// <summary>
         /// Delete operation by identificator
