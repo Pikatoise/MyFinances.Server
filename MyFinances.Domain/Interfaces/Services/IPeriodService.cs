@@ -23,12 +23,19 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <para><c>null</c>: otherwise</para></returns>
         Task<BaseResult<PeriodDto?>> CurrentPeriodByUserId(int userId);
 
-
         /// <summary>
         /// Create new period for user
         /// </summary>
         /// <param name="userId">User identificator</param>
         /// <returns><c>PeriodDto</c>: new user period</returns>
         Task<BaseResult<PeriodDto>> CreateNewPeriod(int userId);
+
+        /// <summary>
+        /// Delete period by identificator
+        /// </summary>
+        /// <param name="periodId">Period identificator</param>
+        /// <returns><c>PeriodDto</c>: deleted period if success
+        /// <para><c>null</c>: otherwise</para></returns>
+        Task<BaseResult<PeriodDto?>> DeletePeriod(int periodId);
     }
 }
