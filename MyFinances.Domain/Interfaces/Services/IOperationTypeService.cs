@@ -12,7 +12,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// Get operation type that fits under user association
         /// </summary>
         /// <param name="association">User input association</param>
-        /// <returns><c>OperationTypeDto</c>: type with id and image source</returns>
-        Task<BaseResult<OperationTypeDto>> GetTypeByAssociation(string association);
+        /// <returns><c>Collection of OperationTypeDto</c>: type with id and image source</returns>
+        Task<CollectionResult<OperationTypeDto>> GetTypeByAssociation(string association);
     }
 }
