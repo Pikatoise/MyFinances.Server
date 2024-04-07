@@ -6,10 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<InvariantGlobalization>true</InvariantGlobalization>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<UserSecretsId>60aed2af-7ea1-4d1a-a5f4-3c1540d5ed37</UserSecretsId>
+	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
