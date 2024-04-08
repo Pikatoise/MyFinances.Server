@@ -19,21 +19,13 @@ namespace MyFinances.DAL.Repositories
         private readonly ApplicationDbContext _context = context;
 
         public IBaseRepository<User> Users { get; } = users;
-
         public IBaseRepository<UserRole> UserRoles { get; } = userRoles;
-
         public IBaseRepository<UserToken> UserTokens { get; } = userTokens;
-
         public IBaseRepository<Role> Roles { get; } = roles;
-
         public IBaseRepository<TypeAssociation> TypeAssociations { get; } = typeAssociations;
-
         public IBaseRepository<OperationType> OperationTypes { get; } = operationTypes;
-
         public IBaseRepository<Plan> Plans { get; } = plans;
-
         public IBaseRepository<Period> Periods { get; } = periods;
-
         public IBaseRepository<Operation> Operations { get; } = operations;
 
         public async Task<IDbContextTransaction> BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
