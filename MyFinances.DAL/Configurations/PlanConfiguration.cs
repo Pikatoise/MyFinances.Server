@@ -8,6 +8,8 @@ namespace MyFinances.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Plan> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.FinalDate).IsRequired();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50);

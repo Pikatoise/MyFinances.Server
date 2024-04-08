@@ -8,19 +8,19 @@ namespace MyFinances.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Login).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Password).IsRequired();
 
             builder.HasMany<Period>(x => x.Periods)
                 .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId)
-                .HasPrincipalKey(x => x.Id);
+                .HasForeignKey(x => x.UserId);
 
             builder.HasMany<Plan>(x => x.Plans)
                 .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId)
-                .HasPrincipalKey(x => x.Id);
+                .HasForeignKey(x => x.UserId);
 
             builder.HasMany(x => x.Roles)
                 .WithMany(x => x.Users)

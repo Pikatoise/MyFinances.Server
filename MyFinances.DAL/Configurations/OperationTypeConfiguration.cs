@@ -8,13 +8,14 @@ namespace MyFinances.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<OperationType> builder)
         {
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.IconSrc).IsRequired().HasMaxLength(200);
 
             builder.HasMany<TypeAssociation>(x => x.Associations)
                 .WithOne(x => x.Type)
-                .HasForeignKey(x => x.TypeId)
-                .HasPrincipalKey(x => x.Id);
+                .HasForeignKey(x => x.TypeId);
         }
     }
 }
