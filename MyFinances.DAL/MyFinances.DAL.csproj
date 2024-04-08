@@ -15,7 +15,10 @@
     <Folder Include="Configurations\" />
     <Folder Include="DI\" />
     <Folder Include="Interceptors\" />
-    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyFinances.Domain\MyFinances.Domain.csproj" />
   </ItemGroup>
 
 </Project>
