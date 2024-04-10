@@ -1,4 +1,6 @@
 
+using MyFinances.Api.Middlewares;
+
 namespace MyFinances.Api
 {
     /// <summary>
@@ -35,6 +37,8 @@ namespace MyFinances.Api
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseAuthorization();
 

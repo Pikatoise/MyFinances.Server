@@ -1,17 +1,15 @@
-﻿using MyFinances.Api.Extensions;
-using MyFinances.Domain.Result;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace MyFinances.Api.Middlewares
 {
     /// <summary>
     /// Middleware that convert application exception for user
     /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="next"></param>
+    /// <param name="next">Next middleware</param>
     public class ExceptionHandlerMiddleware(/*ILogger logger,*/ RequestDelegate next)
     {
         private readonly RequestDelegate _next = next;
-        //private readonly ILogger _logger = logger;
+        //private readonly ILogger<ExceptionHandlerMiddleware> _logger = logger;
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -21,27 +19,20 @@ namespace MyFinances.Api.Middlewares
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(httpContext, ex);
-            }
-        }
+                //_logger.LogError(ex, "", ex.Message);
 
-        private async Task HandleExceptionAsync(HttpContext httpContext, Exception ex)
-        {
-            //_logger.Error(ex, ex.Message);
-
-            var response = ex switch
-            {
-                _ => new BaseResult()
+                var problemDetails = new ProblemDetails()
                 {
-                    Failure = Error.Failure("", "")
-                }.ToProblemDetails()
-            };
+                    Status = StatusCodes.Status500InternalServerError,
+                    Title = "Server error"
+                };
 
-            httpContext.Response.ContentType = "application/json";
+                httpContext.Response.ContentType = "application/json";
 
-            //httpContext.Response.StatusCode = response;
+                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            await httpContext.Response.WriteAsJsonAsync(response);
+                await httpContext.Response.WriteAsJsonAsync(problemDetails);
+            }
         }
     }
 }

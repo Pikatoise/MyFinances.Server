@@ -28,7 +28,6 @@ namespace MyFinances.Api.Extensions
                         { "errors", result.Failure }
                     }
                 );
-
         }
 
         static int GetStatusCode(ErrorType errorType) =>
