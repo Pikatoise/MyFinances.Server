@@ -31,10 +31,14 @@ namespace MyFinances.Api.Controllers
         {
             _logger.LogDebug($"Get request --- {DateTime.Now.ToShortTimeString()}");
 
+
             var result = new BaseResult<string>()
             {
                 Failure = Error.Conflict("User.Conflit", "Some conflict")
             };
+
+            if (result != null)
+                throw new ArgumentNullException();
 
             if (result.IsSuccess)
                 return Results.Ok("Successful request");
