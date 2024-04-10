@@ -5,11 +5,9 @@
     /// </summary>
     public class BaseResult
     {
-        public bool IsSuccess => ErrorMessage == null;
+        public bool IsSuccess => Failure == null;
 
-        public string? ErrorMessage { get; set; }
-
-        public int? ErrorCode { get; set; }
+        public Error? Failure { get; set; }
     }
 
     /// <summary>
@@ -18,10 +16,9 @@
     /// <typeparam name="T">response data type</typeparam>
     public class BaseResult<T>: BaseResult
     {
-        public BaseResult(string errorMessage, int errorCode, T data)
+        public BaseResult(Error failure, T data)
         {
-            ErrorMessage = errorMessage;
-            ErrorCode = errorCode;
+            Failure = failure;
             Data = data;
         }
 
