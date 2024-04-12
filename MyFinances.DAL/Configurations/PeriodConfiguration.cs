@@ -20,7 +20,8 @@ namespace MyFinances.DAL.Configurations
 
             builder.HasMany<Operation>(x => x.Operations)
                 .WithOne(x => x.Period)
-                .HasForeignKey(x => x.PeriodId);
+                .HasForeignKey(x => x.PeriodId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

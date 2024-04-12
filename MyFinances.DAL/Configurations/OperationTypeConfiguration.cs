@@ -15,7 +15,8 @@ namespace MyFinances.DAL.Configurations
 
             builder.HasMany<TypeAssociation>(x => x.Associations)
                 .WithOne(x => x.Type)
-                .HasForeignKey(x => x.TypeId);
+                .HasForeignKey(x => x.TypeId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

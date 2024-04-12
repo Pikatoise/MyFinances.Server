@@ -16,11 +16,13 @@ namespace MyFinances.DAL.Configurations
 
             builder.HasMany<Period>(x => x.Periods)
                 .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId);
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany<Plan>(x => x.Plans)
                 .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId);
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(x => x.Roles)
                 .WithMany(x => x.Users)
