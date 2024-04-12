@@ -1,5 +1,6 @@
 
 using MyFinances.Api.Middlewares;
+using Serilog;
 
 namespace MyFinances.Api
 {
@@ -17,6 +18,11 @@ namespace MyFinances.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Host.UseSerilog((context, loggerConfig) =>
+            {
+                loggerConfig.ReadFrom.Configuration(context.Configuration);
+            });
 
             builder.Services.AddControllers();
             builder.Services.AddSwagger();
@@ -37,6 +43,10 @@ namespace MyFinances.Api
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<RequestLogContextMiddleware>();
+
+            app.UseSerilogRequestLogging();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 

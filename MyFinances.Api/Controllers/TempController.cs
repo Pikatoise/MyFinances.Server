@@ -29,7 +29,7 @@ namespace MyFinances.Api.Controllers
         [HttpGet()]
         public IResult Get()
         {
-            _logger.LogDebug($"Get request --- {DateTime.Now.ToShortTimeString()}");
+            _logger.LogInformation($"Get request --- {DateTime.Now.ToShortTimeString()}");
 
 
             var result = new BaseResult<string>()
