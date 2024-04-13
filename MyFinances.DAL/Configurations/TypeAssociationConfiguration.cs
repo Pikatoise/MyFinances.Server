@@ -8,6 +8,9 @@ namespace MyFinances.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<TypeAssociation> builder)
         {
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Association).IsRequired().HasMaxLength(50);
 
             builder.HasOne<OperationType>(x => x.Type)

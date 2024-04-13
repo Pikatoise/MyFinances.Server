@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  myfinances.api:
+    image: ${DOCKER_REGISTRY-}myfinancesapi
+    container_name: myfinances.api
+    build:
+      context: .
+      dockerfile: MyFinances.Api/Dockerfile
+    ports:
+        - "5000:5000"
+        - "5001:5001"
+
+  myfinances.database:
+    image: postgres:latest
+    container_name: myfinances.database
+    environment:
+        - POSTGRES_DB=MyFinances
+        - POSTGRES_USER=postgres        
+        - POSTGRES_PASSWORD=postgres
+    volumes:
+        - ./.containers/myfinances-db:/var/lib/postgresql/data
+    ports:
+        - 5432:5432 

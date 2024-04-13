@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFinances.Domain", "MyFina
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFinances.Application", "MyFinances.Application\MyFinances.Application.csproj", "{F34B77A8-E7AD-449E-BA3F-664032C377AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFinances.DAL", "MyFinances.DAL\MyFinances.DAL.csproj", "{8C3099DF-5E5E-42BE-AE71-D0145FAD1D77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFinances.DAL", "MyFinances.DAL\MyFinances.DAL.csproj", "{8C3099DF-5E5E-42BE-AE71-D0145FAD1D77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

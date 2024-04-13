@@ -28,6 +28,8 @@ namespace MyFinances.DAL.Repositories
         public IBaseRepository<Period> Periods { get; } = periods;
         public IBaseRepository<Operation> Operations { get; } = operations;
 
+        public bool IsRun() => _context.Database.CanConnectAsync().Result;
+
         public async Task<IDbContextTransaction> BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();

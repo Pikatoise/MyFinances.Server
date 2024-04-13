@@ -1,5 +1,5 @@
-
 using MyFinances.Api.Middlewares;
+using MyFinances.DAL.DI;
 using Serilog;
 
 namespace MyFinances.Api
@@ -19,13 +19,10 @@ namespace MyFinances.Api
 
             // Add services to the container.
 
-            builder.Host.UseSerilog((context, loggerConfig) =>
-            {
-                loggerConfig.ReadFrom.Configuration(context.Configuration);
-            });
-
+            builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
             builder.Services.AddControllers();
             builder.Services.AddSwagger();
+            builder.Services.AddDataAccessLayer(builder.Configuration);
 
             var app = builder.Build();
 
@@ -46,9 +43,9 @@ namespace MyFinances.Api
 
             app.UseMiddleware<RequestLogContextMiddleware>();
 
-            app.UseSerilogRequestLogging();
-
             app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            app.UseSerilogRequestLogging();
 
             app.UseAuthorization();
 

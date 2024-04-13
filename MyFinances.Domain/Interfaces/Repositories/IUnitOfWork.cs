@@ -12,6 +12,8 @@ namespace MyFinances.Domain.Interfaces.Repositories
 
         Task<int> SaveChangesAsync();
 
+        bool IsRun();
+
         IBaseRepository<User> Users { get; }
 
         IBaseRepository<UserRole> UserRoles { get; }

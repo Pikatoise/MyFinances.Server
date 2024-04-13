@@ -3,8 +3,13 @@ using System.Reflection;
 
 namespace MyFinances.DAL
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): DbContext(options)
+    public class ApplicationDbContext: DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
