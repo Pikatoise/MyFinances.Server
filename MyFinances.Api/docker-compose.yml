@@ -10,3 +10,27 @@ services:
     build:
         context: .
         dockerfile: Dockerfile
+    ports:
+        - "80:80"
+    networks:
+        - myfinances-dev
+    depends_on:
+        - postgres_db
+
+  postgres_db:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: MyFinances
+    ports:
+        - "5432:5432"
+    networks:
+        - myfinances-dev
+    volumes:
+        - postgres-data:/var/lib/postgresql/data
+
+volumes:
+    postgres-data:   
+    

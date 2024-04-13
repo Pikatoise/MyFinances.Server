@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MyFinances.Application\MyFinances.Application.csproj" />
     <ProjectReference Include="..\MyFinances.DAL\MyFinances.DAL.csproj" />
+    <ProjectReference Include="..\MyFinances.Domain\MyFinances.Domain.csproj" />
   </ItemGroup>
 
 </Project>
