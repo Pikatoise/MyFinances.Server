@@ -1,7 +1,6 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using MyFinances.Api.Extensions;
-using MyFinances.Domain.Result;
+using MyFinances.Domain.Interfaces.Repositories;
 
 namespace MyFinances.Api.Controllers
 {
@@ -11,9 +10,10 @@ namespace MyFinances.Api.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("[controller]")]
-    public class TempController(ILogger<TempController> logger): ControllerBase
+    public class TempController(ILogger<TempController> logger, IUnitOfWork unitOfWork): ControllerBase
     {
         private readonly ILogger<TempController> _logger = logger;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         /// <summary>
         /// Empty get request
@@ -31,16 +31,9 @@ namespace MyFinances.Api.Controllers
         {
             _logger.LogInformation($"Get request --- {DateTime.Now.ToShortTimeString()}");
 
+            var isDbWork = _unitOfWork.IsRun();
 
-            var result = new BaseResult<string>()
-            {
-                Failure = Error.Conflict("User.Conflit", "Some conflict")
-            };
-
-            if (result.IsSuccess)
-                return Results.Ok("Successful request");
-            else
-                return result.ToProblemDetails();
+            return Results.Ok(isDbWork);
         }
     }
 }
