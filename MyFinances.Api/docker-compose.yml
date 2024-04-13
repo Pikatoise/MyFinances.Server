@@ -1,0 +1,12 @@
+version: "3.9"
+
+networks:
+  myfinances-dev:
+    driver: brigde
+
+services:
+  app:
+    container_name: myfinances_api
+    build:
+        context: .
+        dockerfile: Dockerfile
