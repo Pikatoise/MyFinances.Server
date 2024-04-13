@@ -24,7 +24,7 @@ namespace MyFinances.DAL.DI
 
             services.InitRepositories();
 
-            services.LogDatabaseAvailability();
+            //services.LogDatabaseAvailability();
         }
 
         private static void InitRepositories(this IServiceCollection services)
