@@ -3,14 +3,20 @@
 namespace MyFinances.Api.Middlewares
 {
     /// <summary>
-    /// Middleware that convert application exception for user
+    /// Global exception handler
     /// </summary>
+    /// <param name="logger">Logger from DI</param>
     /// <param name="next">Next middleware</param>
-    public class ExceptionHandlerMiddleware(/*ILogger logger,*/ RequestDelegate next)
+    public class ExceptionHandlerMiddleware(ILogger<ExceptionHandlerMiddleware> logger, RequestDelegate next)
     {
         private readonly RequestDelegate _next = next;
-        //private readonly ILogger<ExceptionHandlerMiddleware> _logger = logger;
+        private readonly ILogger<ExceptionHandlerMiddleware> _logger = logger;
 
+        /// <summary>
+        /// Try to execute next middleware and if it throw exception, log it and return response
+        /// </summary>
+        /// <param name="httpContext">Http data of request</param>
+        /// <returns></returns>
         public async Task InvokeAsync(HttpContext httpContext)
         {
             try
@@ -19,7 +25,7 @@ namespace MyFinances.Api.Middlewares
             }
             catch (Exception ex)
             {
-                //_logger.LogError(ex, "", ex.Message);
+                _logger.LogError(ex, "Exception occurred: {Message}", ex.Message);
 
                 var problemDetails = new ProblemDetails()
                 {
