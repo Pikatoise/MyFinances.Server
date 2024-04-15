@@ -20,8 +20,11 @@ namespace MyFinances.Api
             // Add services to the container.
 
             builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
+
             builder.Services.AddControllers();
+
             builder.Services.AddSwagger();
+
             builder.Services.AddDataAccessLayer(builder.Configuration);
 
             var app = builder.Build();
