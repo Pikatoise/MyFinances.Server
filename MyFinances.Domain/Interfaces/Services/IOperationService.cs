@@ -1,5 +1,4 @@
 ﻿using MyFinances.Domain.DTO.Operation;
-using MyFinances.Domain.Entity;
 using MyFinances.Domain.Result;
 
 namespace MyFinances.Domain.Interfaces.Services
@@ -28,9 +27,9 @@ namespace MyFinances.Domain.Interfaces.Services
         /// Filter operations by type
         /// </summary>
         /// <param name="operations">Operations to filter</param>
-        /// <param name="typeFilter">Type for filter</param>
+        /// <param name="typeFilterId">Identificator of type for filter</param>
         /// <returns><c>Collection of OperationDto</c>: filtered operations</returns>
-        Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, OperationType typeFilter);
+        Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeFilterId);
 
         /// <summary>
         /// Filter operations by profitability or unprofitability

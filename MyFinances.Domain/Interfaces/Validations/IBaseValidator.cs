@@ -12,7 +12,8 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// Check the <typeparamref name="T"/> is empty
         /// </summary>
         /// <param name="model">Entity</param>
-        /// <returns></returns>
+        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
         BaseResult ValidateOnNull(T? model);
     }
 }
