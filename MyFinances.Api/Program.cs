@@ -1,3 +1,4 @@
+using MyFinances.Api.Extensions;
 using MyFinances.Api.Middlewares;
 using MyFinances.DAL.DI;
 using Serilog;
@@ -38,6 +39,7 @@ namespace MyFinances.Api
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "MyFinances Swagger v1.0");
                     options.RoutePrefix = string.Empty;
                 });
+                app.ApplyMigrations();
             }
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
