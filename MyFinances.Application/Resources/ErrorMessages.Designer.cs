@@ -115,6 +115,15 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requested plan not found.
+        /// </summary>
+        internal static string Plan_NotFound {
+            get {
+                return ResourceManager.GetString("Plan.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Association with that name already exist.
         /// </summary>
         internal static string TypeAssociation_AlreadyExist {

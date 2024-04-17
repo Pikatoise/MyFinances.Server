@@ -135,6 +135,9 @@
   <data name="Period.OutOfRange" xml:space="preserve">
     <value>Requested amout of periods out of range</value>
   </data>
+  <data name="Plan.NotFound" xml:space="preserve">
+    <value>Requested plan not found</value>
+  </data>
   <data name="TypeAssociation.AlreadyExist" xml:space="preserve">
     <value>Association with that name already exist</value>
   </data>
