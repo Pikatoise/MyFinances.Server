@@ -9,14 +9,31 @@
   <ItemGroup>
     <Folder Include="DI\" />
     <Folder Include="Mapping\" />
-    <Folder Include="Resources\" />
     <Folder Include="Services\" />
     <Folder Include="Validations\DtoValidations\Currency\" />
     <Folder Include="Validations\DtoValidations\Plan\" />
     <Folder Include="Validations\DtoValidations\Period\" />
     <Folder Include="Validations\DtoValidations\OperationType\" />
     <Folder Include="Validations\DtoValidations\Operation\" />
-    <Folder Include="Validations\ServiceValidations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyFinances.Domain\MyFinances.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\ErrorMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ErrorMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
