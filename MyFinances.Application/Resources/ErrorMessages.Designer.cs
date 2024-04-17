@@ -63,9 +63,27 @@ namespace MyFinances.Application.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Requested currency not supported.
         /// </summary>
-        internal static string Currency_NotExist {
+        internal static string Currency_NotFound {
             get {
-                return ResourceManager.GetString("Currency.NotExist", resourceCulture);
+                return ResourceManager.GetString("Currency.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested operation type not exist.
+        /// </summary>
+        internal static string OperationType_NotFound {
+            get {
+                return ResourceManager.GetString("OperationType.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Association with that name already exist.
+        /// </summary>
+        internal static string TypeAssociation_AlreadyExist {
+            get {
+                return ResourceManager.GetString("TypeAssociation.AlreadyExist", resourceCulture);
             }
         }
     }

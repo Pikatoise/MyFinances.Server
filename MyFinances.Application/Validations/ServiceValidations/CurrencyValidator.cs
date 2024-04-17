@@ -12,7 +12,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("Currency.NotExist", ErrorMessages.Currency_NotExist)
+                    Failure = Error.NotFound("Currency.NotFound", ErrorMessages.Currency_NotFound)
                 };
 
             return new BaseResult();
