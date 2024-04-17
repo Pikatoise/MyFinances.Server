@@ -79,20 +79,38 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested period not found.
-        /// </summary>
-        internal static string OperationPeriod_NotFound {
-            get {
-                return ResourceManager.GetString("OperationPeriod.NotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Requested operation type not found.
         /// </summary>
         internal static string OperationType_NotFound {
             get {
                 return ResourceManager.GetString("OperationType.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect sorting order.
+        /// </summary>
+        internal static string Period_IncorrectOrder {
+            get {
+                return ResourceManager.GetString("Period.IncorrectOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested period not found.
+        /// </summary>
+        internal static string Period_NotFound {
+            get {
+                return ResourceManager.GetString("Period.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested amout of periods out of range.
+        /// </summary>
+        internal static string Period_OutOfRange {
+            get {
+                return ResourceManager.GetString("Period.OutOfRange", resourceCulture);
             }
         }
         

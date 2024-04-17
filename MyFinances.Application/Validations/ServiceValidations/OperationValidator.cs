@@ -12,13 +12,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (operationPeriod == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("OperationPeriod.NotFound", ErrorMessages.OperationPeriod_NotFound)
+                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
                 };
 
             if (operationType == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
+                    Failure = Error.NotFound("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
                 };
 
             return new BaseResult();
@@ -29,13 +29,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (operation == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("Operation.NotFound", ErrorMessages.Operation_NotFound)
+                    Failure = Error.NotFound("Operation.NotFound", ErrorMessages.Operation_NotFound)
                 };
 
             if (operationType == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
+                    Failure = Error.NotFound("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
                 };
 
             return new BaseResult();
@@ -46,7 +46,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("Operation.NotFound", ErrorMessages.Operation_NotFound)
+                    Failure = Error.NotFound("Operation.NotFound", ErrorMessages.Operation_NotFound)
                 };
 
             return new BaseResult();
