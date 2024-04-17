@@ -38,7 +38,6 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <para><c>null</c>: otherwise</para></returns>
         Task<BaseResult<PeriodDto?>> DeletePeriod(int periodId);
 
-
         /// <summary>
         /// Get specific period by year and month
         /// </summary>
