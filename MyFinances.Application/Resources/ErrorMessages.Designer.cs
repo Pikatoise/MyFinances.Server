@@ -70,7 +70,25 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested operation type not exist.
+        ///   Looks up a localized string similar to Requested operation not found.
+        /// </summary>
+        internal static string Operation_NotFound {
+            get {
+                return ResourceManager.GetString("Operation.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested period not found.
+        /// </summary>
+        internal static string OperationPeriod_NotFound {
+            get {
+                return ResourceManager.GetString("OperationPeriod.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested operation type not found.
         /// </summary>
         internal static string OperationType_NotFound {
             get {

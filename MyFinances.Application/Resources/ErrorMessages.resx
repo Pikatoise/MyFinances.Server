@@ -120,8 +120,14 @@
   <data name="Currency.NotFound" xml:space="preserve">
     <value>Requested currency not supported</value>
   </data>
+  <data name="Operation.NotFound" xml:space="preserve">
+    <value>Requested operation not found</value>
+  </data>
+  <data name="OperationPeriod.NotFound" xml:space="preserve">
+    <value>Requested period not found</value>
+  </data>
   <data name="OperationType.NotFound" xml:space="preserve">
-    <value>Requested operation type not exist</value>
+    <value>Requested operation type not found</value>
   </data>
   <data name="TypeAssociation.AlreadyExist" xml:space="preserve">
     <value>Association with that name already exist</value>
