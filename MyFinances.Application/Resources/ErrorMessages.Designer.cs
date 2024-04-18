@@ -70,6 +70,42 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Field was empty.
+        /// </summary>
+        internal static string Dto_EmptyField {
+            get {
+                return ResourceManager.GetString("Dto.EmptyField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value was incorrect.
+        /// </summary>
+        internal static string Dto_IncorrectValue {
+            get {
+                return ResourceManager.GetString("Dto.IncorrectValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value was too big.
+        /// </summary>
+        internal static string Dto_TooBigValue {
+            get {
+                return ResourceManager.GetString("Dto.TooBigValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value was too low.
+        /// </summary>
+        internal static string Dto_TooLowValue {
+            get {
+                return ResourceManager.GetString("Dto.TooLowValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested operation not found.
         /// </summary>
         internal static string Operation_NotFound {

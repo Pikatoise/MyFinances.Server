@@ -10,11 +10,10 @@
     <Folder Include="DI\" />
     <Folder Include="Mapping\" />
     <Folder Include="Services\" />
-    <Folder Include="Validations\DtoValidations\Currency\" />
-    <Folder Include="Validations\DtoValidations\Plan\" />
-    <Folder Include="Validations\DtoValidations\Period\" />
-    <Folder Include="Validations\DtoValidations\OperationType\" />
-    <Folder Include="Validations\DtoValidations\Operation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
   </ItemGroup>
 
   <ItemGroup>

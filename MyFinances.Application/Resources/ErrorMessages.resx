@@ -120,6 +120,18 @@
   <data name="Currency.NotFound" xml:space="preserve">
     <value>Requested currency not supported</value>
   </data>
+  <data name="Dto.EmptyField" xml:space="preserve">
+    <value>Field was empty</value>
+  </data>
+  <data name="Dto.IncorrectValue" xml:space="preserve">
+    <value>Value was incorrect</value>
+  </data>
+  <data name="Dto.TooBigValue" xml:space="preserve">
+    <value>Value was too big</value>
+  </data>
+  <data name="Dto.TooLowValue" xml:space="preserve">
+    <value>Value was too low</value>
+  </data>
   <data name="Operation.NotFound" xml:space="preserve">
     <value>Requested operation not found</value>
   </data>
