@@ -9,17 +9,17 @@ namespace MyFinances.Application.Validations.DtoValidations.Plan
         public CreatePlanValidator()
         {
             RuleFor(x => x.FinalDate)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
 
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField)
-                .MaximumLength(50).WithMessage(ErrorMessages.Dto_TooBigValue);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
+                .MaximumLength(50).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
 
             RuleFor(x => x.TypeId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
 
             RuleFor(x => x.UserId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
         }
     }
 }

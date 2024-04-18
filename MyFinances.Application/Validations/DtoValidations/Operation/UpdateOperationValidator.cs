@@ -9,18 +9,18 @@ namespace MyFinances.Application.Validations.DtoValidations.Operation
         public UpdateOperationValidator()
         {
             RuleFor(x => x.Amount)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField)
-                .InclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_IncorrectValue);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
+                .InclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_IncorrectValue).WithErrorCode("Dto.IncorrectValue");
 
             RuleFor(x => x.Title)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField)
-                .MaximumLength(50).WithMessage(ErrorMessages.Dto_TooBigValue);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
+                .MaximumLength(50).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
 
             RuleFor(x => x.TypeId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
 
             RuleFor(x => x.OperationId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField);
+                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
         }
     }
 }
