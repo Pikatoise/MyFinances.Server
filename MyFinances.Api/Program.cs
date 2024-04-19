@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using MyFinances.Api.Extensions;
 using MyFinances.Api.Middlewares;
+using MyFinances.Application.DI;
 using MyFinances.Application.Services;
 using MyFinances.DAL.DI;
 using MyFinances.Domain.Settings;
@@ -48,6 +49,8 @@ namespace MyFinances.Api
                 httpClient.DefaultRequestHeaders.Add("symbols", fixerSettings.Symbols);
                 httpClient.DefaultRequestHeaders.Add("format", fixerSettings.Format);
             });
+
+            builder.Services.AddApplication();
 
             var app = builder.Build();
 
