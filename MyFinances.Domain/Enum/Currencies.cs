@@ -5,7 +5,8 @@
     /// </summary>
     public enum Currencies
     {
-        EURO,
-        USD
+        EUR,
+        USD,
+        RUB
     }
 }
