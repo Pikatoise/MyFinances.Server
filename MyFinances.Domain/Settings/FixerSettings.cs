@@ -9,6 +9,13 @@ namespace MyFinances.Domain.Settings
         [Required, Url]
         public string BaseAddress { get; init; } = string.Empty;
 
-        public string AccessToken { get; init; } = string.Empty;
+        [Required]
+        public string AccessKey { get; init; } = string.Empty;
+
+        [Required]
+        public string Symbols { get; init; } = string.Empty;
+
+        [Required]
+        public string Format { get; init; } = string.Empty;
     }
 }
