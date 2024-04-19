@@ -23,6 +23,8 @@ namespace MyFinances.Api
 
             // Add services to the container.
 
+            builder.Configuration.AddUserSecrets<Program>();
+
             builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
             builder.Services.AddOptions<FixerSettings>()
@@ -36,6 +38,7 @@ namespace MyFinances.Api
 
             builder.Services.AddDataAccessLayer(builder.Configuration);
 
+            // Transfer to Application DI
             builder.Services.AddHttpClient<FixerService>((sp, httpClient) =>
             {
                 var fixerSettings = sp.GetRequiredService<IOptions<FixerSettings>>().Value;
