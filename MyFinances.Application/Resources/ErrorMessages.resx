@@ -120,8 +120,11 @@
   <data name="Api.Fixer.BadRequest" xml:space="preserve">
     <value>The request could not be sent</value>
   </data>
+  <data name="Currency.Expired" xml:space="preserve">
+    <value>Currency value was expired and need to refresh</value>
+  </data>
   <data name="Currency.NotFound" xml:space="preserve">
-    <value>Requested currency not supported</value>
+    <value>Requested currency not supported or not loaded yet</value>
   </data>
   <data name="Dto.EmptyField" xml:space="preserve">
     <value>Field was empty</value>

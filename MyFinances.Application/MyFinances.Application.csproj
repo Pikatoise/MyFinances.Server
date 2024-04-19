@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="DI\" />
-    <Folder Include="Mapping\" />
   </ItemGroup>
 
   <ItemGroup>

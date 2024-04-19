@@ -70,7 +70,16 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested currency not supported.
+        ///   Looks up a localized string similar to Currency value was expired and need to refresh.
+        /// </summary>
+        internal static string Currency_Expired {
+            get {
+                return ResourceManager.GetString("Currency.Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested currency not supported or not loaded yet.
         /// </summary>
         internal static string Currency_NotFound {
             get {
