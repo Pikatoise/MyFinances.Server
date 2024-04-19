@@ -26,28 +26,28 @@ namespace MyFinances.Application.Services
         {
             var currency = await _unitOfWork.Currencies.GetAll().FirstOrDefaultAsync(x => x.Name.Equals(currencyName));
 
-            var validation = _currencyValidator.ValidateOnNull(currency);
+            var validationOnNull = _currencyValidator.ValidateOnNull(currency);
+            var validationOnExpired = _currencyValidator.ValidateOnExpired(currency);
 
-            if (!validation.IsSuccess)
+            if (!(validationOnNull.IsSuccess && validationOnExpired.IsSuccess))
             {
-                await UpdateCurrencies();
+                var updateResult = await UpdateCurrencies();
 
-                return new BaseResult<CurrencyDto>()
-                {
-                    Failure = validation.Failure
-                };
-            }
+                if (!updateResult.IsSuccess)
+                    return new BaseResult<CurrencyDto>
+                    {
+                        Failure = updateResult.Failure,
+                    };
 
-            validation = _currencyValidator.ValidateOnExpired(currency);
+                currency = await _unitOfWork.Currencies.GetAll().FirstOrDefaultAsync(x => x.Name.Equals(currencyName));
 
-            if (validation.IsSuccess)
-            {
-                await UpdateCurrencies();
+                validationOnNull = _currencyValidator.ValidateOnNull(currency);
 
-                return new BaseResult<CurrencyDto>()
-                {
-                    Failure = validation.Failure
-                };
+                if (!validationOnNull.IsSuccess)
+                    return new BaseResult<CurrencyDto>
+                    {
+                        Failure = validationOnNull.Failure
+                    };
             }
 
             return new BaseResult<CurrencyDto>
@@ -56,7 +56,7 @@ namespace MyFinances.Application.Services
             };
         }
 
-        public Task<BaseResult<bool>> UpdateCurrencies()
+        public async Task<BaseResult> UpdateCurrencies()
         {
             throw new NotImplementedException();
         }

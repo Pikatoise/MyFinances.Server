@@ -18,7 +18,8 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <summary>
         /// Update server stored value of available currency
         /// </summary>
-        /// <returns><c>Boolean</c>: a value that indicates whether the update is successful</returns>
-        Task<BaseResult<bool>> UpdateCurrencies();
+        /// <returns><c>BaseResult</c>: empty BaseResult, if update was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
+        Task<BaseResult> UpdateCurrencies();
     }
 }
