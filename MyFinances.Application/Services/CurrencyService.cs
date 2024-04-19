@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MyFinances.Domain.DTO.Currency;
+using MyFinances.Domain.Entity;
 using MyFinances.Domain.Interfaces.Repositories;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
@@ -58,7 +59,25 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult> UpdateCurrencies()
         {
-            throw new NotImplementedException();
+            var result = await _fixerService.GetCurrencies();
+
+            if (!result.IsSuccess)
+                return new BaseResult()
+                {
+                    Failure = result.Failure
+                };
+
+            var isCurrencyInDb = _unitOfWork.Currencies.GetAll().Count() > 0;
+
+            foreach (Currency freshCurrency in result.Data)
+            {
+                if (isCurrencyInDb)
+                    _unitOfWork.Currencies.Update(freshCurrency);
+                else
+                    await _unitOfWork.Currencies.CreateAsync(freshCurrency);
+            }
+
+            return new BaseResult();
         }
     }
 }
