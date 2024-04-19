@@ -1,6 +1,7 @@
 using MyFinances.Api.Extensions;
 using MyFinances.Api.Middlewares;
 using MyFinances.DAL.DI;
+using MyFinances.Domain.Settings;
 using Serilog;
 
 namespace MyFinances.Api
@@ -21,6 +22,11 @@ namespace MyFinances.Api
             // Add services to the container.
 
             builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
+
+            builder.Services.AddOptions<FixerSettings>()
+                .BindConfiguration(FixerSettings.ConfigurationSection)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
 
             builder.Services.AddControllers();
 
