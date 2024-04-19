@@ -1,8 +1,6 @@
-using Microsoft.Extensions.Options;
 using MyFinances.Api.Extensions;
 using MyFinances.Api.Middlewares;
 using MyFinances.Application.DI;
-using MyFinances.Application.Services;
 using MyFinances.DAL.DI;
 using MyFinances.Domain.Settings;
 using Serilog;
@@ -38,17 +36,6 @@ namespace MyFinances.Api
             builder.Services.AddSwagger();
 
             builder.Services.AddDataAccessLayer(builder.Configuration);
-
-            // Transfer to Application DI
-            builder.Services.AddHttpClient<FixerService>((sp, httpClient) =>
-            {
-                var fixerSettings = sp.GetRequiredService<IOptions<FixerSettings>>().Value;
-
-                httpClient.BaseAddress = new Uri(fixerSettings.BaseAddress);
-                httpClient.DefaultRequestHeaders.Add("access_key", fixerSettings.AccessKey);
-                httpClient.DefaultRequestHeaders.Add("symbols", fixerSettings.Symbols);
-                httpClient.DefaultRequestHeaders.Add("format", fixerSettings.Format);
-            });
 
             builder.Services.AddApplication();
 

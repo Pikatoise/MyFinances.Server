@@ -15,5 +15,13 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
         BaseResult ValidateOnExpired(Currency currency);
+
+        /// <summary>
+        /// Check is currency supported
+        /// </summary>
+        /// <param name="currencyName">Currency for validation</param>
+        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
+        BaseResult ValidateOnSupport(string currencyName);
     }
 }

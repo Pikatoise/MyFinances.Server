@@ -25,6 +25,14 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult<CurrencyDto>> GetCurrencyValue(string currencyName)
         {
+            var validationOnSupport = _currencyValidator.ValidateOnSupport(currencyName);
+
+            if (!validationOnSupport.IsSuccess)
+                return new BaseResult<CurrencyDto>
+                {
+                    Failure = validationOnSupport.Failure,
+                };
+
             var currency = await _unitOfWork.Currencies.GetAll().FirstOrDefaultAsync(x => x.Name.Equals(currencyName));
 
             var validationOnNull = _currencyValidator.ValidateOnNull(currency);
@@ -76,6 +84,8 @@ namespace MyFinances.Application.Services
                 else
                     await _unitOfWork.Currencies.CreateAsync(freshCurrency);
             }
+
+            await _unitOfWork.SaveChangesAsync();
 
             return new BaseResult();
         }

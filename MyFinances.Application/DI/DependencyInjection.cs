@@ -34,8 +34,8 @@ namespace MyFinances.Application.DI
             services.AddScoped<IValidator<CreatePlanDto>, CreatePlanValidator>();
             services.AddScoped<IValidator<CreatePlanDto>, CreatePlanValidator>();
 
-            services.AddScoped<ICurrencyService, CurrencyService>();
             services.AddScoped<IFixerService, FixerService>();
+            services.AddScoped<ICurrencyService, CurrencyService>();
         }
     }
 }

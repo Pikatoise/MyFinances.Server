@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using MyFinances.Application.Services;
+using MyFinances.Api.Extensions;
+using MyFinances.Domain.Interfaces.Services;
 
 namespace MyFinances.Api.Controllers
 {
@@ -10,11 +11,9 @@ namespace MyFinances.Api.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("[controller]")]
-    public class TempController(ILogger<TempController> logger, FixerService fixerService): ControllerBase
+    public class TempController(ICurrencyService currencyService): ControllerBase
     {
-        private readonly ILogger<TempController> _logger = logger;
-        private readonly FixerService _fixerService = fixerService;
-
+        private readonly ICurrencyService _currencyService = currencyService;
 
         /// <summary>
         /// Empty get request
@@ -27,12 +26,13 @@ namespace MyFinances.Api.Controllers
         /// </remarks>
         /// <response code="200">Ok - request successfuly worked out</response>
         /// <response code="400">Fail - server can't process request</response>
-        [HttpGet()]
-        public async Task<IResult> Get()
+        [HttpGet("{currencyName}")]
+        public async Task<IResult> Get(string currencyName)
         {
-            _logger.LogInformation($"Get request --- {DateTime.Now.ToShortTimeString()}");
+            var result = await _currencyService.GetCurrencyValue(currencyName);
 
-            var result = await _fixerService.GetCurrencies();
+            if (!result.IsSuccess)
+                return result.ToProblemDetails();
 
             return Results.Ok(result);
         }

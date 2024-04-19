@@ -1,24 +1,28 @@
-﻿using MyFinances.Application.Resources;
+﻿using Microsoft.Extensions.Options;
+using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Fixer;
 using MyFinances.Domain.Entity;
 using MyFinances.Domain.Enum;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Result;
+using MyFinances.Domain.Settings;
 using System.Net.Http.Json;
 
 namespace MyFinances.Application.Services
 {
-    public class FixerService(HttpClient httpClient): IFixerService
+    public class FixerService(IOptions<FixerSettings> apiOptions): IFixerService
     {
+        private readonly FixerSettings _apiOptions = apiOptions.Value;
+
         public async Task<CollectionResult<Currency>> GetCurrencies()
         {
-            var requestParams = httpClient.DefaultRequestHeaders.ToDictionary();
+            HttpClient fixerClient = new HttpClient()
+            {
+                BaseAddress = new Uri(_apiOptions.BaseAddress)
+            };
 
-            string accessKey = requestParams["access_key"].First();
-            string symbols = requestParams["symbols"].First();
-            string format = requestParams["format"].First();
-
-            var response = await httpClient.GetFromJsonAsync<RatesRequestDto>($"latest?access_key={accessKey}&symbols={symbols}&format={format}");
+            var response = await fixerClient
+                .GetFromJsonAsync<RatesRequestDto>($"latest?access_key={_apiOptions.AccessKey}&symbols={_apiOptions.Symbols}&format={_apiOptions.Format}");
 
             CollectionResult<Currency> result = new CollectionResult<Currency>();
 
