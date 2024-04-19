@@ -11,9 +11,11 @@ namespace MyFinances.Application.Services
     {
         public async Task<CollectionResult<Currency>> GetCurrencies()
         {
-            string accessKey = httpClient.DefaultRequestHeaders.FirstOrDefault(x => x.Key == "access_key").Value.First();
-            string symbols = httpClient.DefaultRequestHeaders.FirstOrDefault(x => x.Key == "symbols").Value.First();
-            string format = httpClient.DefaultRequestHeaders.FirstOrDefault(x => x.Key == "format").Value.First();
+            var requestParams = httpClient.DefaultRequestHeaders.ToDictionary();
+
+            string accessKey = requestParams["access_key"].First();
+            string symbols = requestParams["symbols"].First();
+            string format = requestParams["format"].First();
 
             var response = await httpClient.GetFromJsonAsync<RatesRequestDto>($"latest?access_key={accessKey}&symbols={symbols}&format={format}");
 
