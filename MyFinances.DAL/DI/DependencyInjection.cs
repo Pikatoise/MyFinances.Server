@@ -35,6 +35,7 @@ namespace MyFinances.DAL.DI
             services.AddScoped<IBaseRepository<Plan>, BaseRepository<Plan>>();
             services.AddScoped<IBaseRepository<Period>, BaseRepository<Period>>();
             services.AddScoped<IBaseRepository<Operation>, BaseRepository<Operation>>();
+            services.AddScoped<IBaseRepository<Currency>, BaseRepository<Currency>>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

@@ -14,7 +14,8 @@ namespace MyFinances.DAL.Repositories
         IBaseRepository<Role> roles,
         IBaseRepository<UserToken> userTokens,
         IBaseRepository<UserRole> userRoles,
-        IBaseRepository<User> users): IUnitOfWork
+        IBaseRepository<User> users,
+        IBaseRepository<Currency> currencies): IUnitOfWork
     {
         private readonly ApplicationDbContext _context = context;
 
@@ -27,6 +28,7 @@ namespace MyFinances.DAL.Repositories
         public IBaseRepository<Plan> Plans { get; } = plans;
         public IBaseRepository<Period> Periods { get; } = periods;
         public IBaseRepository<Operation> Operations { get; } = operations;
+        public IBaseRepository<Currency> Currencies { get; } = currencies;
 
         public bool IsRun() => _context.Database.CanConnectAsync().Result;
 

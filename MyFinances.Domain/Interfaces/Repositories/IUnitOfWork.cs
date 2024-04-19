@@ -31,5 +31,7 @@ namespace MyFinances.Domain.Interfaces.Repositories
         IBaseRepository<Period> Periods { get; }
 
         IBaseRepository<Operation> Operations { get; }
+
+        IBaseRepository<Currency> Currencies { get; }
     }
 }
