@@ -61,6 +61,15 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The request could not be sent.
+        /// </summary>
+        internal static string Api_Fixer_BadRequest {
+            get {
+                return ResourceManager.GetString("Api.Fixer.BadRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested currency not supported.
         /// </summary>
         internal static string Currency_NotFound {
