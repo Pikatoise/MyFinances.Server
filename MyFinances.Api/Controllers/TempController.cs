@@ -1,6 +1,6 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using MyFinances.Domain.Interfaces.Repositories;
+using MyFinances.Application.Services;
 
 namespace MyFinances.Api.Controllers
 {
@@ -10,10 +10,11 @@ namespace MyFinances.Api.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("[controller]")]
-    public class TempController(ILogger<TempController> logger, IUnitOfWork unitOfWork): ControllerBase
+    public class TempController(ILogger<TempController> logger, FixerService fixerService): ControllerBase
     {
         private readonly ILogger<TempController> _logger = logger;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly FixerService _fixerService = fixerService;
+
 
         /// <summary>
         /// Empty get request
@@ -27,13 +28,13 @@ namespace MyFinances.Api.Controllers
         /// <response code="200">Ok - request successfuly worked out</response>
         /// <response code="400">Fail - server can't process request</response>
         [HttpGet()]
-        public IResult Get()
+        public async Task<IResult> Get()
         {
             _logger.LogInformation($"Get request --- {DateTime.Now.ToShortTimeString()}");
 
-            var isDbWork = _unitOfWork.IsRun();
+            var result = await _fixerService.GetCurrencies();
 
-            return Results.Ok(isDbWork);
+            return Results.Ok(result);
         }
     }
 }
