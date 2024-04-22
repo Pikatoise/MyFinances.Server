@@ -15,6 +15,10 @@ namespace MyFinances.Application.Validations.DtoValidations.Plan
                 .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
                 .MaximumLength(50).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
 
+            RuleFor(x => x.Amount)
+                .NotNull().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
+                .ExclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_IncorrectValue).WithErrorCode("Dto.IncorrectValue");
+
             RuleFor(x => x.TypeId)
                 .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
 

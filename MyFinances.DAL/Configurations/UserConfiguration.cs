@@ -12,6 +12,7 @@ namespace MyFinances.DAL.Configurations
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Login).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Password).IsRequired();
 
             builder.HasMany<Period>(x => x.Periods)

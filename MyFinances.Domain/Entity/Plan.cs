@@ -11,6 +11,8 @@ namespace MyFinances.Domain.Entity
 
         public required string Name { get; set; }
 
+        public double Amount { get; set; }
+
         public DateTime FinalDate { get; set; }
 
         /// <summary>

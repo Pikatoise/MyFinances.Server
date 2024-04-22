@@ -11,6 +11,7 @@ namespace MyFinances.DAL.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Amount).HasDefaultValue(0);
             builder.Property(x => x.FinalDate).IsRequired();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Status).IsRequired();
