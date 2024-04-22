@@ -16,7 +16,9 @@ namespace MyFinances.Application.DI
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(CurrencyMapping));
+            services.AddAutoMapper(
+                typeof(CurrencyMapping),
+                typeof(PlanMapping));
 
             InitServices(services);
         }

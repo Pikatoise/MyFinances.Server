@@ -185,5 +185,14 @@ namespace MyFinances.Application.Resources {
                 return ResourceManager.GetString("TypeAssociation.AlreadyExist", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested user not found.
+        /// </summary>
+        internal static string User_NotFound {
+            get {
+                return ResourceManager.GetString("User.NotFound", resourceCulture);
+            }
+        }
     }
 }

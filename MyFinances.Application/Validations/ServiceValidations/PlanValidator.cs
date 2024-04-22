@@ -17,5 +17,22 @@ namespace MyFinances.Application.Validations.ServiceValidations
 
             return new BaseResult();
         }
+
+        public BaseResult ValidateOnUserAndTypeExist(User? user, OperationType? type)
+        {
+            if (user == null)
+                return new BaseResult()
+                {
+                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                };
+
+            if (type == null)
+                return new BaseResult()
+                {
+                    Failure = Error.NotFound("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
+                };
+
+            return new BaseResult();
+        }
     }
 }

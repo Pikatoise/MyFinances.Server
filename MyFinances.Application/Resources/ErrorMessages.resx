@@ -159,4 +159,7 @@
   <data name="TypeAssociation.AlreadyExist" xml:space="preserve">
     <value>Association with that name already exist</value>
   </data>
+  <data name="User.NotFound" xml:space="preserve">
+    <value>Requested user not found</value>
+  </data>
 </root>

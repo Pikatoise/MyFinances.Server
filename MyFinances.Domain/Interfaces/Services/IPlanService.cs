@@ -21,30 +21,27 @@ namespace MyFinances.Domain.Interfaces.Services
         /// </summary>
         /// <param name="planId">Plan identificator</param>
         /// <returns><c>PlanDto</c>: deleted plan if success
-        /// <para><c>null</c>: null otherwise</para></returns>
-        Task<BaseResult<PlanDto?>> DeletePlan(int planId);
+        Task<BaseResult<PlanDto>> DeletePlan(int planId);
 
         /// <summary>
-        /// Change plan state to opposite
+        /// Change plan state
         /// </summary>
         /// <param name="planId">Plan identificator</param>
         /// <returns><c>bool</c>: current plan state</returns>
-        Task<BaseResult<int>> ChangePlanStatus(int planId);
+        Task<BaseResult<int>> ChangePlanStatus(int planId, int status);
 
         /// <summary>
         /// Add plan
         /// </summary>
         /// <param name="dto">Data for new plan</param>
         /// <returns><c>PlanDto</c>: created plan if success
-        /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<PlanDto?>> CreatePlan(CreatePlanDto dto);
+        Task<BaseResult<PlanDto>> CreatePlan(CreatePlanDto dto);
 
         /// <summary>
         /// Update plan
         /// </summary>
         /// <param name="dto">Data for plan update</param>
         /// <returns><c>PlanDto</c>: updated plan if success
-        /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<PlanDto?>> UpdatePlan(UpdatePlanDto dto);
+        Task<BaseResult<PlanDto>> UpdatePlan(UpdatePlanDto dto);
     }
 }
