@@ -45,7 +45,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="month">Month of requsted period</param>
         /// <returns><c>PeriodDto</c>: specific period if exist
         /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<PeriodDto?>> GetByYearAndMonth(int year, int month);
+        Task<BaseResult<PeriodDto?>> GetByYearAndMonth(int userId, int year, int month);
 
         /// <summary>
         /// Get periods with pagination and ascending or descending sort
@@ -54,6 +54,6 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="step">Count of periods</param>
         /// <param name="order">Order of collection</param>
         /// <returns><c>Collection of PeriodDto</c>: section of periods</returns>
-        Task<CollectionResult<PeriodDto>> PeriodsPaging(int currentPage, int step, string order = "asc");
+        Task<CollectionResult<PeriodDto>> PeriodsPaging(int userId, int currentPage, int step, string order = "asc");
     }
 }
