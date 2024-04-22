@@ -75,12 +75,16 @@ namespace MyFinances.Application.Services
                     Failure = result.Failure
                 };
 
-            var isCurrencyInDb = _unitOfWork.Currencies.GetAll().Count() > 0;
-
             foreach (Currency freshCurrency in result.Data)
             {
-                if (isCurrencyInDb)
-                    _unitOfWork.Currencies.Update(freshCurrency);
+                var oldCurrency = _unitOfWork.Currencies.GetAll().FirstOrDefault(x => x.Name.Equals(freshCurrency.Name));
+
+                if (oldCurrency != null)
+                {
+                    oldCurrency.Value = freshCurrency.Value;
+
+                    _unitOfWork.Currencies.Update(oldCurrency);
+                }
                 else
                     await _unitOfWork.Currencies.CreateAsync(freshCurrency);
             }
