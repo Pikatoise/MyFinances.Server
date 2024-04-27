@@ -17,6 +17,9 @@ namespace MyFinances.Application.Validations.DtoValidations.Plan
 
             RuleFor(x => x.PlanId)
                 .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
+
+            RuleFor(x => x.Amount)
+                .ExclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Period_OutOfRange).WithErrorCode("Dto.OutOfRange");
         }
     }
 }

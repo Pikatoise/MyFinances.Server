@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Plan;
 using MyFinances.Domain.Entity;
 using MyFinances.Domain.Enum;
@@ -79,22 +80,117 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult<int>> ChangePlanStatus(int planId, int status)
         {
-            throw new NotImplementedException();
+            var plan = _unitOfWork.Plans.GetAll().FirstOrDefault(x => x.Id == planId);
+
+            var resultValidation = _planValidator.ValidateOnNull(plan);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<int>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            if (plan.Status != status)
+            {
+                plan.Status = status;
+
+                _unitOfWork.Plans.Update(plan);
+
+                await _unitOfWork.SaveChangesAsync();
+            }
+
+            return new BaseResult<int>()
+            {
+                Data = plan.Status
+            };
         }
 
         public async Task<BaseResult<PlanDto>> DeletePlan(int planId)
         {
-            throw new NotImplementedException();
+            var plan = _unitOfWork.Plans.GetAll().FirstOrDefault(x => x.Id == planId);
+
+            var resultValidation = _planValidator.ValidateOnNull(plan);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<PlanDto>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            _unitOfWork.Plans.Delete(plan);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new BaseResult<PlanDto>()
+            {
+                Data = _mapper.Map<PlanDto>(plan)
+            };
         }
 
         public async Task<CollectionResult<PlanDto>> GetPlansByUserId(int userId)
         {
-            throw new NotImplementedException();
+            var isUserExist = _unitOfWork.Users.GetAll().Any(x => x.Id == userId);
+
+            if (!isUserExist)
+                return new CollectionResult<PlanDto>()
+                {
+                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                };
+
+            var planDtos = _unitOfWork.Plans
+                .GetAll()
+                .Where(x => x.UserId == userId)
+                .Select(plan => _mapper.Map<PlanDto>(plan));
+
+            return new CollectionResult<PlanDto>()
+            {
+                Count = planDtos.Count(),
+                Data = planDtos
+            };
         }
 
         public async Task<BaseResult<PlanDto>> UpdatePlan(UpdatePlanDto dto)
         {
-            throw new NotImplementedException();
+            var resultDtoValidation = _updateDtoValidator.Validate(dto);
+
+            if (!resultDtoValidation.IsValid)
+            {
+                var errorValidation = resultDtoValidation.Errors.FirstOrDefault();
+
+                if (errorValidation == null)
+                    return new BaseResult<PlanDto>()
+                    {
+                        Failure = Error.None
+                    };
+
+                return new BaseResult<PlanDto>()
+                {
+                    Failure = Error.Validation(errorValidation.ErrorCode, errorValidation.ErrorMessage)
+                };
+            }
+
+            var plan = _unitOfWork.Plans.GetAll().FirstOrDefault(x => x.Id == dto.PlanId);
+
+            var resultValidation = _planValidator.ValidateOnNull(plan);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<PlanDto>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            plan.Name = dto.Name;
+            plan.Amount = dto.Amount;
+            plan.TypeId = dto.TypeId;
+
+            _unitOfWork.Plans.Update(plan);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new BaseResult<PlanDto>
+            {
+                Data = _mapper.Map<PlanDto>(plan)
+            };
         }
     }
 }
