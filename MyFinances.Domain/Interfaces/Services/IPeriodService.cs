@@ -21,7 +21,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="userId">User identificator</param>
         /// <returns><c>PeriodDto</c>: current user period if not expired
         /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<PeriodDto?>> CurrentPeriodByUserId(int userId);
+        Task<BaseResult<PeriodDto>> CurrentPeriodByUserId(int userId);
 
         /// <summary>
         /// Create new period for user
@@ -36,7 +36,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="periodId">Period identificator</param>
         /// <returns><c>PeriodDto</c>: deleted period if success
         /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<PeriodDto?>> DeletePeriod(int periodId);
+        Task<BaseResult<PeriodDto>> DeletePeriod(int periodId);
 
         /// <summary>
         /// Get specific period by year and month
@@ -45,7 +45,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="month">Month of requsted period</param>
         /// <returns><c>PeriodDto</c>: specific period if exist
         /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<PeriodDto?>> GetByYearAndMonth(int userId, int year, int month);
+        Task<BaseResult<PeriodDto>> GetByYearAndMonth(int userId, int year, int month);
 
         /// <summary>
         /// Get periods with pagination and ascending or descending sort

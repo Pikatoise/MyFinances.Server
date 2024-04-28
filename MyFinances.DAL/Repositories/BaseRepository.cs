@@ -1,4 +1,5 @@
-﻿using MyFinances.Domain.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using MyFinances.Domain.Interfaces.Repositories;
 
 namespace MyFinances.DAL.Repositories
 {
@@ -28,7 +29,7 @@ namespace MyFinances.DAL.Repositories
 
         public IQueryable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>();
+            return _dbContext.Set<TEntity>().AsNoTracking();
         }
 
         public TEntity Update(TEntity entity)
