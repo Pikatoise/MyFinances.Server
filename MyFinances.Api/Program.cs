@@ -53,6 +53,15 @@ namespace MyFinances.Api
                 app.ApplyMigrations();
             }
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    ctx.Context.Response.Headers.Append(
+                        "Cache-Control", $"public, max-age={60 * 60 * 24 * 7}");
+                }
+            });
+
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseHttpsRedirection();
