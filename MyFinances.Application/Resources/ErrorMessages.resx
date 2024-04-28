@@ -132,6 +132,9 @@
   <data name="Dto.IncorrectValue" xml:space="preserve">
     <value>Value was incorrect</value>
   </data>
+  <data name="Dto.OutOfRange" xml:space="preserve">
+    <value>Given value out of allowed range</value>
+  </data>
   <data name="Dto.TooBigValue" xml:space="preserve">
     <value>Value was too big</value>
   </data>

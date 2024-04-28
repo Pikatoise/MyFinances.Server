@@ -106,6 +106,15 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Given value out of allowed range.
+        /// </summary>
+        internal static string Dto_OutOfRange {
+            get {
+                return ResourceManager.GetString("Dto.OutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value was too big.
         /// </summary>
         internal static string Dto_TooBigValue {

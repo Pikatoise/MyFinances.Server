@@ -17,7 +17,7 @@ namespace MyFinances.Application.Validations.DtoValidations.Plan
 
             RuleFor(x => x.Amount)
                 .NotNull().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .ExclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_IncorrectValue).WithErrorCode("Dto.IncorrectValue");
+                .ExclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_OutOfRange).WithErrorCode("Dto.IncorrectValue");
 
             RuleFor(x => x.TypeId)
                 .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");

@@ -9,7 +9,7 @@ namespace MyFinances.Application.Validations.DtoValidations.Operation
         {
             RuleFor(x => x.Amount)
                 .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .InclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_IncorrectValue).WithErrorCode("Dto.IncorrectValue");
+                .InclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_OutOfRange).WithErrorCode("Dto.OutOfRange");
 
             RuleFor(x => x.Title)
                 .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
