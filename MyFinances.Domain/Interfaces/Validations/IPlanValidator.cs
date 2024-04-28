@@ -13,13 +13,5 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
         BaseResult ValidateOnUserAndTypeExist(User? user, OperationType? type);
-
-        /// <summary>
-        /// Check is user who owns plans exists
-        /// </summary>
-        /// <param name="user">Owner of plans</param>
-        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
-        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
-        BaseResult ValidateOnPlansOwnerExist(User? user);
     }
 }
