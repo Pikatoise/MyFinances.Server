@@ -44,23 +44,20 @@ namespace MyFinances.Domain.Interfaces.Services
         /// </summary>
         /// <param name="operationId">Operation identificator</param>
         /// <returns><c>OperationDto</c>: deleted operation if success
-        /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<OperationDto?>> DeleteOperationById(int operationId);
+        Task<BaseResult<OperationDto>> DeleteOperationById(int operationId);
 
         /// <summary>
         /// Add operation
         /// </summary>
         /// <param name="dto">Data for new operation</param>
         /// <returns><c>OperationDto</c>: created operation if success
-        /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<OperationDto?>> CreateOperation(CreateOperationDto dto);
+        Task<BaseResult<OperationDto>> CreateOperation(CreateOperationDto dto);
 
         /// <summary>
         /// Update operation
         /// </summary>
         /// <param name="dto">Data for operation update</param>
         /// <returns><c>OperationDto</c>: updated operation if success
-        /// <para><c>null</c>: otherwise</para></returns>
-        Task<BaseResult<OperationDto?>> UpdateOperation(UpdateOperationDto dto);
+        Task<BaseResult<OperationDto>> UpdateOperation(UpdateOperationDto dto);
     }
 }

@@ -17,12 +17,12 @@ namespace MyFinances.Application.Services
         IValidator<CreateOperationDto> createDtoValidator,
         IValidator<UpdateOperationDto> updateDtoValidator): IOperationService
     {
-        public Task<BaseResult<OperationDto?>> CreateOperation(CreateOperationDto dto)
+        public Task<BaseResult<OperationDto>> CreateOperation(CreateOperationDto dto)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult<OperationDto?>> DeleteOperationById(int operationId)
+        public Task<BaseResult<OperationDto>> DeleteOperationById(int operationId)
         {
             throw new NotImplementedException();
         }
@@ -47,7 +47,7 @@ namespace MyFinances.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<BaseResult<OperationDto?>> UpdateOperation(UpdateOperationDto dto)
+        public Task<BaseResult<OperationDto>> UpdateOperation(UpdateOperationDto dto)
         {
             throw new NotImplementedException();
         }
