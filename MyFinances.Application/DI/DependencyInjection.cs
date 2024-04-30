@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using MyFinances.Application.Mapping;
 using MyFinances.Application.Services;
 using MyFinances.Application.Validations.DtoValidations.Operation;
 using MyFinances.Application.Validations.DtoValidations.Plan;
@@ -9,6 +8,7 @@ using MyFinances.Domain.DTO.Operation;
 using MyFinances.Domain.DTO.Plan;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
+using System.Reflection;
 
 namespace MyFinances.Application.DI
 {
@@ -16,10 +16,7 @@ namespace MyFinances.Application.DI
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddAutoMapper(
-                typeof(CurrencyMapping),
-                typeof(PlanMapping),
-                typeof(PeriodMapping));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             InitServices(services);
         }
