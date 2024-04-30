@@ -18,7 +18,8 @@ namespace MyFinances.Application.DI
         {
             services.AddAutoMapper(
                 typeof(CurrencyMapping),
-                typeof(PlanMapping));
+                typeof(PlanMapping),
+                typeof(PeriodMapping));
 
             InitServices(services);
         }
@@ -38,6 +39,8 @@ namespace MyFinances.Application.DI
 
             services.AddScoped<IFixerService, FixerService>();
             services.AddScoped<ICurrencyService, CurrencyService>();
+            services.AddScoped<IPeriodService, PeriodService>();
+            services.AddScoped<IPlanService, PlanService>();
         }
     }
 }
