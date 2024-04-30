@@ -43,10 +43,18 @@ namespace MyFinances.Application.Services
                 var updateResult = await UpdateCurrencies();
 
                 if (!updateResult.IsSuccess)
-                    return new BaseResult<CurrencyDto>
-                    {
-                        Failure = updateResult.Failure,
-                    };
+                {
+                    if (validationOnNull.IsSuccess)
+                        return new BaseResult<CurrencyDto>()
+                        {
+                            Data = _mapper.Map<CurrencyDto>(currency)
+                        };
+                    else
+                        return new BaseResult<CurrencyDto>
+                        {
+                            Failure = updateResult.Failure,
+                        };
+                }
 
                 currency = await _unitOfWork.Currencies.GetAll().FirstOrDefaultAsync(x => x.Name.Equals(currencyName));
 
