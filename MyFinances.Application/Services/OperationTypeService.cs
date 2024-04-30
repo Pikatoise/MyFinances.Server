@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MyFinances.Domain.DTO.OperationType;
+using MyFinances.Domain.Entity;
 using MyFinances.Domain.Interfaces.Repositories;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
@@ -19,19 +20,80 @@ namespace MyFinances.Application.Services
         private readonly IOperationTypeValidator _operationTypeValidator = operationTypeValidator;
         private readonly IMapper _mapper = mapper;
 
-        public Task<BaseResult<OperationTypeDto>> AddTypeAssociation(int typeId, string association)
+        public async Task<BaseResult<OperationTypeDto>> AddTypeAssociation(int typeId, string association)
         {
-            throw new NotImplementedException();
+            var type = _unitOfWork.OperationTypes
+                .GetAll()
+                .FirstOrDefault(x => x.Id == typeId);
+
+            var typeAssociation = _unitOfWork.TypeAssociations
+                .GetAll()
+                .FirstOrDefault(x => x.Association.Equals(association));
+
+            var resultValidation = _operationTypeValidator.AddTypeAssociationValidator(type, typeAssociation);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<OperationTypeDto>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            var newAssociation = new TypeAssociation()
+            {
+                Association = association,
+                TypeId = typeId
+            };
+
+            await _unitOfWork.TypeAssociations.CreateAsync(newAssociation);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new BaseResult<OperationTypeDto>
+            {
+                Data = _mapper.Map<OperationTypeDto>(type)
+            };
         }
 
-        public Task<CollectionResult<OperationTypeDto>> GetAllTypes()
+        public async Task<CollectionResult<OperationTypeDto>> GetAllTypes()
         {
-            throw new NotImplementedException();
+            var operationTypes = _unitOfWork.OperationTypes
+                .GetAll()
+                .Select(x => _mapper.Map<OperationTypeDto>(x));
+
+            return new CollectionResult<OperationTypeDto>
+            {
+                Count = operationTypes.Count(),
+                Data = operationTypes
+            };
         }
 
-        public Task<CollectionResult<OperationTypeDto>> GetTypesByAssociation(string association)
+        public async Task<CollectionResult<OperationTypeDto>> GetTypesByAssociation(string association)
         {
-            throw new NotImplementedException();
+            var typesId = _unitOfWork.TypeAssociations
+                .GetAll()
+                .Where(x => x.Association.Contains(association, StringComparison.InvariantCultureIgnoreCase))
+                .Select(x => x.TypeId)
+                .ToHashSet()
+                .ToList();
+
+            var operationTypes = _unitOfWork.OperationTypes.GetAll().IntersectBy(typesId, x => x.Id);
+
+            foreach (var operationType in operationTypes)
+            {
+                var resultValidation = _operationTypeValidator.ValidateOnNull(operationType);
+
+                if (!resultValidation.IsSuccess)
+                    return new CollectionResult<OperationTypeDto>()
+                    {
+                        Failure = resultValidation.Failure
+                    };
+            }
+
+            return new CollectionResult<OperationTypeDto>()
+            {
+                Count = operationTypes.Count(),
+                Data = operationTypes.Select(x => _mapper.Map<OperationTypeDto>(x))
+            };
         }
     }
 }
