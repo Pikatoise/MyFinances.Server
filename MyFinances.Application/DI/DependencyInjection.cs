@@ -32,7 +32,7 @@ namespace MyFinances.Application.DI
             services.AddScoped<IValidator<CreateOperationDto>, CreateOperationValidator>();
             services.AddScoped<IValidator<UpdateOperationDto>, UpdateOperationValidator>();
             services.AddScoped<IValidator<CreatePlanDto>, CreatePlanValidator>();
-            services.AddScoped<IValidator<CreatePlanDto>, CreatePlanValidator>();
+            services.AddScoped<IValidator<UpdatePlanDto>, UpdatePlanValidator>();
 
             services.AddScoped<IFixerService, FixerService>();
             services.AddScoped<ICurrencyService, CurrencyService>();
