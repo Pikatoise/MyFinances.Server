@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MyFinances.Domain.DTO.Operation;
+using MyFinances.Domain.Entity;
 using MyFinances.Domain.Interfaces.Repositories;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
@@ -17,9 +18,54 @@ namespace MyFinances.Application.Services
         IValidator<CreateOperationDto> createDtoValidator,
         IValidator<UpdateOperationDto> updateDtoValidator): IOperationService
     {
-        public Task<BaseResult<OperationDto>> CreateOperation(CreateOperationDto dto)
+        private readonly IMapper _mapper = mapper;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly ILogger _logger = logger;
+        private readonly IOperationValidator _operationValidator = operationValidator;
+        private readonly IValidator<CreateOperationDto> _createDtoValidator = createDtoValidator;
+        private readonly IValidator<UpdateOperationDto> _updateDtoValidator = updateDtoValidator;
+
+        public async Task<BaseResult<OperationDto>> CreateOperation(CreateOperationDto dto)
         {
-            throw new NotImplementedException();
+            var resultDtoValidation = _createDtoValidator.Validate(dto);
+
+            if (!resultDtoValidation.IsValid)
+            {
+                var error = resultDtoValidation.Errors.FirstOrDefault();
+
+                return new BaseResult<OperationDto>()
+                {
+                    Failure = error == null ? Error.None : Error.Validation(error.ErrorCode, error.ErrorMessage)
+                };
+            }
+
+            var period = _unitOfWork.Periods.GetAll().FirstOrDefault(x => x.Id == dto.PeriodId);
+            var type = _unitOfWork.OperationTypes.GetAll().FirstOrDefault(x => x.Id == dto.TypeId);
+
+            var resultValidation = _operationValidator.CreateValidator(period, type);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<OperationDto>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            var operation = new Operation()
+            {
+                Title = dto.Title,
+                Amount = dto.Amount,
+                PeriodId = dto.PeriodId,
+                TypeId = dto.TypeId
+            };
+
+            await _unitOfWork.Operations.CreateAsync(operation);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new BaseResult<OperationDto>()
+            {
+                Data = _mapper.Map<OperationDto>(operation)
+            };
         }
 
         public Task<BaseResult<OperationDto>> DeleteOperationById(int operationId)

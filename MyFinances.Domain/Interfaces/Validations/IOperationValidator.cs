@@ -15,7 +15,7 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <param name="operationType">Type of operation</param>
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
-        BaseResult CreateValidator(Period operationPeriod, OperationType operationType);
+        BaseResult CreateValidator(Period? operationPeriod, OperationType? operationType);
 
         /// <summary>
         /// Check is operation and type exists
@@ -24,6 +24,6 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <param name="operationType">Type of operation</param>
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
-        BaseResult UpdateValidator(Operation operation, OperationType operationType);
+        BaseResult UpdateValidator(Operation? operation, OperationType? operationType);
     }
 }
