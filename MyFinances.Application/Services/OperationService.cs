@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Operation;
 using MyFinances.Domain.Entity;
 using MyFinances.Domain.Interfaces.Repositories;
@@ -68,34 +69,143 @@ namespace MyFinances.Application.Services
             };
         }
 
-        public Task<BaseResult<OperationDto>> DeleteOperationById(int operationId)
+        public async Task<BaseResult<OperationDto>> DeleteOperationById(int operationId)
         {
-            throw new NotImplementedException();
+            var operation = _unitOfWork.Operations.GetAll().FirstOrDefault(x => x.Id == operationId);
+
+            var resultValidation = _operationValidator.ValidateOnNull(operation);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<OperationDto>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            _unitOfWork.Operations.Delete(operation);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new BaseResult<OperationDto>()
+            {
+                Data = _mapper.Map<OperationDto>(operation)
+            };
         }
 
-        public Task<CollectionResult<OperationDto>> FilterOperationsByProfit(IEnumerable<OperationDto> operations, bool isProfit)
+        public async Task<CollectionResult<OperationDto>> FilterOperationsByProfit(IEnumerable<OperationDto> operations, bool isProfit)
         {
-            throw new NotImplementedException();
+            var filteredOperations = operations.Where(x => x.Amount > 0 == isProfit);
+
+            return new CollectionResult<OperationDto>()
+            {
+                Count = filteredOperations.Count(),
+                Data = filteredOperations
+            };
         }
 
-        public Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeFilterId)
+        public async Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeFilterId)
         {
-            throw new NotImplementedException();
+            var filteredOperations = operations.Where(x => x.TypeId == typeFilterId);
+
+            return new CollectionResult<OperationDto>()
+            {
+                Count = filteredOperations.Count(),
+                Data = filteredOperations
+            };
         }
 
-        public Task<CollectionResult<OperationDto>> GetOperationsByPeriod(int periodId)
+        public async Task<CollectionResult<OperationDto>> GetOperationsByPeriod(int periodId)
         {
-            throw new NotImplementedException();
+            var isPeriodExist = _unitOfWork.Periods.GetAll().Any(x => x.Id == periodId);
+
+            if (!isPeriodExist)
+                return new CollectionResult<OperationDto>()
+                {
+                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
+                };
+
+            var operationDtos = _unitOfWork.Operations
+                .GetAll()
+                .Where(x => x.PeriodId == periodId).Select(x => _mapper.Map<OperationDto>(x));
+
+            return new CollectionResult<OperationDto>()
+            {
+                Count = operationDtos.Count(),
+                Data = operationDtos
+            };
         }
 
-        public Task<CollectionResult<int>> GroupByTypeAndSum(int periodId)
+        public async Task<CollectionResult<int>> GroupByTypeAndSum(int periodId)
         {
-            throw new NotImplementedException();
+            var isPeriodExist = _unitOfWork.Periods.GetAll().Any(x => x.Id == periodId);
+
+            if (!isPeriodExist)
+                return new CollectionResult<int>()
+                {
+                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
+                };
+
+            var operations = _unitOfWork.Operations.GetAll().Where(x => x.PeriodId == periodId);
+
+            if (operations.Count() == 0)
+                return new CollectionResult<int>()
+                {
+                    Data = new List<int>() { 0 }
+                };
+
+            Dictionary<int, int> typeSumPairs = new Dictionary<int, int>();
+
+            foreach (var operation in operations)
+            {
+                if (typeSumPairs.ContainsKey(operation.TypeId))
+                    typeSumPairs[operation.TypeId] += (int)operation.Amount;
+                else
+                    typeSumPairs.Add(operation.TypeId, (int)operation.Amount);
+            }
+
+            return new CollectionResult<int>()
+            {
+                Count = typeSumPairs.Count,
+                Data = typeSumPairs.Select(x => x.Value)
+            };
         }
 
-        public Task<BaseResult<OperationDto>> UpdateOperation(UpdateOperationDto dto)
+        public async Task<BaseResult<OperationDto>> UpdateOperation(UpdateOperationDto dto)
         {
-            throw new NotImplementedException();
+            var resultDtoValidation = _updateDtoValidator.Validate(dto);
+
+            if (!resultDtoValidation.IsValid)
+            {
+                var error = resultDtoValidation.Errors.FirstOrDefault();
+
+                return new BaseResult<OperationDto>()
+                {
+                    Failure = error == null ? Error.None : Error.Validation(error.ErrorCode, error.ErrorMessage)
+                };
+            }
+
+            var operation = _unitOfWork.Operations.GetAll().FirstOrDefault(x => x.Id == dto.OperationId);
+            var type = _unitOfWork.OperationTypes.GetAll().FirstOrDefault(x => x.Id == dto.TypeId);
+
+            var resultValidation = _operationValidator.UpdateValidator(operation, type);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<OperationDto>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            operation.Title = dto.Title;
+            operation.Amount = dto.Amount;
+            operation.TypeId = dto.TypeId;
+
+            _unitOfWork.Operations.Update(operation);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new BaseResult<OperationDto>()
+            {
+                Data = _mapper.Map<OperationDto>(operation)
+            };
         }
     }
 }
