@@ -187,6 +187,15 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requested role not found.
+        /// </summary>
+        internal static string Role_NotFound {
+            get {
+                return ResourceManager.GetString("Role.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Association with that name already exist.
         /// </summary>
         internal static string TypeAssociation_AlreadyExist {
@@ -210,6 +219,24 @@ namespace MyFinances.Application.Resources {
         internal static string User_WrongPassword {
             get {
                 return ResourceManager.GetString("User.WrongPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User already have this role.
+        /// </summary>
+        internal static string UserRole_AlreadyExist {
+            get {
+                return ResourceManager.GetString("UserRole.AlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested userRole not found.
+        /// </summary>
+        internal static string UserRole_NotFound {
+            get {
+                return ResourceManager.GetString("UserRole.NotFound", resourceCulture);
             }
         }
     }
