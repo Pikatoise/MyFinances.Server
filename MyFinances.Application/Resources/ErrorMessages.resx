@@ -165,4 +165,7 @@
   <data name="User.NotFound" xml:space="preserve">
     <value>Requested user not found</value>
   </data>
+  <data name="User.WrongPassword" xml:space="preserve">
+    <value>Password is incorrect</value>
+  </data>
 </root>

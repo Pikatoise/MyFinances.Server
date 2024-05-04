@@ -203,5 +203,14 @@ namespace MyFinances.Application.Resources {
                 return ResourceManager.GetString("User.NotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is incorrect.
+        /// </summary>
+        internal static string User_WrongPassword {
+            get {
+                return ResourceManager.GetString("User.WrongPassword", resourceCulture);
+            }
+        }
     }
 }
