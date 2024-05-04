@@ -6,7 +6,7 @@ namespace MyFinances.Domain.Interfaces.Validations
     public interface ITokenValidator: IBaseValidator<UserToken>
     {
         /// <summary>
-        /// Check is user exist, received token similar to origin and token not expired
+        /// Check is received token similar to origin and token not expired
         /// </summary>
         /// <param name="user">Token owner</param>
         /// <param name="receivedRefreshToken">Refresh token from dto</param>

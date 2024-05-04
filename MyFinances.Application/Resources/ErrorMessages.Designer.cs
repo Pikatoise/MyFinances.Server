@@ -239,5 +239,32 @@ namespace MyFinances.Application.Resources {
                 return ResourceManager.GetString("UserRole.NotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User token is already expired and need to be refresh.
+        /// </summary>
+        internal static string UserToken_Expired {
+            get {
+                return ResourceManager.GetString("UserToken.Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token invalid.
+        /// </summary>
+        internal static string UserToken_Invalid {
+            get {
+                return ResourceManager.GetString("UserToken.Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested userToken not found.
+        /// </summary>
+        internal static string UserToken_NotFound {
+            get {
+                return ResourceManager.GetString("UserToken.NotFound", resourceCulture);
+            }
+        }
     }
 }
