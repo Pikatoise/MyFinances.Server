@@ -12,9 +12,9 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <summary>
         /// Create new role
         /// </summary>
-        /// <param name="dto">Data for creation</param>
+        /// <param name="roleName">Name for new role</param>
         /// <returns><c>RoleDto</c>: data of new role</returns>
-        Task<BaseResult<RoleDto>> CreateRoleAsync(CreateRoleDto dto);
+        Task<BaseResult<RoleDto>> CreateRoleAsync(string roleName);
 
         /// <summary>
         /// Remove role
