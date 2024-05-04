@@ -35,7 +35,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// </summary>
         /// <param name="dto">Data for adding role to user</param> 
         /// <returns><c>UserRoleDto</c>: data of user with new role</returns>
-        Task<BaseResult<UserRoleDto>> SetRoleToUserAsync(UserRoleDto dto);
+        Task<BaseResult<UserRoleDto>> SetRoleToUserAsync(AddUserRoleDto dto);
 
         /// <summary>
         /// Remove role from user
