@@ -12,6 +12,15 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <param name="receivedRefreshToken">Refresh token from dto</param>
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
-        BaseResult ValidateRefreshingToken(User? user, string receivedRefreshToken);
+        BaseResult ValidateRefreshTokenAuthentic(User? user, string receivedRefreshToken);
+
+        /// <summary>
+        /// Check is token exists and not similar
+        /// </summary>
+        /// <param name="refreshToken">Received refresh token</param>
+        /// <param name="accessToken">Received access token</param>
+        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
+        BaseResult ValidateTokensExists(string? refreshToken, string? accessToken);
     }
 }
