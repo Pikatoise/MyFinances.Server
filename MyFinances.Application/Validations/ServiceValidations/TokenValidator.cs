@@ -18,7 +18,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             return new BaseResult();
         }
 
-        public BaseResult ValidateRefreshingToken(User? user, string receivedRefreshToken)
+        public BaseResult ValidateRefreshTokenAuthentic(User? user, string receivedRefreshToken)
         {
             if (!user.UserToken.RefreshToken.Equals(receivedRefreshToken))
                 return new BaseResult()
@@ -30,6 +30,23 @@ namespace MyFinances.Application.Validations.ServiceValidations
                 return new BaseResult()
                 {
                     Failure = Error.Failure("UserToken.Expired", ErrorMessages.UserToken_Expired)
+                };
+
+            return new BaseResult();
+        }
+
+        public BaseResult ValidateTokensExists(string? refreshToken, string? accessToken)
+        {
+            if (refreshToken == null || accessToken == null)
+                return new BaseResult()
+                {
+                    Failure = Error.Validation("UserToken.NotFound", ErrorMessages.UserToken_NotFound)
+                };
+
+            if (string.IsNullOrWhiteSpace(refreshToken) || string.IsNullOrWhiteSpace(accessToken))
+                return new BaseResult()
+                {
+                    Failure = Error.Validation("UserToken.EmptyValues", ErrorMessages.UserToken_Invalid)
                 };
 
             return new BaseResult();
