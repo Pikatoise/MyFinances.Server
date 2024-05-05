@@ -6,12 +6,13 @@ namespace MyFinances.Domain.Interfaces.Validations
     public interface IRoleValidator: IBaseValidator<Role>
     {
         /// <summary>
-        /// Check is userRole exist
+        /// Check is user and his userRole exist
         /// </summary>
-        /// <param name="userRole">Entity to validate</param>
+        /// <param name="user">User, owner of role</param>
+        /// <param name="roleId">Identificator of role</param>
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
-        BaseResult ValidateOnUserRoleExist(UserRole? userRole);
+        BaseResult ValidateOnUserRoleExist(User? user, string roleName);
 
         /// <summary>
         /// Check is userRole not exist

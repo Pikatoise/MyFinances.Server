@@ -138,33 +138,23 @@ namespace MyFinances.Application.Services
                .Include(x => x.Roles)
                .FirstOrDefaultAsync(x => x.Login.Equals(dto.Login));
 
-            if (user == null)
+            var resultValidationOnUserRoleExist = _roleValidator.ValidateOnUserRoleExist(user, dto.RoleName);
+
+            if (!resultValidationOnUserRoleExist.IsSuccess)
                 return new BaseResult<UserRoleDto>()
                 {
-                    ErrorCode = (int)ErrorCodes.UserNotFound,
-                    ErrorMessage = ErrorMessage.UserNotFound
+                    Failure = resultValidationOnUserRoleExist.Failure
                 };
 
-            var userRole = user.Roles.FirstOrDefault(x => x.Id == dto.RoleId);
-
-            if (userRole == null)
-                return new BaseResult<UserRoleDto>()
-                {
-                    ErrorCode = (int)ErrorCodes.RoleNotFound,
-                    ErrorMessage = ErrorMessage.RoleNotFound
-                };
+            var userRole = user.Roles.FirstOrDefault(x => x.Name.Equals(dto.RoleName));
 
             user.Roles.Remove(userRole);
 
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new BaseResult<UserRoleDto>()
             {
-                Data = new UserRoleDto()
-                {
-                    Login = dto.Login,
-                    RoleName = userRole.Name
-                }
+                Data = new UserRoleDto(user.Login, userRole.Name)
             };
         }
     }
