@@ -20,7 +20,7 @@ namespace MyFinances.Application.Services
         ITokenValidator tokenValidator): ITokenService
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        private readonly ITokenValidator tokenValidator = tokenValidator;
+        private readonly ITokenValidator _tokenValidator = tokenValidator;
         private readonly string _jwtKey = options.Value.JwtKey;
         private readonly string _issuer = options.Value.Issuer;
         private readonly string _audience = options.Value.Audience;
@@ -30,6 +30,14 @@ namespace MyFinances.Application.Services
             var accessToken = dto.AccessToken;
             var refreshToken = dto.RefreshToken;
 
+            var resultValidationTokensExists = _tokenValidator.ValidateTokensExists(refreshToken, accessToken);
+
+            if (!resultValidationTokensExists.IsSuccess)
+                return new BaseResult<TokenDto>()
+                {
+                    Failure = resultValidationTokensExists.Failure
+                };
+
             var claimPrincipal = GetPrincipalFromExpiredToken(accessToken);
 
             var userName = claimPrincipal.Identity?.Name;
@@ -38,21 +46,20 @@ namespace MyFinances.Application.Services
                 .Include(x => x.UserToken)
                 .FirstOrDefaultAsync(x => x.Login.Equals(userName));
 
-            if (user == null ||
-                user.UserToken.RefreshToken != refreshToken ||
-                user.UserToken.RefreshTokenExpiryTime <= DateTime.UtcNow)
-            {
+            var resultValidationRefreshTokenAuthentic = _tokenValidator.ValidateRefreshTokenAuthentic(user, refreshToken);
+
+            if (!resultValidationRefreshTokenAuthentic.IsSuccess)
                 return new BaseResult<TokenDto>()
                 {
-                    Failure = Error.Conflict("", "")
+                    Failure = resultValidationRefreshTokenAuthentic.Failure
                 };
-            }
 
             var newAccessToken = GenerateAccessToken(claimPrincipal.Claims);
 
             var newRefreshToken = GenerateRefreshToken();
 
             user.UserToken.RefreshToken = newRefreshToken;
+
             _unitOfWork.Users.Update(user);
 
             await _unitOfWork.SaveChangesAsync();

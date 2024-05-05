@@ -20,6 +20,12 @@ namespace MyFinances.Application.Validations.ServiceValidations
 
         public BaseResult ValidateRefreshTokenAuthentic(User? user, string receivedRefreshToken)
         {
+            if (user == null)
+                return new BaseResult()
+                {
+                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                };
+
             if (!user.UserToken.RefreshToken.Equals(receivedRefreshToken))
                 return new BaseResult()
                 {
