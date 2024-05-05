@@ -86,20 +86,21 @@ namespace MyFinances.Application.Services
             };
         }
 
-        public async Task<BaseResult<RoleDto>> DeleteRoleAsync(long id)
+        public async Task<BaseResult<RoleDto>> DeleteRoleAsync(int id)
         {
             var role = await _unitOfWork.Roles.GetAll().FirstOrDefaultAsync(x => x.Id == id);
 
-            if (role == null)
+            var resultValidationOnNull = _roleValidator.ValidateOnNull(role);
+
+            if (!resultValidationOnNull.IsSuccess)
                 return new BaseResult<RoleDto>()
                 {
-                    ErrorCode = (int)ErrorCodes.RoleNotFound,
-                    ErrorMessage = ErrorMessage.RoleNotFound
+                    Failure = resultValidationOnNull.Failure
                 };
 
-            _unitOfWork.Roles.Remove(role);
+            _unitOfWork.Roles.Delete(role);
 
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new BaseResult<RoleDto>()
             {

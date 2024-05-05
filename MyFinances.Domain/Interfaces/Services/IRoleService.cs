@@ -21,7 +21,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// </summary>
         /// <param name="id">Role identificator</param>
         /// <returns><c>RoleDto</c>: data of deleted role</returns>
-        Task<BaseResult<RoleDto>> DeleteRoleAsync(long id);
+        Task<BaseResult<RoleDto>> DeleteRoleAsync(int id);
 
         /// <summary>
         /// Update role
