@@ -20,13 +20,15 @@ namespace MyFinances.Application.Services
         IMapper mapper,
         ITokenService tokenService,
         IUnitOfWork unitOfWork,
-        IAuthValidator authValidator): IAuthService
+        IAuthValidator authValidator,
+        IRoleValidator roleValidator): IAuthService
     {
         private readonly ILogger _logger = logger;
         private readonly IMapper _mapper = mapper;
         private readonly ITokenService _tokenService = tokenService;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IAuthValidator _authValidator = authValidator;
+        private readonly IRoleValidator _roleValidator = roleValidator;
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)
         {
@@ -94,28 +96,32 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult<UserDto>> Register(RegisterUserDto dto)
         {
-            if (!dto.Password.Equals(dto.PasswordConfirm))
+            var resultValidationPasswords = _authValidator.ValidateNewUserPassword(dto.Password, dto.PasswordConfirm);
+
+            if (!resultValidationPasswords.IsSuccess)
                 return new BaseResult<UserDto>()
                 {
-                    ErrorCode = (int)ErrorCodes.PasswordsAreDifferent,
-                    ErrorMessage = ErrorMessage.PasswordsAreDifferent
+                    Failure = resultValidationPasswords.Failure
                 };
 
             var user = await _unitOfWork.Users.GetAll().FirstOrDefaultAsync(u => u.Login.Equals(dto.Login));
 
-            if (user != null)
+            var resultValidationUserOnNull = _authValidator.ValidateOnUserNotExist(user);
+
+            if (!resultValidationUserOnNull.IsSuccess)
                 return new BaseResult<UserDto>()
                 {
-                    ErrorCode = (int)ErrorCodes.UserAlreadyExist,
-                    ErrorMessage = ErrorMessage.UserAlreadyExist
+                    Failure = resultValidationUserOnNull.Failure
                 };
 
             var defaultRole = _unitOfWork.Roles.GetAll().FirstOrDefault(x => x.Name.Equals(nameof(Roles.User)));
-            if (defaultRole == null)
+
+            var resultValidationOnRoleExist = _roleValidator.ValidateOnNull(defaultRole);
+
+            if (!resultValidationOnRoleExist.IsSuccess)
                 return new BaseResult<UserDto>()
                 {
-                    ErrorCode = (int)ErrorCodes.RoleNotFound,
-                    ErrorMessage = ErrorMessage.RoleNotFound
+                    Failure = resultValidationOnRoleExist.Failure
                 };
 
             var hashedPassword = HashPassword(dto.Password);
@@ -127,12 +133,13 @@ namespace MyFinances.Application.Services
                     user = new User()
                     {
                         Login = dto.Login,
-                        Password = hashedPassword
+                        Password = hashedPassword,
+                        Email = string.Empty
                     };
 
                     await _unitOfWork.Users.CreateAsync(user);
 
-                    await _unitOfWork.SaveChangeAsync();
+                    await _unitOfWork.SaveChangesAsync();
 
                     var userRole = new UserRole()
                     {
@@ -142,7 +149,7 @@ namespace MyFinances.Application.Services
 
                     await _unitOfWork.UserRoles.CreateAsync(userRole);
 
-                    await _unitOfWork.SaveChangeAsync();
+                    await _unitOfWork.SaveChangesAsync();
 
                     await transaction.CommitAsync();
                 }

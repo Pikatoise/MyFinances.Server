@@ -14,5 +14,22 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
         BaseResult ValidatePasswordVerifying(Func<string, string, bool> passwordVerifier, string userPassword, string dtoPassword);
+
+        /// <summary>
+        /// Complex password verification
+        /// </summary>
+        /// <param name="password">New password</param>
+        /// <param name="passwordConfirm">Copy of new password</param>
+        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
+        BaseResult ValidateNewUserPassword(string? password, string? passwordConfirm);
+
+        /// <summary>
+        /// Check is user with same login not already exist
+        /// </summary>
+        /// <param name="user">User with same login</param>
+        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
+        BaseResult ValidateOnUserNotExist(User? user);
     }
 }

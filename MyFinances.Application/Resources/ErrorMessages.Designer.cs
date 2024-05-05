@@ -214,11 +214,65 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User with same login already exist.
+        /// </summary>
+        internal static string User_AlreadyExist {
+            get {
+                return ResourceManager.GetString("User.AlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested user not found.
         /// </summary>
         internal static string User_NotFound {
             get {
                 return ResourceManager.GetString("User.NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least 1 digit.
+        /// </summary>
+        internal static string User_PasswordMustContainDigit {
+            get {
+                return ResourceManager.GetString("User.PasswordMustContainDigit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least 1 letter.
+        /// </summary>
+        internal static string User_PasswordMustContainLetters {
+            get {
+                return ResourceManager.GetString("User.PasswordMustContainLetters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least 1 symbol.
+        /// </summary>
+        internal static string User_PasswordMustContainSymbol {
+            get {
+                return ResourceManager.GetString("User.PasswordMustContainSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password length might be at least 6 symbols.
+        /// </summary>
+        internal static string User_PasswordTooShort {
+            get {
+                return ResourceManager.GetString("User.PasswordTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password field must be filled.
+        /// </summary>
+        internal static string User_RequiredPassword {
+            get {
+                return ResourceManager.GetString("User.RequiredPassword", resourceCulture);
             }
         }
         

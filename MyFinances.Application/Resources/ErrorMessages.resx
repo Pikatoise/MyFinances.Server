@@ -168,8 +168,26 @@
   <data name="TypeAssociation.AlreadyExist" xml:space="preserve">
     <value>Association with that name already exist</value>
   </data>
+  <data name="User.AlreadyExist" xml:space="preserve">
+    <value>User with same login already exist</value>
+  </data>
   <data name="User.NotFound" xml:space="preserve">
     <value>Requested user not found</value>
+  </data>
+  <data name="User.PasswordMustContainDigit" xml:space="preserve">
+    <value>Password must contain at least 1 digit</value>
+  </data>
+  <data name="User.PasswordMustContainLetters" xml:space="preserve">
+    <value>Password must contain at least 1 letter</value>
+  </data>
+  <data name="User.PasswordMustContainSymbol" xml:space="preserve">
+    <value>Password must contain at least 1 symbol</value>
+  </data>
+  <data name="User.PasswordTooShort" xml:space="preserve">
+    <value>Password length might be at least 6 symbols</value>
+  </data>
+  <data name="User.RequiredPassword" xml:space="preserve">
+    <value>Password field must be filled</value>
   </data>
   <data name="User.WrongPassword" xml:space="preserve">
     <value>Password is incorrect</value>
