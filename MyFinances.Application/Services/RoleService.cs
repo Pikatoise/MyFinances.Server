@@ -112,18 +112,19 @@ namespace MyFinances.Application.Services
         {
             var role = await _unitOfWork.Roles.GetAll().FirstOrDefaultAsync(x => x.Id == dto.Id);
 
-            if (role == null)
+            var resultValidationOnNull = _roleValidator.ValidateOnNull(role);
+
+            if (!resultValidationOnNull.IsSuccess)
                 return new BaseResult<RoleDto>()
                 {
-                    ErrorCode = (int)ErrorCodes.RoleNotFound,
-                    ErrorMessage = ErrorMessage.RoleNotFound
+                    Failure = resultValidationOnNull.Failure
                 };
 
             role.Name = dto.Name;
 
             _unitOfWork.Roles.Update(role);
 
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new BaseResult<RoleDto>()
             {
