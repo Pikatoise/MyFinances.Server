@@ -159,6 +159,9 @@
   <data name="Plan.NotFound" xml:space="preserve">
     <value>Requested plan not found</value>
   </data>
+  <data name="Role.AlreadyExist" xml:space="preserve">
+    <value>This role already exist</value>
+  </data>
   <data name="Role.NotFound" xml:space="preserve">
     <value>Requested role not found</value>
   </data>

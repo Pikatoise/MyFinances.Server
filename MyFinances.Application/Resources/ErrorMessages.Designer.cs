@@ -187,6 +187,15 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This role already exist.
+        /// </summary>
+        internal static string Role_AlreadyExist {
+            get {
+                return ResourceManager.GetString("Role.AlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested role not found.
         /// </summary>
         internal static string Role_NotFound {

@@ -18,6 +18,17 @@ namespace MyFinances.Application.Validations.ServiceValidations
             return new BaseResult();
         }
 
+        public BaseResult ValidateOnNotNull(Role? model)
+        {
+            if (model != null)
+                return new BaseResult()
+                {
+                    Failure = Error.Conflict("Role.AlreadyExist", ErrorMessages.Role_AlreadyExist)
+                };
+
+            return new BaseResult();
+        }
+
         public BaseResult ValidateOnUserRoleExist(UserRole? userRole)
         {
             if (userRole == null)

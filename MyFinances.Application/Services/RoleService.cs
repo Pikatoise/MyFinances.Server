@@ -61,23 +61,24 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult<RoleDto>> CreateRoleAsync(string roleName)
         {
-            var role = await _unitOfWork.Roles.GetAll().FirstOrDefaultAsync(x => x.Name.Equals(dto.Name));
+            var role = await _unitOfWork.Roles.GetAll().FirstOrDefaultAsync(x => x.Name.Equals(roleName));
 
-            if (role != null)
+            var resultValidationOnRoleExist = _roleValidator.ValidateOnNotNull(role);
+
+            if (!resultValidationOnRoleExist.IsSuccess)
                 return new BaseResult<RoleDto>()
                 {
-                    ErrorCode = (int)ErrorCodes.RoleAlreadyExist,
-                    ErrorMessage = ErrorMessage.RoleAlreadyExist
+                    Failure = resultValidationOnRoleExist.Failure
                 };
 
             role = new Role()
             {
-                Name = dto.Name
+                Name = roleName
             };
 
             await _unitOfWork.Roles.CreateAsync(role);
 
-            await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new BaseResult<RoleDto>()
             {

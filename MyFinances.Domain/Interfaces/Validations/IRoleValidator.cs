@@ -21,5 +21,13 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
         BaseResult ValidateOnUserRoleNotExist(User? user, string roleName);
+
+        /// <summary>
+        /// Check is role already exist
+        /// </summary>
+        /// <param name="model">Role to check</param>
+        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
+        BaseResult ValidateOnNotNull(Role? model);
     }
 }
