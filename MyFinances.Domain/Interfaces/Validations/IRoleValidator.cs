@@ -16,9 +16,10 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <summary>
         /// Check is userRole not exist
         /// </summary>
-        /// <param name="userRole">Entity to validate</param>
+        /// <param name="user">User with roles for check</param>
+        /// <param name="roleName">Name of role, which user should not have</param>
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
-        BaseResult ValidateOnUserRoleNotExist(UserRole? userRole);
+        BaseResult ValidateOnUserRoleNotExist(User? user, string roleName);
     }
 }

@@ -29,9 +29,15 @@ namespace MyFinances.Application.Validations.ServiceValidations
             return new BaseResult();
         }
 
-        public BaseResult ValidateOnUserRoleNotExist(UserRole? userRole)
+        public BaseResult ValidateOnUserRoleNotExist(User? user, string roleName)
         {
-            if (userRole != null)
+            if (user == null)
+                return new BaseResult()
+                {
+                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                };
+
+            if (user.Roles.Any(x => x.Name.Equals(roleName)))
                 return new BaseResult()
                 {
                     Failure = Error.NotFound("UserRole.AlreadyExist", ErrorMessages.UserRole_AlreadyExist)
