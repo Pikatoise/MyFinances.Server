@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MyFinances.Domain.Entity;
+using MyFinances.Domain.Enum;
 
 namespace MyFinances.DAL.Configurations
 {
@@ -18,17 +19,17 @@ namespace MyFinances.DAL.Configurations
                 new Role()
                 {
                     Id = 1,
-                    Name = "User"
+                    Name = nameof(Roles.User)
                 },
                 new Role()
                 {
                     Id = 2,
-                    Name = "Admin"
+                    Name = nameof(Roles.Admin)
                 },
                 new Role()
                 {
                     Id = 3,
-                    Name = "Premium"
+                    Name = nameof(Roles.Premium)
                 }
             });
         }
