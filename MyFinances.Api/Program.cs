@@ -24,6 +24,10 @@ namespace MyFinances.Api
 
             builder.Configuration.AddUserSecrets<Program>();
 
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.DefaultSection));
+
+            builder.Services.AddAuth(builder);
+
             builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
             builder.Services.AddOptions<FixerSettings>()
@@ -36,7 +40,6 @@ namespace MyFinances.Api
             builder.Services.AddSwagger();
 
             builder.Services.AddDataAccessLayer(builder.Configuration);
-
             builder.Services.AddApplication();
 
             var app = builder.Build();
