@@ -27,22 +27,16 @@ namespace MyFinances.Application.Validations.ServiceValidations
                     Failure = Error.Validation("User.WrongPasswordConfirm", ErrorMessages.User_WrongPassword)
                 };
 
-            if (!password.Any(c => char.IsLetter(c)))
+            if (!password.Any(char.IsLetter))
                 return new BaseResult()
                 {
                     Failure = Error.Validation("User.PasswordMustContainLetters", ErrorMessages.User_PasswordMustContainLetters)
                 };
 
-            if (!password.Any(c => char.IsDigit(c)))
+            if (!password.Any(char.IsDigit))
                 return new BaseResult()
                 {
                     Failure = Error.Validation("User.PasswordMustContainDigit", ErrorMessages.User_PasswordMustContainDigit)
-                };
-
-            if (!password.Any(c => char.IsSymbol(c)))
-                return new BaseResult()
-                {
-                    Failure = Error.Validation("User.PasswordMustContainSymbol", ErrorMessages.User_PasswordMustContainSymbol)
                 };
 
             return new BaseResult();
