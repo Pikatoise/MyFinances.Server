@@ -1,6 +1,8 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyFinances.Api.Extensions;
+using MyFinances.Domain.Enum;
 using MyFinances.Domain.Interfaces.Services;
 
 namespace MyFinances.Api.Controllers
@@ -8,6 +10,7 @@ namespace MyFinances.Api.Controllers
     /// <summary>
     /// Temporary controller 
     /// </summary>
+    [Authorize(Roles = nameof(Roles.Admin))]
     [ApiController]
     [ApiVersion("1.0")]
     [Route("[controller]")]
