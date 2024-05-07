@@ -102,7 +102,7 @@ namespace MyFinances.Application.Services
             };
         }
 
-        public async Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeFilterId)
+        public async Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeId)
         {
             var filteredOperations = operations.Where(x => x.TypeId == typeFilterId);
 
@@ -113,7 +113,7 @@ namespace MyFinances.Application.Services
             };
         }
 
-        public async Task<CollectionResult<OperationDto>> GetOperationsByPeriod(int periodId)
+        public async Task<CollectionResult<OperationDto>> GetOperationsByPeriod(int periodId, int? typeId, bool? isProfit)
         {
             var isPeriodExist = _unitOfWork.Periods.GetAll().Any(x => x.Id == periodId);
 
@@ -127,11 +127,19 @@ namespace MyFinances.Application.Services
                 .GetAll()
                 .Where(x => x.PeriodId == periodId).Select(x => _mapper.Map<OperationDto>(x));
 
-            return new CollectionResult<OperationDto>()
+            var result = new CollectionResult<OperationDto>()
             {
                 Count = operationDtos.Count(),
                 Data = operationDtos
             };
+
+            if (result.IsSuccess && typeId != null)
+                result = await FilterOperationsByType(result.Data, (int)typeId);
+
+            if (result.IsSuccess && isProfit != null)
+                result = await FilterOperationsByProfit(result.Data, (bool)isProfit);
+
+            return result;
         }
 
         public async Task<CollectionResult<int>> GroupByTypeAndSum(int periodId)

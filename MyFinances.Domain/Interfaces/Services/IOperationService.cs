@@ -20,8 +20,10 @@ namespace MyFinances.Domain.Interfaces.Services
         /// Get all operations by period
         /// </summary>
         /// <param name="periodId">Period identificator</param>
+        /// <param name="typeFilterId">Identificator of type for filter</param>
+        /// <param name="isProfit">Boolean for filter</param>
         /// <returns><c>Collection of OperationDto</c>: collection of operations</returns>
-        Task<CollectionResult<OperationDto>> GetOperationsByPeriod(int periodId);
+        Task<CollectionResult<OperationDto>> GetOperationsByPeriod(int periodId, int? typeId, bool? isProfit);
 
         /// <summary>
         /// Filter operations by type
@@ -29,7 +31,7 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="operations">Operations to filter</param>
         /// <param name="typeFilterId">Identificator of type for filter</param>
         /// <returns><c>Collection of OperationDto</c>: filtered operations</returns>
-        Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeFilterId);
+        Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeId);
 
         /// <summary>
         /// Filter operations by profitability or unprofitability
