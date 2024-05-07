@@ -20,7 +20,6 @@ namespace MyFinances.Domain.Interfaces.Services
         /// </summary>
         /// <param name="userId">User identificator</param>
         /// <returns><c>PeriodDto</c>: current user period if not expired
-        /// <para><c>null</c>: otherwise</para></returns>
         Task<BaseResult<PeriodDto>> CurrentPeriodByUserId(int userId);
 
         /// <summary>
@@ -35,7 +34,6 @@ namespace MyFinances.Domain.Interfaces.Services
         /// </summary>
         /// <param name="periodId">Period identificator</param>
         /// <returns><c>PeriodDto</c>: deleted period if success
-        /// <para><c>null</c>: otherwise</para></returns>
         Task<BaseResult<PeriodDto>> DeletePeriod(int periodId);
 
         /// <summary>
@@ -44,7 +42,6 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="year">Year of requsted period</param>
         /// <param name="month">Month of requsted period</param>
         /// <returns><c>PeriodDto</c>: specific period if exist
-        /// <para><c>null</c>: otherwise</para></returns>
         Task<BaseResult<PeriodDto>> GetByYearAndMonth(int userId, int year, int month);
 
         /// <summary>
@@ -54,6 +51,6 @@ namespace MyFinances.Domain.Interfaces.Services
         /// <param name="step">Count of periods</param>
         /// <param name="order">Order of collection</param>
         /// <returns><c>Collection of PeriodDto</c>: section of periods</returns>
-        Task<CollectionResult<PeriodDto>> PeriodsPaging(int userId, int currentPage, int step, string order = "asc");
+        Task<CollectionResult<PeriodDto>> PeriodsPaging(int userId, int currentPage, int step, string order);
     }
 }

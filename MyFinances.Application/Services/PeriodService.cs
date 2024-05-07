@@ -116,7 +116,7 @@ namespace MyFinances.Application.Services
             };
         }
 
-        public async Task<CollectionResult<PeriodDto>> PeriodsPaging(int userId, int currentPage, int step, string order = "asc")
+        public async Task<CollectionResult<PeriodDto>> PeriodsPaging(int userId, int currentPage, int step, string order)
         {
             var periodsAmount = await _unitOfWork.Periods.GetAll().CountAsync(x => x.UserId == userId);
 
