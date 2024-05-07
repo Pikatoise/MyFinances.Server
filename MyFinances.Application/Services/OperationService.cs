@@ -104,7 +104,7 @@ namespace MyFinances.Application.Services
 
         public async Task<CollectionResult<OperationDto>> FilterOperationsByType(IEnumerable<OperationDto> operations, int typeId)
         {
-            var filteredOperations = operations.Where(x => x.TypeId == typeFilterId);
+            var filteredOperations = operations.Where(x => x.TypeId == typeId);
 
             return new CollectionResult<OperationDto>()
             {
