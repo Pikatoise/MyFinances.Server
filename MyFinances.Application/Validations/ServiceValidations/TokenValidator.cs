@@ -46,7 +46,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (refreshToken == null || accessToken == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("UserToken.NotFound", ErrorMessages.UserToken_NotFound)
+                    Failure = Error.Validation("UserToken.Invalid", ErrorMessages.UserToken_Invalid)
                 };
 
             if (string.IsNullOrWhiteSpace(refreshToken) || string.IsNullOrWhiteSpace(accessToken))
