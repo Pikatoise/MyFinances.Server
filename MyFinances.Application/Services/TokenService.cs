@@ -25,6 +25,7 @@ namespace MyFinances.Application.Services
         private readonly string _issuer = options.Value.Issuer;
         private readonly string _audience = options.Value.Audience;
         private readonly int _accessTokenLifeTime = options.Value.Lifetime;
+        private readonly int _refreshTokenValidityInDays = options.Value.RefreshTokenValidityInDays;
 
         public async Task<BaseResult<TokenDto>> RefreshToken(TokenDto dto)
         {
@@ -60,6 +61,7 @@ namespace MyFinances.Application.Services
             var newRefreshToken = GenerateRefreshToken();
 
             user.UserToken.RefreshToken = newRefreshToken;
+            user.UserToken.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_refreshTokenValidityInDays);
 
             _unitOfWork.Users.Update(user);
 
