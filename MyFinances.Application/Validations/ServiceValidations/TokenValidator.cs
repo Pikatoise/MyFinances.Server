@@ -29,13 +29,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (!user.UserToken.RefreshToken.Equals(receivedRefreshToken))
                 return new BaseResult()
                 {
-                    Failure = Error.Failure("UserToken.Invalid", ErrorMessages.UserToken_Invalid)
+                    Failure = Error.Validation("UserToken.Invalid", ErrorMessages.UserToken_Invalid)
                 };
 
-            if (!(user.UserToken.RefreshTokenExpiryTime <= DateTime.UtcNow))
+            if (user.UserToken.RefreshTokenExpiryTime <= DateTime.UtcNow)
                 return new BaseResult()
                 {
-                    Failure = Error.Failure("UserToken.NotExpired", ErrorMessages.UserToken_NotExpired)
+                    Failure = Error.Failure("UserToken.Expired", ErrorMessages.UserToken_Expired)
                 };
 
             return new BaseResult();

@@ -24,6 +24,7 @@ namespace MyFinances.Application.Services
         private readonly string _jwtKey = options.Value.JwtKey;
         private readonly string _issuer = options.Value.Issuer;
         private readonly string _audience = options.Value.Audience;
+        private readonly int _accessTokenLifeTime = options.Value.Lifetime;
 
         public async Task<BaseResult<TokenDto>> RefreshToken(TokenDto dto)
         {
@@ -80,7 +81,7 @@ namespace MyFinances.Application.Services
 
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var securityToken = new JwtSecurityToken(_issuer, _audience, claims, null, DateTime.UtcNow.AddMinutes(10), credentials);
+            var securityToken = new JwtSecurityToken(_issuer, _audience, claims, null, DateTime.UtcNow.AddMinutes(_accessTokenLifeTime), credentials);
 
             var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
@@ -106,7 +107,7 @@ namespace MyFinances.Application.Services
                 ValidateIssuer = true,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtKey)),
-                ValidateLifetime = true,
+                ValidateLifetime = false,
                 ValidAudience = _audience,
                 ValidIssuer = _issuer
             };

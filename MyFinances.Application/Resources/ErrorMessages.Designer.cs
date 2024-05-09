@@ -304,20 +304,20 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User token has expired and need to be refreshed.
+        /// </summary>
+        internal static string UserToken_Expired {
+            get {
+                return ResourceManager.GetString("UserToken.Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Token invalid.
         /// </summary>
         internal static string UserToken_Invalid {
             get {
                 return ResourceManager.GetString("UserToken.Invalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User token has not expired and doesnt need to be refreshed.
-        /// </summary>
-        internal static string UserToken_NotExpired {
-            get {
-                return ResourceManager.GetString("UserToken.NotExpired", resourceCulture);
             }
         }
         
