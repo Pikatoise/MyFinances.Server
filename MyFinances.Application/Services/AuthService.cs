@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MyFinances.Domain.DTO;
 using MyFinances.Domain.DTO.User;
 using MyFinances.Domain.Entity;
@@ -8,6 +9,7 @@ using MyFinances.Domain.Interfaces.Repositories;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
+using MyFinances.Domain.Settings;
 using Serilog;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -21,6 +23,7 @@ namespace MyFinances.Application.Services
         ITokenService tokenService,
         IUnitOfWork unitOfWork,
         IAuthValidator authValidator,
+        IOptions<JwtSettings> options,
         IRoleValidator roleValidator): IAuthService
     {
         private readonly ILogger _logger = logger;
@@ -28,6 +31,7 @@ namespace MyFinances.Application.Services
         private readonly ITokenService _tokenService = tokenService;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IAuthValidator _authValidator = authValidator;
+        private readonly IOptions<JwtSettings> _options = options;
         private readonly IRoleValidator _roleValidator = roleValidator;
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)
