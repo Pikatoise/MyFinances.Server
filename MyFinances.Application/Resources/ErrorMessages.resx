@@ -198,11 +198,11 @@
   <data name="UserRole.NotFound" xml:space="preserve">
     <value>Requested userRole not found</value>
   </data>
-  <data name="UserToken.Expired" xml:space="preserve">
-    <value>User token is already expired and need to be refresh</value>
-  </data>
   <data name="UserToken.Invalid" xml:space="preserve">
     <value>Token invalid</value>
+  </data>
+  <data name="UserToken.NotExpired" xml:space="preserve">
+    <value>User token has not expired and doesnt need to be refreshed</value>
   </data>
   <data name="UserToken.NotFound" xml:space="preserve">
     <value>Requested userToken not found</value>
