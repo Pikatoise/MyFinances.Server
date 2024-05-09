@@ -146,15 +146,17 @@ namespace MyFinances.Application.Services
                     Failure = resultValidationOnUserRoleExist.Failure
                 };
 
-            var userRole = user.Roles.FirstOrDefault(x => x.Name.Equals(dto.RoleName));
+            var role = await _unitOfWork.Roles.GetAll().FirstOrDefaultAsync(x => x.Name.Equals(dto.RoleName));
 
-            user.Roles.Remove(userRole);
+            var userRole = await _unitOfWork.UserRoles.GetAll().FirstOrDefaultAsync(x => x.UserId == user.Id && x.RoleId == role.Id);
+
+            _unitOfWork.UserRoles.Delete(userRole);
 
             await _unitOfWork.SaveChangesAsync();
 
             return new BaseResult<UserRoleDto>()
             {
-                Data = new UserRoleDto(user.Login, userRole.Name)
+                Data = new UserRoleDto(user.Login, role.Name)
             };
         }
     }
