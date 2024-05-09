@@ -31,7 +31,7 @@ namespace MyFinances.Application.Services
         private readonly ITokenService _tokenService = tokenService;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IAuthValidator _authValidator = authValidator;
-        private readonly IOptions<JwtSettings> _options = options;
+        private readonly int _refreshTokenValidityInDays = options.Value.RefreshTokenValidityInDays;
         private readonly IRoleValidator _roleValidator = roleValidator;
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)
@@ -73,7 +73,7 @@ namespace MyFinances.Application.Services
                 {
                     UserId = user.Id,
                     RefreshToken = refreshToken,
-                    RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7)
+                    RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_refreshTokenValidityInDays)
                 };
 
                 await _unitOfWork.UserTokens.CreateAsync(userToken);
@@ -81,7 +81,7 @@ namespace MyFinances.Application.Services
             else
             {
                 userToken.RefreshToken = refreshToken;
-                userToken.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+                userToken.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_refreshTokenValidityInDays);
 
                 _unitOfWork.UserTokens.Update(userToken);
             }
