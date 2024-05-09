@@ -15,7 +15,7 @@ namespace MyFinances.Api.Controllers
         private readonly IAuthService _authService = authService;
 
         /// <summary>
-        /// Registration
+        /// User registration
         /// </summary>
         /// <param name="dto">Data for registration</param>
         /// <remarks>
@@ -42,7 +42,7 @@ namespace MyFinances.Api.Controllers
         }
 
         /// <summary>
-        /// Authorization
+        /// User log in
         /// </summary>
         /// <param name="dto">Data for auth</param>
         /// <remarks>
@@ -57,7 +57,7 @@ namespace MyFinances.Api.Controllers
         /// </remarks>
         /// <response code="200">Succesfull auth</response>
         /// <response code="400">Some error</response>
-        [HttpPost("auth")]
+        [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IResult> Login([FromBody] LoginUserDto dto)

@@ -12,7 +12,7 @@ namespace MyFinances.Api.Controllers
     {
         private readonly IPeriodService _periodService = periodService;
 
-        [HttpGet("profitOf={periodId}")]
+        [HttpGet("profitOf/{periodId}")]
         public async Task<IResult> ProfitOfPeriod(int periodId)
         {
             var response = await _periodService.ProfitOfPeriod(periodId);
@@ -24,22 +24,6 @@ namespace MyFinances.Api.Controllers
         public async Task<IResult> CurrentPeriodByUserId(int userId)
         {
             var response = await _periodService.CurrentPeriodByUserId(userId);
-
-            return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
-        }
-
-        [HttpPost("add/{userId}")]
-        public async Task<IResult> CreateNewPeriod(int userId)
-        {
-            var response = await _periodService.CreateNewPeriod(userId);
-
-            return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
-        }
-
-        [HttpDelete("remove/{periodId}")]
-        public async Task<IResult> DeletePeriod(int periodId)
-        {
-            var response = await _periodService.DeletePeriod(periodId);
 
             return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
         }
@@ -56,6 +40,22 @@ namespace MyFinances.Api.Controllers
         public async Task<IResult> PeriodsPaging(int userId, int currentPage, int step, string order)
         {
             var response = await _periodService.PeriodsPaging(userId, currentPage, step, order);
+
+            return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
+        }
+
+        [HttpPost("add/{userId}")]
+        public async Task<IResult> CreateNewPeriod(int userId)
+        {
+            var response = await _periodService.CreateNewPeriod(userId);
+
+            return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
+        }
+
+        [HttpDelete("remove/{periodId}")]
+        public async Task<IResult> DeletePeriod(int periodId)
+        {
+            var response = await _periodService.DeletePeriod(periodId);
 
             return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
         }

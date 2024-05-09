@@ -16,7 +16,7 @@ namespace MyFinances.Api.Controllers
     {
         private readonly IOperationService _operationService = operationService;
 
-        [HttpGet("diagram/GroupByTypeAndSum={periodId}")]
+        [HttpGet("diagram/GroupByTypeAndSum/{periodId}")]
         public async Task<IResult> GroupByTypeAndSum(int periodId)
         {
             var response = await _operationService.GroupByTypeAndSum(periodId);
@@ -32,7 +32,7 @@ namespace MyFinances.Api.Controllers
             return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
         }
 
-        [HttpDelete("remove={operationId}")]
+        [HttpDelete("remove/{operationId}")]
         public async Task<IResult> DeleteOperationById(int operationId)
         {
             var response = await _operationService.DeleteOperationById(operationId);
