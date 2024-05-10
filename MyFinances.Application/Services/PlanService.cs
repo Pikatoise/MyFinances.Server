@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Plan;
 using MyFinances.Domain.Entity;
@@ -140,6 +141,7 @@ namespace MyFinances.Application.Services
             var planDtos = _unitOfWork.Plans
                 .GetAll()
                 .Where(x => x.UserId == userId)
+                .Include(x => x.Type)
                 .Select(plan => _mapper.Map<PlanDto>(plan));
 
             return new CollectionResult<PlanDto>()
