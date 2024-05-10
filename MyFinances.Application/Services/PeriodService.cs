@@ -140,7 +140,9 @@ namespace MyFinances.Application.Services
             IQueryable<Period> allUserPeriods = _unitOfWork.Periods.GetAll();
 
             if (order.Equals("desc"))
-                allUserPeriods = allUserPeriods.OrderDescending();
+                allUserPeriods = allUserPeriods.OrderBy(x => x.Year).ThenBy(x => x.Month);
+            else
+                allUserPeriods = allUserPeriods.OrderByDescending(x => x.Year).ThenByDescending(x => x.Month);
 
             var pagedPeriodDtos = allUserPeriods
                     .Skip(alreadyLoaded)
