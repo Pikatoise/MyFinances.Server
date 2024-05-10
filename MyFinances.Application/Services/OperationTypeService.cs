@@ -55,7 +55,7 @@ namespace MyFinances.Application.Services
 
             var typeAssociation = await _unitOfWork.TypeAssociations
                 .GetAll()
-                .FirstOrDefaultAsync(x => x.Association.Equals(association));
+                .FirstOrDefaultAsync(x => x.TypeId.Equals(typeId) && x.Association.Equals(association));
 
             var resultValidation = _operationTypeValidator.AddTypeAssociationValidator(type, typeAssociation);
 
