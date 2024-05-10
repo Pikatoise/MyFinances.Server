@@ -22,11 +22,18 @@ namespace MyFinances.Domain.Interfaces.Services
         Task<CollectionResult<OperationTypeDto>> GetAllTypes();
 
         /// <summary>
+        /// Add new operation type
+        /// </summary>
+        /// <param name="srcPath">file name of icon</param>
+        /// <returns><c>OperationTypeDto</c>: added type</returns>
+        Task<BaseResult<OperationTypeDto>> AddOperationType(string srcPath);
+
+        /// <summary>
         /// Add new association to operation type
         /// </summary>
         /// <param name="typeId">Associated type</param>
         /// <param name="association">New association</param>
-        /// <returns>Type to which the association was added</returns>
+        /// <returns><c>OperationTypeDto</c>: type to which the association was added</returns>
         Task<BaseResult<OperationTypeDto>> AddTypeAssociation(int typeId, string association);
     }
 }
