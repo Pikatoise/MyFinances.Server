@@ -39,6 +39,13 @@ namespace MyFinances.Application.Services
                 UserId = userId
             };
 
+            var oldPeriod = _unitOfWork.Periods
+                .GetAll()
+                .FirstOrDefault(x => x.Year == DateTime.Now.Year && x.Month == DateTime.Now.Month);
+
+            if (oldPeriod != null)
+                _unitOfWork.Periods.Delete(oldPeriod);
+
             await _unitOfWork.Periods.CreateAsync(period);
 
             await _unitOfWork.SaveChangesAsync();
