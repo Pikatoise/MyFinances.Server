@@ -142,6 +142,15 @@ namespace MyFinances.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operation type with this path already exists.
+        /// </summary>
+        internal static string OperationType_AlreadyExist {
+            get {
+                return ResourceManager.GetString("OperationType.AlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requested operation type not found.
         /// </summary>
         internal static string OperationType_NotFound {

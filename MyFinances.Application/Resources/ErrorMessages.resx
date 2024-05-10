@@ -144,6 +144,9 @@
   <data name="Operation.NotFound" xml:space="preserve">
     <value>Requested operation not found</value>
   </data>
+  <data name="OperationType.AlreadyExist" xml:space="preserve">
+    <value>Operation type with this path already exists</value>
+  </data>
   <data name="OperationType.NotFound" xml:space="preserve">
     <value>Requested operation type not found</value>
   </data>

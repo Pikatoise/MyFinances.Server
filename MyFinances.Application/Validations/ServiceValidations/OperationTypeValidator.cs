@@ -7,6 +7,17 @@ namespace MyFinances.Application.Validations.ServiceValidations
 {
     public class OperationTypeValidator: IOperationTypeValidator
     {
+        public BaseResult AddOperationTypeValidator(OperationType? operationType)
+        {
+            if (operationType != null)
+                return new BaseResult()
+                {
+                    Failure = Error.Conflict("OperationType.AlreadyExist", ErrorMessages.OperationType_AlredyExist)
+                };
+
+            return new BaseResult();
+        }
+
         public BaseResult AddTypeAssociationValidator(OperationType? operationType, TypeAssociation? typeAssociation)
         {
             if (operationType == null)

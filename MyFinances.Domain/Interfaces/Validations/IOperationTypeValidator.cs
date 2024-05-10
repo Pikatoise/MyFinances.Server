@@ -13,5 +13,13 @@ namespace MyFinances.Domain.Interfaces.Validations
         /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
         /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
         BaseResult AddTypeAssociationValidator(OperationType? operationType, TypeAssociation? typeAssociation);
+
+        /// <summary>
+        /// Check is new type not already exist
+        /// </summary>
+        /// <param name="operationType">Associated type</param>
+        /// <returns><c>BaseResult</c>: empty BaseResult, if validation was successful
+        /// <para><c>BaseResult with Error</c>: otherwise</para></returns>
+        BaseResult AddOperationTypeValidator(OperationType? operationType);
     }
 }
