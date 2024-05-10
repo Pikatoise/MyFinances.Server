@@ -92,6 +92,7 @@ namespace MyFinances.Application.Services
             {
                 Data = new TokenDto()
                 {
+                    UserId = user.Id,
                     AccessToken = accesToken,
                     RefreshToken = refreshToken,
                 }
