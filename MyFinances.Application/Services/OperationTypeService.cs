@@ -49,13 +49,15 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult<OperationTypeDto>> AddTypeAssociation(int typeId, string association)
         {
+            var clearedAssociation = ClearAssociation(association);
+
             var type = await _unitOfWork.OperationTypes
                 .GetAll()
                 .FirstOrDefaultAsync(x => x.Id == typeId);
 
             var typeAssociation = await _unitOfWork.TypeAssociations
                 .GetAll()
-                .FirstOrDefaultAsync(x => x.TypeId.Equals(typeId) && x.Association.Equals(association));
+                .FirstOrDefaultAsync(x => x.TypeId.Equals(typeId) && x.Association.Equals(clearedAssociation));
 
             var resultValidation = _operationTypeValidator.AddTypeAssociationValidator(type, typeAssociation);
 
@@ -67,7 +69,7 @@ namespace MyFinances.Application.Services
 
             var newAssociation = new TypeAssociation()
             {
-                Association = association,
+                Association = clearedAssociation,
                 TypeId = typeId
             };
 
@@ -96,9 +98,11 @@ namespace MyFinances.Application.Services
 
         public async Task<CollectionResult<OperationTypeDto>> GetTypesByAssociation(string association)
         {
+            var clearedAssociation = ClearAssociation(association);
+
             var typesId = _unitOfWork.TypeAssociations
                 .GetAll()
-                .Where(x => x.Association.Contains(association, StringComparison.InvariantCultureIgnoreCase))
+                .Where(x => x.Association.Contains(clearedAssociation))
                 .Select(x => x.TypeId)
                 .ToHashSet()
                 .ToList();
@@ -122,5 +126,7 @@ namespace MyFinances.Application.Services
                 Data = operationTypes.Select(x => _mapper.Map<OperationTypeDto>(x))
             };
         }
+
+        private string ClearAssociation(string rawAssociation) => rawAssociation.Trim().ToLower();
     }
 }
