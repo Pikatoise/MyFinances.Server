@@ -62,10 +62,10 @@ namespace MyFinances.Application.Services
             {
                 Name = dto.Name,
                 Amount = dto.Amount,
-                FinalDate = DateTime.Parse(dto.FinalDate),
+                FinalDate = DateTime.SpecifyKind(DateTime.Parse(dto.FinalDate), DateTimeKind.Utc),
                 Status = (int)PlanStatuses.InProgress,
-                Type = type,
-                User = user
+                TypeId = type.Id,
+                UserId = user.Id
             };
 
             await _unitOfWork.Plans.CreateAsync(newPlan);
