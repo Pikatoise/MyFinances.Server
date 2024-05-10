@@ -100,25 +100,20 @@ namespace MyFinances.Application.Services
         {
             var clearedAssociation = ClearAssociation(association);
 
-            var typesId = _unitOfWork.TypeAssociations
+            var associationsWithTypes = _unitOfWork.TypeAssociations
                 .GetAll()
-                .Where(x => x.Association.Contains(clearedAssociation))
+                .Include(x => x.Type)
+                .ToList()
+                .Where(x => ClearAssociation(x.Association).Contains(clearedAssociation));
+
+            var uniqueTypes = associationsWithTypes
                 .Select(x => x.TypeId)
                 .ToHashSet()
                 .ToList();
 
-            var operationTypes = _unitOfWork.OperationTypes.GetAll().IntersectBy(typesId, x => x.Id);
-
-            foreach (var operationType in operationTypes)
-            {
-                var resultValidation = _operationTypeValidator.ValidateOnNull(operationType);
-
-                if (!resultValidation.IsSuccess)
-                    return new CollectionResult<OperationTypeDto>()
-                    {
-                        Failure = resultValidation.Failure
-                    };
-            }
+            var operationTypes = associationsWithTypes
+                .Where(x => uniqueTypes.Any(id => id == x.TypeId))
+                .Select(x => x.Type);
 
             return new CollectionResult<OperationTypeDto>()
             {
