@@ -12,7 +12,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (operationType != null)
                 return new BaseResult()
                 {
-                    Failure = Error.Conflict("OperationType.AlreadyExist", ErrorMessages.OperationType_AlredyExist)
+                    Failure = Error.Conflict("OperationType.AlreadyExist", ErrorMessages.OperationType_AlreadyExist)
                 };
 
             return new BaseResult();

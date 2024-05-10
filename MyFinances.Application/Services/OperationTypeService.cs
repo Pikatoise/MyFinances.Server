@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using MyFinances.Domain.DTO.OperationType;
 using MyFinances.Domain.Entity;
 using MyFinances.Domain.Interfaces.Repositories;
@@ -20,15 +21,41 @@ namespace MyFinances.Application.Services
         private readonly IOperationTypeValidator _operationTypeValidator = operationTypeValidator;
         private readonly IMapper _mapper = mapper;
 
+        public async Task<BaseResult<OperationTypeDto>> AddOperationType(string srcPath)
+        {
+            var type = await _unitOfWork.OperationTypes
+                .GetAll()
+                .FirstOrDefaultAsync(x => x.IconSrc.Equals(srcPath));
+
+            var resultValidation = _operationTypeValidator.AddOperationTypeValidator(type);
+
+            if (!resultValidation.IsSuccess)
+                return new BaseResult<OperationTypeDto>()
+                {
+                    Failure = resultValidation.Failure
+                };
+
+            type = new OperationType() { IconSrc = srcPath };
+
+            await _unitOfWork.OperationTypes.CreateAsync(type);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new BaseResult<OperationTypeDto>()
+            {
+                Data = _mapper.Map<OperationTypeDto>(type)
+            };
+        }
+
         public async Task<BaseResult<OperationTypeDto>> AddTypeAssociation(int typeId, string association)
         {
-            var type = _unitOfWork.OperationTypes
+            var type = await _unitOfWork.OperationTypes
                 .GetAll()
-                .FirstOrDefault(x => x.Id == typeId);
+                .FirstOrDefaultAsync(x => x.Id == typeId);
 
-            var typeAssociation = _unitOfWork.TypeAssociations
+            var typeAssociation = await _unitOfWork.TypeAssociations
                 .GetAll()
-                .FirstOrDefault(x => x.Association.Equals(association));
+                .FirstOrDefaultAsync(x => x.Association.Equals(association));
 
             var resultValidation = _operationTypeValidator.AddTypeAssociationValidator(type, typeAssociation);
 
