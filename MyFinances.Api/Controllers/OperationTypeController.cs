@@ -14,6 +14,15 @@ namespace MyFinances.Api.Controllers
         private readonly IOperationTypeService _operationTypeService = operationTypeService;
 
         [Authorize(Roles = $"{nameof(Roles.Admin)}")]
+        [HttpPost("type/add")]
+        public async Task<IResult> AddOperationType(string srcPath)
+        {
+            var response = await _operationTypeService.AddOperationType(srcPath);
+
+            return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
+        }
+
+        [Authorize(Roles = $"{nameof(Roles.Admin)}")]
         [HttpPost("associations/add")]
         public async Task<IResult> AddTypeAssociation(int typeId, string association)
         {
