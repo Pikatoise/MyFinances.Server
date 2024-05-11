@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Period;
 using MyFinances.Domain.Entity;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Repositories;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
@@ -29,7 +29,7 @@ namespace MyFinances.Application.Services
             if (!isUserExist)
                 return new BaseResult<PeriodDto>
                 {
-                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                    Failure = UserErrors.UserNotFound
                 };
 
             var period = new Period()
@@ -162,7 +162,7 @@ namespace MyFinances.Application.Services
             if (!isPeriodExist)
                 return new BaseResult<double>()
                 {
-                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
+                    Failure = PeriodErrors.PeriodNotFound
                 };
 
             var operations = _unitOfWork.Operations.GetAll().Where(x => x.PeriodId == periodId);
