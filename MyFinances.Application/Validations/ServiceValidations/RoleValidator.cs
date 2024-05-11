@@ -1,5 +1,5 @@
-﻿using MyFinances.Application.Resources;
-using MyFinances.Domain.Entity;
+﻿using MyFinances.Domain.Entity;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 
@@ -12,7 +12,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Role.NotFound", ErrorMessages.Role_NotFound)
+                    Failure = RoleErrors.RoleNotFound
                 };
 
             return new BaseResult();
@@ -23,7 +23,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model != null)
                 return new BaseResult()
                 {
-                    Failure = Error.Conflict("Role.AlreadyExist", ErrorMessages.Role_AlreadyExist)
+                    Failure = RoleErrors.RoleAlreadyExist
                 };
 
             return new BaseResult();
@@ -40,7 +40,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (!user.Roles.Any(x => x.Name.Equals(roleName)))
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("UserRole.NotFound", ErrorMessages.UserRole_NotFound)
+                    Failure = RoleErrors.UserRoleNotFound
                 };
 
             return new BaseResult();
@@ -57,7 +57,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (user.Roles.Any(x => x.Name.Equals(roleName)))
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("UserRole.AlreadyExist", ErrorMessages.UserRole_AlreadyExist)
+                    Failure = RoleErrors.UserRoleAlreadyExist
                 };
 
             return new BaseResult();
