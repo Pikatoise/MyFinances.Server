@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Operation;
 using MyFinances.Domain.Entity;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Repositories;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
@@ -120,7 +120,7 @@ namespace MyFinances.Application.Services
             if (!isPeriodExist)
                 return new CollectionResult<OperationDto>()
                 {
-                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
+                    Failure = PeriodErrors.PeriodNotFound
                 };
 
             var operationDtos = _unitOfWork.Operations
@@ -149,7 +149,7 @@ namespace MyFinances.Application.Services
             if (!isPeriodExist)
                 return new CollectionResult<int>()
                 {
-                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
+                    Failure = PeriodErrors.PeriodNotFound
                 };
 
             var operations = _unitOfWork.Operations.GetAll().Where(x => x.PeriodId == periodId);

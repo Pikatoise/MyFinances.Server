@@ -1,5 +1,5 @@
-﻿using MyFinances.Application.Resources;
-using MyFinances.Domain.Entity;
+﻿using MyFinances.Domain.Entity;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 
@@ -12,13 +12,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (operationPeriod == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
+                    Failure = PeriodErrors.PeriodNotFound
                 };
 
             if (operationType == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
+                    Failure = OperationTypeErrors.OperationTypeNotFound
                 };
 
             return new BaseResult();
@@ -29,13 +29,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (operation == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Operation.NotFound", ErrorMessages.Operation_NotFound)
+                    Failure = OperationErrors.OperationNotFound
                 };
 
             if (operationType == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
+                    Failure = OperationTypeErrors.OperationTypeNotFound
                 };
 
             return new BaseResult();
@@ -46,7 +46,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Operation.NotFound", ErrorMessages.Operation_NotFound)
+                    Failure = OperationErrors.OperationNotFound
                 };
 
             return new BaseResult();
