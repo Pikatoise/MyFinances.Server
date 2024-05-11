@@ -1,5 +1,5 @@
-﻿using MyFinances.Application.Resources;
-using MyFinances.Domain.Entity;
+﻿using MyFinances.Domain.Entity;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 
@@ -12,31 +12,31 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(passwordConfirm))
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("User.RequiredPassword", ErrorMessages.User_RequiredPassword)
+                    Failure = UserErrors.UserRequiredPassword
                 };
 
             if (password.Length < 6)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("User.PasswordTooShort", ErrorMessages.User_PasswordTooShort)
+                    Failure = UserErrors.UserPasswordTooShort
                 };
 
             if (!password.Equals(passwordConfirm))
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("User.WrongPasswordConfirm", ErrorMessages.User_WrongPassword)
+                    Failure = UserErrors.UserPasswordConfirmWrong
                 };
 
             if (!password.Any(char.IsLetter))
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("User.PasswordMustContainLetters", ErrorMessages.User_PasswordMustContainLetters)
+                    Failure = UserErrors.UserPasswordMustContainLetters
                 };
 
             if (!password.Any(char.IsDigit))
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("User.PasswordMustContainDigit", ErrorMessages.User_PasswordMustContainDigit)
+                    Failure = UserErrors.UserPasswordMustContainDigit
                 };
 
             return new BaseResult();
@@ -47,7 +47,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                    Failure = UserErrors.UserNotFound
                 };
 
             return new BaseResult();
@@ -58,7 +58,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (user != null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("User.AlreadyExist", ErrorMessages.User_AlreadyExist)
+                    Failure = UserErrors.UserAlreadyExist
                 };
 
             return new BaseResult();
@@ -71,7 +71,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (!result)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("User.WrongPassword", ErrorMessages.User_WrongPassword)
+                    Failure = UserErrors.UserWrongPassword
                 };
 
             return new BaseResult();
