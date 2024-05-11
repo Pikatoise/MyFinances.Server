@@ -29,7 +29,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (type == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("OperationType.NotFound", ErrorMessages.OperationType_NotFound)
+                    Failure = OperationTypeErrors.OperationTypeNotFound
                 };
 
             return new BaseResult();
