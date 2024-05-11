@@ -1,5 +1,5 @@
-﻿using MyFinances.Application.Resources;
-using MyFinances.Domain.Entity;
+﻿using MyFinances.Domain.Entity;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 
@@ -12,7 +12,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("UserToken.NotFound", ErrorMessages.UserToken_NotFound)
+                    Failure = TokenErrors.TokenNotFound
                 };
 
             return new BaseResult();
@@ -23,19 +23,19 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (user == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                    Failure = TokenErrors.TokenNotFound
                 };
 
             if (!user.UserToken.RefreshToken.Equals(receivedRefreshToken))
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("UserToken.Invalid", ErrorMessages.UserToken_Invalid)
+                    Failure = TokenErrors.TokenIsInvalid
                 };
 
             if (user.UserToken.RefreshTokenExpiryTime <= DateTime.UtcNow)
                 return new BaseResult()
                 {
-                    Failure = Error.Failure("UserToken.Expired", ErrorMessages.UserToken_Expired)
+                    Failure = TokenErrors.TokenExpired
                 };
 
             return new BaseResult();
@@ -46,13 +46,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (refreshToken == null || accessToken == null)
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("UserToken.Invalid", ErrorMessages.UserToken_Invalid)
+                    Failure = TokenErrors.TokenIsInvalid
                 };
 
             if (string.IsNullOrWhiteSpace(refreshToken) || string.IsNullOrWhiteSpace(accessToken))
                 return new BaseResult()
                 {
-                    Failure = Error.Validation("UserToken.EmptyValues", ErrorMessages.UserToken_Invalid)
+                    Failure = TokenErrors.TokenHasEmptyValues
                 };
 
             return new BaseResult();
