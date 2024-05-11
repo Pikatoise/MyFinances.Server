@@ -1,5 +1,5 @@
-﻿using MyFinances.Application.Resources;
-using MyFinances.Domain.Entity;
+﻿using MyFinances.Domain.Entity;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 
@@ -15,13 +15,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (isOutOfRange)
                 return new BaseResult()
                 {
-                    Failure = Error.Failure("Period.OutOfRange", ErrorMessages.Period_OutOfRange)
+                    Failure = PeriodErrors.PeriodOutOfRange
                 };
 
             if (isOrderNotCorrect)
                 return new BaseResult()
                 {
-                    Failure = Error.Failure("Period.IncorrectOrder", ErrorMessages.Period_IncorrectOrder)
+                    Failure = PeriodErrors.PeriodIncorrectOrder
                 };
 
             return new BaseResult();
@@ -32,7 +32,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Period.NotFound", ErrorMessages.Period_NotFound)
+                    Failure = PeriodErrors.PeriodNotFound
                 };
 
             return new BaseResult();
