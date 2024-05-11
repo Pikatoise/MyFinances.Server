@@ -34,7 +34,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (user == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                    Failure = UserErrors.UserNotFound
                 };
 
             if (!user.Roles.Any(x => x.Name.Equals(roleName)))
@@ -51,7 +51,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (user == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                    Failure = UserErrors.UserNotFound
                 };
 
             if (user.Roles.Any(x => x.Name.Equals(roleName)))
