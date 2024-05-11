@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Fixer;
 using MyFinances.Domain.Entity;
 using MyFinances.Domain.Enum;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Result;
 using MyFinances.Domain.Settings;
@@ -43,7 +43,7 @@ namespace MyFinances.Application.Services
                 };
             }
             else
-                result.Failure = Error.Failure("Api.Fixer.BadRequest", ErrorMessages.Api_Fixer_BadRequest);
+                result.Failure = FixerErrors.FixerBadRequest;
 
             return result;
         }
