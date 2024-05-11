@@ -88,6 +88,15 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency is not supported yet.
+        /// </summary>
+        internal static string Currency_NotSupported {
+            get {
+                return ResourceManager.GetString("Currency.NotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Field was empty.
         /// </summary>
         internal static string Dto_EmptyField {

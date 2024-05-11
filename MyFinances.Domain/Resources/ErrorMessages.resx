@@ -126,6 +126,9 @@
   <data name="Currency.NotFound" xml:space="preserve">
     <value>Requested currency not supported or not loaded yet</value>
   </data>
+  <data name="Currency.NotSupported" xml:space="preserve">
+    <value>Currency is not supported yet</value>
+  </data>
   <data name="Dto.EmptyField" xml:space="preserve">
     <value>Field was empty</value>
   </data>

@@ -1,6 +1,6 @@
-﻿using MyFinances.Application.Resources;
-using MyFinances.Domain.Entity;
+﻿using MyFinances.Domain.Entity;
 using MyFinances.Domain.Enum;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 
@@ -13,7 +13,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (currency == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Currency.NotFound", ErrorMessages.Currency_NotFound)
+                    Failure = CurrencyErrors.CurrencyNotFound
                 };
 
             if (currency.UpdatedAt != null)
@@ -21,13 +21,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
                 if (currency.UpdatedAt.Value.AddHours(1) < DateTime.Now)
                     return new BaseResult()
                     {
-                        Failure = Error.Failure("Currency.Expired", ErrorMessages.Currency_Expired)
+                        Failure = CurrencyErrors.CurrencyExpired
                     };
             }
             else if (currency.CreatedAt.AddHours(1) < DateTime.Now)
                 return new BaseResult()
                 {
-                    Failure = Error.Failure("Currency.Expired", ErrorMessages.Currency_Expired)
+                    Failure = CurrencyErrors.CurrencyExpired
                 };
 
             return new BaseResult();
@@ -38,7 +38,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (model == null)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Currency.NotFound", ErrorMessages.Currency_NotFound)
+                    Failure = CurrencyErrors.CurrencyNotFound
                 };
 
             return new BaseResult();
@@ -57,7 +57,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
             if (!isSupported)
                 return new BaseResult()
                 {
-                    Failure = Error.NotFound("Currency.NotFound", ErrorMessages.Currency_NotFound)
+                    Failure = CurrencyErrors.CurrencyNotSupported
                 };
 
             return new BaseResult();
