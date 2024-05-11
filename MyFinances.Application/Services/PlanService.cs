@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Plan;
 using MyFinances.Domain.Entity;
 using MyFinances.Domain.Enum;
+using MyFinances.Domain.Errors;
 using MyFinances.Domain.Interfaces.Repositories;
 using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
@@ -135,7 +135,7 @@ namespace MyFinances.Application.Services
             if (!isUserExist)
                 return new CollectionResult<PlanDto>()
                 {
-                    Failure = Error.NotFound("User.NotFound", ErrorMessages.User_NotFound)
+                    Failure = UserErrors.UserNotFound
                 };
 
             var planDtos = _unitOfWork.Plans
