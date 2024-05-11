@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Operation;
+using MyFinances.Domain.Errors;
 
 namespace MyFinances.Application.Validations.DtoValidations.Operation
 {
@@ -9,18 +9,18 @@ namespace MyFinances.Application.Validations.DtoValidations.Operation
         public UpdateOperationValidator()
         {
             RuleFor(x => x.Amount)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .InclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_OutOfRange).WithErrorCode("Dto.OutOfRange");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .InclusiveBetween(-999_999, 999_999).WithMessage(DtoErrors.DtoOutOfRange.Description).WithErrorCode(DtoErrors.DtoOutOfRange.Code);
 
             RuleFor(x => x.Title)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .MaximumLength(50).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .MaximumLength(50).WithMessage(DtoErrors.DtoTooBigValue.Description).WithErrorCode(DtoErrors.DtoTooBigValue.Code);
 
             RuleFor(x => x.TypeId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
+                .NotNull().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code);
 
             RuleFor(x => x.OperationId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
+                .NotNull().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code);
         }
     }
 }

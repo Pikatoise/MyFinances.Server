@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.UserRole;
+using MyFinances.Domain.Errors;
 
 namespace MyFinances.Application.Validations.DtoValidations.UserRole
 {
@@ -9,14 +9,14 @@ namespace MyFinances.Application.Validations.DtoValidations.UserRole
         public RemoveUserRoleValidator()
         {
             RuleFor(x => x.Login)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .MinimumLength(4).WithMessage(ErrorMessages.Dto_TooLowValue).WithErrorCode("Dto.TooLowValue")
-                .MaximumLength(20).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .MinimumLength(4).WithMessage(DtoErrors.DtoTooLowValue.Description).WithErrorCode(DtoErrors.DtoTooLowValue.Code)
+                .MaximumLength(20).WithMessage(DtoErrors.DtoTooBigValue.Description).WithErrorCode(DtoErrors.DtoTooBigValue.Code);
 
             RuleFor(x => x.RoleName)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .MinimumLength(4).WithMessage(ErrorMessages.Dto_TooLowValue).WithErrorCode("Dto.TooLowValue")
-                .MaximumLength(20).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .MinimumLength(4).WithMessage(DtoErrors.DtoTooLowValue.Description).WithErrorCode(DtoErrors.DtoTooLowValue.Code)
+                .MaximumLength(20).WithMessage(DtoErrors.DtoTooBigValue.Description).WithErrorCode(DtoErrors.DtoTooBigValue.Code);
         }
     }
 }

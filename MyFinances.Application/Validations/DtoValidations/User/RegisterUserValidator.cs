@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.User;
+using MyFinances.Domain.Errors;
 
 namespace MyFinances.Application.Validations.DtoValidations.User
 {
@@ -9,19 +9,19 @@ namespace MyFinances.Application.Validations.DtoValidations.User
         public RegisterUserValidator()
         {
             RuleFor(x => x.Login)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .MinimumLength(4).WithMessage(ErrorMessages.Dto_TooLowValue).WithErrorCode("Dto.TooLowValue")
-                .MaximumLength(20).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .MinimumLength(4).WithMessage(DtoErrors.DtoTooLowValue.Description).WithErrorCode(DtoErrors.DtoTooLowValue.Code)
+                .MaximumLength(20).WithMessage(DtoErrors.DtoTooBigValue.Description).WithErrorCode(DtoErrors.DtoTooBigValue.Code);
 
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .MinimumLength(6).WithMessage(ErrorMessages.Dto_TooLowValue).WithErrorCode("Dto.TooLowValue")
-                .MaximumLength(30).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .MinimumLength(6).WithMessage(DtoErrors.DtoTooLowValue.Description).WithErrorCode(DtoErrors.DtoTooLowValue.Code)
+                .MaximumLength(30).WithMessage(DtoErrors.DtoTooBigValue.Description).WithErrorCode(DtoErrors.DtoTooBigValue.Code);
 
             RuleFor(x => x.PasswordConfirm)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .MinimumLength(6).WithMessage(ErrorMessages.Dto_TooLowValue).WithErrorCode("Dto.TooLowValue")
-                .MaximumLength(30).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .MinimumLength(6).WithMessage(DtoErrors.DtoTooLowValue.Description).WithErrorCode(DtoErrors.DtoTooLowValue.Code)
+                .MaximumLength(30).WithMessage(DtoErrors.DtoTooBigValue.Description).WithErrorCode(DtoErrors.DtoTooBigValue.Code);
         }
     }
 }

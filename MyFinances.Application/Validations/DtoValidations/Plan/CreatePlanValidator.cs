@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using MyFinances.Application.Resources;
 using MyFinances.Domain.DTO.Plan;
+using MyFinances.Domain.Errors;
 
 namespace MyFinances.Application.Validations.DtoValidations.Plan
 {
@@ -9,21 +9,21 @@ namespace MyFinances.Application.Validations.DtoValidations.Plan
         public CreatePlanValidator()
         {
             RuleFor(x => x.FinalDate)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code);
 
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .MaximumLength(50).WithMessage(ErrorMessages.Dto_TooBigValue).WithErrorCode("Dto.TooBigValue");
+                .NotEmpty().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .MaximumLength(50).WithMessage(DtoErrors.DtoTooBigValue.Description).WithErrorCode(DtoErrors.DtoTooBigValue.Code);
 
             RuleFor(x => x.Amount)
-                .NotNull().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField")
-                .ExclusiveBetween(-999_999, 999_999).WithMessage(ErrorMessages.Dto_OutOfRange).WithErrorCode("Dto.IncorrectValue");
+                .NotNull().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code)
+                .ExclusiveBetween(-999_999, 999_999).WithMessage(DtoErrors.DtoOutOfRange.Description).WithErrorCode(DtoErrors.DtoOutOfRange.Code);
 
             RuleFor(x => x.TypeId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
+                .NotNull().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code);
 
             RuleFor(x => x.UserId)
-                .NotEmpty().WithMessage(ErrorMessages.Dto_EmptyField).WithErrorCode("Dto.EmptyField");
+                .NotNull().WithMessage(DtoErrors.DtoEmptyField.Description).WithErrorCode(DtoErrors.DtoEmptyField.Code);
         }
     }
 }
