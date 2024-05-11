@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using MyFinances.Domain.DTO.Role;
 using MyFinances.Domain.DTO.UserRole;
@@ -13,14 +14,30 @@ namespace MyFinances.Application.Services
     public class RoleService(
         IUnitOfWork unitOfWork,
         IMapper mapper,
-        IRoleValidator roleValidator): IRoleService
+        IRoleValidator roleValidator,
+        IValidator<AddUserRoleDto> addUserRoleDtoValidator,
+        IValidator<RemoveUserRoleDto> removeUserRoleDtoValidator): IRoleService
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IMapper _mapper = mapper;
         private readonly IRoleValidator _roleValidator = roleValidator;
+        private readonly IValidator<AddUserRoleDto> _addUserRoleDtoValidator = addUserRoleDtoValidator;
+        private readonly IValidator<RemoveUserRoleDto> _removeUserRoleDtoValidator = removeUserRoleDtoValidator;
 
         public async Task<BaseResult<UserRoleDto>> SetRoleToUserAsync(AddUserRoleDto dto)
         {
+            var resultDtoValidation = _addUserRoleDtoValidator.Validate(dto);
+
+            if (!resultDtoValidation.IsValid)
+            {
+                var error = resultDtoValidation.Errors.FirstOrDefault();
+
+                return new BaseResult<UserRoleDto>()
+                {
+                    Failure = Error.Validation(error.ErrorCode, error.ErrorMessage)
+                };
+            }
+
             var user = await _unitOfWork.Users.GetAll()
                 .Include(x => x.Roles)
                 .FirstOrDefaultAsync(x => x.Login.Equals(dto.Login));
@@ -134,6 +151,18 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult<UserRoleDto>> RemoveUserRole(RemoveUserRoleDto dto)
         {
+            var resultDtoValidation = _removeUserRoleDtoValidator.Validate(dto);
+
+            if (!resultDtoValidation.IsValid)
+            {
+                var error = resultDtoValidation.Errors.FirstOrDefault();
+
+                return new BaseResult<UserRoleDto>()
+                {
+                    Failure = Error.Validation(error.ErrorCode, error.ErrorMessage)
+                };
+            }
+
             var user = await _unitOfWork.Users.GetAll()
                .Include(x => x.Roles)
                .FirstOrDefaultAsync(x => x.Login.Equals(dto.Login));

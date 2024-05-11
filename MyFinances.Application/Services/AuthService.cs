@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MyFinances.Domain.DTO;
@@ -24,18 +25,35 @@ namespace MyFinances.Application.Services
         IUnitOfWork unitOfWork,
         IAuthValidator authValidator,
         IOptions<JwtSettings> options,
-        IRoleValidator roleValidator): IAuthService
+        IRoleValidator roleValidator,
+        IValidator<LoginUserDto> loginDtoValidator,
+        IValidator<RegisterUserDto> registerDtoValidator): IAuthService
     {
         private readonly ILogger _logger = logger;
         private readonly IMapper _mapper = mapper;
         private readonly ITokenService _tokenService = tokenService;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IAuthValidator _authValidator = authValidator;
+        private readonly IOptions<JwtSettings> options = options;
         private readonly int _refreshTokenValidityInDays = options.Value.RefreshTokenValidityInDays;
         private readonly IRoleValidator _roleValidator = roleValidator;
+        private readonly IValidator<LoginUserDto> _loginDtoValidator = loginDtoValidator;
+        private readonly IValidator<RegisterUserDto> _registerDtoValidator = registerDtoValidator;
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)
         {
+            var resultDtoValidation = _loginDtoValidator.Validate(dto);
+
+            if (!resultDtoValidation.IsValid)
+            {
+                var error = resultDtoValidation.Errors.FirstOrDefault();
+
+                return new BaseResult<TokenDto>()
+                {
+                    Failure = Error.Validation(error.ErrorCode, error.ErrorMessage)
+                };
+            }
+
             var user = await _unitOfWork.Users.GetAll()
                 .Include(x => x.Roles)
                 .FirstOrDefaultAsync(u => u.Login.Equals(dto.Login));
@@ -101,6 +119,18 @@ namespace MyFinances.Application.Services
 
         public async Task<BaseResult<UserDto>> Register(RegisterUserDto dto)
         {
+            var resultDtoValidation = _registerDtoValidator.Validate(dto);
+
+            if (!resultDtoValidation.IsValid)
+            {
+                var error = resultDtoValidation.Errors.FirstOrDefault();
+
+                return new BaseResult<UserDto>()
+                {
+                    Failure = Error.Validation(error.ErrorCode, error.ErrorMessage)
+                };
+            }
+
             var resultValidationPasswords = _authValidator.ValidateNewUserPassword(dto.Password, dto.PasswordConfirm);
 
             if (!resultValidationPasswords.IsSuccess)

@@ -36,7 +36,7 @@ namespace MyFinances.Application.Services
 
                 return new BaseResult<OperationDto>()
                 {
-                    Failure = error == null ? Error.None : Error.Validation(error.ErrorCode, error.ErrorMessage)
+                    Failure = Error.Validation(error.ErrorCode, error.ErrorMessage)
                 };
             }
 
