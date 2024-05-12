@@ -23,6 +23,7 @@ namespace MyFinances.Api
             // Add services to the container.
 
             builder.Configuration.AddUserSecrets<Program>();
+            builder.Configuration.AddEnvironmentVariables();
 
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.DefaultSection));
 
