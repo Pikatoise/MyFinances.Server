@@ -18,7 +18,8 @@ namespace MyFinances.Api.Extensions
 
             using ApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            dbContext.Database.Migrate();
+            if (dbContext.Database.CanConnect())
+                dbContext.Database.Migrate();
         }
     }
 }
