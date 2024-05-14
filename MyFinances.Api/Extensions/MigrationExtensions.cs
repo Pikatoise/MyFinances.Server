@@ -20,7 +20,6 @@ namespace MyFinances.Api.Extensions
 
             if (dbContext.Database.CanConnect())
                 dbContext.Database.Migrate();
-            //dbContext.Database.EnsureCreated();
         }
     }
 }
