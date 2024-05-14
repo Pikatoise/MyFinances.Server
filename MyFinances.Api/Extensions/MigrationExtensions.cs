@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MyFinances.DAL;
+﻿using MyFinances.DAL;
 
 namespace MyFinances.Api.Extensions
 {
@@ -19,7 +18,8 @@ namespace MyFinances.Api.Extensions
             using ApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
             if (dbContext.Database.CanConnect())
-                dbContext.Database.Migrate();
+                dbContext.Database.EnsureCreated();
+            //dbContext.Database.Migrate();
         }
     }
 }

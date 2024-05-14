@@ -12,12 +12,15 @@ namespace MyFinances.DAL.DI
     {
         public static void AddDataAccessLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("pgConn");
+            var connectionString = configuration.GetConnectionString("conn");
 
             services.AddSingleton<DateInterceptor>();
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
-                options.UseNpgsql(connectionString);
+                //options.UseNpgsql(connectionString);
+
+                var mysqlVersion = MySqlServerVersion.AutoDetect(connectionString);
+                options.UseMySql(connectionString, mysqlVersion);
                 options.AddInterceptors(sp.GetRequiredService<DateInterceptor>());
             });
 
