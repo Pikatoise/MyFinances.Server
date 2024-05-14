@@ -1,3 +1,4 @@
+using MyFinances.Api.Extensions;
 using MyFinances.Api.Middlewares;
 using MyFinances.Application.DI;
 using MyFinances.DAL.DI;
@@ -53,7 +54,7 @@ namespace MyFinances.Api
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "MyFinances Swagger v1.0");
                     options.RoutePrefix = string.Empty;
                 });
-                //app.ApplyMigrations();
+                app.ApplyMigrations();
             }
 
             app.UseStaticFiles(new StaticFileOptions
