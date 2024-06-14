@@ -118,99 +118,99 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Api.Fixer.BadRequest" xml:space="preserve">
-    <value>The request could not be sent</value>
+    <value>Не удалось отправить запрос</value>
   </data>
   <data name="Currency.Expired" xml:space="preserve">
-    <value>Currency value was expired and need to refresh</value>
+    <value>Валюта устарела и нуждается в обновлении</value>
   </data>
   <data name="Currency.NotFound" xml:space="preserve">
-    <value>Requested currency not supported or not loaded yet</value>
+    <value>Неизвестная валюта</value>
   </data>
   <data name="Currency.NotSupported" xml:space="preserve">
-    <value>Currency is not supported yet</value>
+    <value>Валюта не поддерживается</value>
   </data>
   <data name="Dto.EmptyField" xml:space="preserve">
-    <value>Field was empty</value>
+    <value>Пустое поле</value>
   </data>
   <data name="Dto.IncorrectValue" xml:space="preserve">
-    <value>Value was incorrect</value>
+    <value>Некорректное значение</value>
   </data>
   <data name="Dto.OutOfRange" xml:space="preserve">
-    <value>Given value out of allowed range</value>
+    <value>Значение выходит за границы</value>
   </data>
   <data name="Dto.TooBigValue" xml:space="preserve">
-    <value>Value was too big</value>
+    <value>Значение слишком большое</value>
   </data>
   <data name="Dto.TooLowValue" xml:space="preserve">
-    <value>Value was too low</value>
+    <value>Значение слишком маленькое</value>
   </data>
   <data name="Operation.NotFound" xml:space="preserve">
-    <value>Requested operation not found</value>
+    <value>Операция не найдена</value>
   </data>
   <data name="OperationType.AlreadyExist" xml:space="preserve">
-    <value>Operation type with this path already exists</value>
+    <value>Тип с данным путем уже существует</value>
   </data>
   <data name="OperationType.NotFound" xml:space="preserve">
-    <value>Requested operation type not found</value>
+    <value>Тип не найден</value>
   </data>
   <data name="Period.IncorrectOrder" xml:space="preserve">
-    <value>Incorrect sorting order</value>
+    <value>Некорректный порядок сортировки</value>
   </data>
   <data name="Period.NotFound" xml:space="preserve">
-    <value>Requested period not found</value>
+    <value>Период не найден</value>
   </data>
   <data name="Period.OutOfRange" xml:space="preserve">
-    <value>Requested amout of periods out of range</value>
+    <value>Запрашиваемое количество периодов выходит за предел</value>
   </data>
   <data name="Plan.NotFound" xml:space="preserve">
-    <value>Requested plan not found</value>
+    <value>План не найден</value>
   </data>
   <data name="Role.AlreadyExist" xml:space="preserve">
-    <value>This role already exist</value>
+    <value>Роль уже существует</value>
   </data>
   <data name="Role.NotFound" xml:space="preserve">
-    <value>Requested role not found</value>
+    <value>Роль не найдена</value>
   </data>
   <data name="TypeAssociation.AlreadyExist" xml:space="preserve">
-    <value>Association with that name already exist</value>
+    <value>Ассоциация уже существует</value>
   </data>
   <data name="User.AlreadyExist" xml:space="preserve">
-    <value>User with same login already exist</value>
+    <value>Логин занят</value>
   </data>
   <data name="User.NotFound" xml:space="preserve">
-    <value>Requested user not found</value>
+    <value>Пользователь не найден</value>
   </data>
   <data name="User.PasswordMustContainDigit" xml:space="preserve">
-    <value>Password must contain at least 1 digit</value>
+    <value>Пароль должен иметь как минимум 1 цифру</value>
   </data>
   <data name="User.PasswordMustContainLetters" xml:space="preserve">
-    <value>Password must contain at least 1 letter</value>
+    <value>Пароль должен иметь как минимум 1 букву</value>
   </data>
   <data name="User.PasswordMustContainSymbol" xml:space="preserve">
-    <value>Password must contain at least 1 symbol</value>
+    <value>Пароль должен иметь как минимум 1 символ</value>
   </data>
   <data name="User.PasswordTooShort" xml:space="preserve">
-    <value>Password length might be at least 6 symbols</value>
+    <value>Пароль должен быть не короче 6 символов</value>
   </data>
   <data name="User.RequiredPassword" xml:space="preserve">
-    <value>Password field must be filled</value>
+    <value>Введите пароль</value>
   </data>
   <data name="User.WrongPassword" xml:space="preserve">
-    <value>Password is incorrect</value>
+    <value>Неверный пароль</value>
   </data>
   <data name="UserRole.AlreadyExist" xml:space="preserve">
-    <value>User already have this role</value>
+    <value>Пользователь уже имеет данную роль</value>
   </data>
   <data name="UserRole.NotFound" xml:space="preserve">
-    <value>Requested userRole not found</value>
+    <value>Роль не найдена у пользователя</value>
   </data>
   <data name="UserToken.Expired" xml:space="preserve">
-    <value>User token has expired and need to be refreshed</value>
+    <value>Токен истек</value>
   </data>
   <data name="UserToken.Invalid" xml:space="preserve">
-    <value>Token invalid</value>
+    <value>Неверный токен</value>
   </data>
   <data name="UserToken.NotFound" xml:space="preserve">
-    <value>Requested userToken not found</value>
+    <value>Токен не найден</value>
   </data>
 </root>

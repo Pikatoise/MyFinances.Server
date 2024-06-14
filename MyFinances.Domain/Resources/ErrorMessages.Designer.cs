@@ -61,7 +61,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The request could not be sent.
+        ///   Looks up a localized string similar to Не удалось отправить запрос.
         /// </summary>
         internal static string Api_Fixer_BadRequest {
             get {
@@ -70,7 +70,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currency value was expired and need to refresh.
+        ///   Looks up a localized string similar to Валюта устарела и нуждается в обновлении.
         /// </summary>
         internal static string Currency_Expired {
             get {
@@ -79,7 +79,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested currency not supported or not loaded yet.
+        ///   Looks up a localized string similar to Неизвестная валюта.
         /// </summary>
         internal static string Currency_NotFound {
             get {
@@ -88,7 +88,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currency is not supported yet.
+        ///   Looks up a localized string similar to Валюта не поддерживается.
         /// </summary>
         internal static string Currency_NotSupported {
             get {
@@ -97,7 +97,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Field was empty.
+        ///   Looks up a localized string similar to Пустое поле.
         /// </summary>
         internal static string Dto_EmptyField {
             get {
@@ -106,7 +106,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value was incorrect.
+        ///   Looks up a localized string similar to Некорректное значение.
         /// </summary>
         internal static string Dto_IncorrectValue {
             get {
@@ -115,7 +115,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Given value out of allowed range.
+        ///   Looks up a localized string similar to Значение выходит за границы.
         /// </summary>
         internal static string Dto_OutOfRange {
             get {
@@ -124,7 +124,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value was too big.
+        ///   Looks up a localized string similar to Значение слишком большое.
         /// </summary>
         internal static string Dto_TooBigValue {
             get {
@@ -133,7 +133,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value was too low.
+        ///   Looks up a localized string similar to Значение слишком маленькое.
         /// </summary>
         internal static string Dto_TooLowValue {
             get {
@@ -142,7 +142,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested operation not found.
+        ///   Looks up a localized string similar to Операция не найдена.
         /// </summary>
         internal static string Operation_NotFound {
             get {
@@ -151,7 +151,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation type with this path already exists.
+        ///   Looks up a localized string similar to Тип с данным путем уже существует.
         /// </summary>
         internal static string OperationType_AlreadyExist {
             get {
@@ -160,7 +160,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested operation type not found.
+        ///   Looks up a localized string similar to Тип не найден.
         /// </summary>
         internal static string OperationType_NotFound {
             get {
@@ -169,7 +169,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect sorting order.
+        ///   Looks up a localized string similar to Некорректный порядок сортировки.
         /// </summary>
         internal static string Period_IncorrectOrder {
             get {
@@ -178,7 +178,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested period not found.
+        ///   Looks up a localized string similar to Период не найден.
         /// </summary>
         internal static string Period_NotFound {
             get {
@@ -187,7 +187,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested amout of periods out of range.
+        ///   Looks up a localized string similar to Запрашиваемое количество периодов выходит за предел.
         /// </summary>
         internal static string Period_OutOfRange {
             get {
@@ -196,7 +196,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested plan not found.
+        ///   Looks up a localized string similar to План не найден.
         /// </summary>
         internal static string Plan_NotFound {
             get {
@@ -205,7 +205,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This role already exist.
+        ///   Looks up a localized string similar to Роль уже существует.
         /// </summary>
         internal static string Role_AlreadyExist {
             get {
@@ -214,7 +214,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested role not found.
+        ///   Looks up a localized string similar to Роль не найдена.
         /// </summary>
         internal static string Role_NotFound {
             get {
@@ -223,7 +223,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Association with that name already exist.
+        ///   Looks up a localized string similar to Ассоциация уже существует.
         /// </summary>
         internal static string TypeAssociation_AlreadyExist {
             get {
@@ -232,7 +232,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User with same login already exist.
+        ///   Looks up a localized string similar to Логин занят.
         /// </summary>
         internal static string User_AlreadyExist {
             get {
@@ -241,7 +241,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested user not found.
+        ///   Looks up a localized string similar to Пользователь не найден.
         /// </summary>
         internal static string User_NotFound {
             get {
@@ -250,7 +250,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must contain at least 1 digit.
+        ///   Looks up a localized string similar to Пароль должен иметь как минимум 1 цифру.
         /// </summary>
         internal static string User_PasswordMustContainDigit {
             get {
@@ -259,7 +259,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must contain at least 1 letter.
+        ///   Looks up a localized string similar to Пароль должен иметь как минимум 1 букву.
         /// </summary>
         internal static string User_PasswordMustContainLetters {
             get {
@@ -268,7 +268,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must contain at least 1 symbol.
+        ///   Looks up a localized string similar to Пароль должен иметь как минимум 1 символ.
         /// </summary>
         internal static string User_PasswordMustContainSymbol {
             get {
@@ -277,7 +277,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password length might be at least 6 symbols.
+        ///   Looks up a localized string similar to Пароль должен быть не короче 6 символов.
         /// </summary>
         internal static string User_PasswordTooShort {
             get {
@@ -286,7 +286,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password field must be filled.
+        ///   Looks up a localized string similar to Введите пароль.
         /// </summary>
         internal static string User_RequiredPassword {
             get {
@@ -295,7 +295,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password is incorrect.
+        ///   Looks up a localized string similar to Неверный пароль.
         /// </summary>
         internal static string User_WrongPassword {
             get {
@@ -304,7 +304,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User already have this role.
+        ///   Looks up a localized string similar to Пользователь уже имеет данную роль.
         /// </summary>
         internal static string UserRole_AlreadyExist {
             get {
@@ -313,7 +313,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested userRole not found.
+        ///   Looks up a localized string similar to Роль не найдена у пользователя.
         /// </summary>
         internal static string UserRole_NotFound {
             get {
@@ -322,7 +322,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User token has expired and need to be refreshed.
+        ///   Looks up a localized string similar to Токен истек.
         /// </summary>
         internal static string UserToken_Expired {
             get {
@@ -331,7 +331,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token invalid.
+        ///   Looks up a localized string similar to Неверный токен.
         /// </summary>
         internal static string UserToken_Invalid {
             get {
@@ -340,7 +340,7 @@ namespace MyFinances.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Requested userToken not found.
+        ///   Looks up a localized string similar to Токен не найден.
         /// </summary>
         internal static string UserToken_NotFound {
             get {
