@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyFinances.Api.Extensions;
 using MyFinances.Domain.DTO;
 using MyFinances.Domain.Interfaces.Services;
@@ -17,6 +18,13 @@ namespace MyFinances.Api.Controllers
             var response = await _tokenService.RefreshToken(tokenDto);
 
             return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IResult> ValidateAccessToken()
+        {
+            return Results.Ok();
         }
     }
 }
