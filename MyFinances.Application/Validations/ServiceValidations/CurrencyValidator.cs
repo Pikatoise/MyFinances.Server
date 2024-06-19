@@ -10,6 +10,8 @@ namespace MyFinances.Application.Validations.ServiceValidations
     {
         public BaseResult ValidateOnExpired(Currency? currency)
         {
+            int updateTimeHours = 3;
+
             if (currency == null)
                 return new BaseResult()
                 {
@@ -18,13 +20,13 @@ namespace MyFinances.Application.Validations.ServiceValidations
 
             if (currency.UpdatedAt != null)
             {
-                if (currency.UpdatedAt.Value.AddHours(1) < DateTime.Now)
+                if (currency.UpdatedAt.Value.AddHours(updateTimeHours) < DateTime.Now)
                     return new BaseResult()
                     {
                         Failure = CurrencyErrors.CurrencyExpired
                     };
             }
-            else if (currency.CreatedAt.AddHours(1) < DateTime.Now)
+            else if (currency.CreatedAt.AddHours(updateTimeHours) < DateTime.Now)
                 return new BaseResult()
                 {
                     Failure = CurrencyErrors.CurrencyExpired
