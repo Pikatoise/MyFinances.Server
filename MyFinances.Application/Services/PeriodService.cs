@@ -41,7 +41,10 @@ namespace MyFinances.Application.Services
 
             var oldPeriod = _unitOfWork.Periods
                 .GetAll()
-                .FirstOrDefault(x => x.Year == DateTime.Now.Year && x.Month == DateTime.Now.Month);
+                .FirstOrDefault(x =>
+                     x.Year == DateTime.Now.Year &&
+                     x.Month == DateTime.Now.Month &&
+                     x.UserId == userId);
 
             if (oldPeriod != null)
                 _unitOfWork.Periods.Delete(oldPeriod);
