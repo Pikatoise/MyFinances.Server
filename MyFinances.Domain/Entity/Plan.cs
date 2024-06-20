@@ -13,7 +13,7 @@ namespace MyFinances.Domain.Entity
 
         public double Amount { get; set; }
 
-        public DateTime FinalDate { get; set; }
+        public string FinalDate { get; set; }
 
         /// <summary>
         /// Represented in enum <c>PlanStatuses</c>

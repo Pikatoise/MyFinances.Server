@@ -63,7 +63,7 @@ namespace MyFinances.Application.Services
             {
                 Name = dto.Name,
                 Amount = dto.Amount,
-                FinalDate = DateTime.SpecifyKind(DateTime.Parse(dto.FinalDate), DateTimeKind.Utc),
+                FinalDate = dto.FinalDate,
                 Status = (int)PlanStatuses.InProgress,
                 TypeId = type.Id,
                 UserId = user.Id
