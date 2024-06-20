@@ -23,6 +23,13 @@ namespace MyFinances.Domain.Interfaces.Services
         Task<BaseResult<PeriodDto>> CurrentPeriodByUserId(int userId);
 
         /// <summary>
+        /// Get all user periods 
+        /// </summary>
+        /// <param name="userId">User identificator</param>
+        /// <returns><c>Collection of PeriodDto</c>: all user periods
+        Task<CollectionResult<PeriodDto>> AllPeriodsByUserId(int userId);
+
+        /// <summary>
         /// Create new period for user
         /// </summary>
         /// <param name="userId">User identificator</param>

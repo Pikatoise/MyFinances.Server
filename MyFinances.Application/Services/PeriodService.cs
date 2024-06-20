@@ -22,6 +22,21 @@ namespace MyFinances.Application.Services
         private readonly IMapper _mapper = mapper;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
+        public async Task<CollectionResult<PeriodDto>> AllPeriodsByUserId(int userId)
+        {
+            var allUserPeriods = _unitOfWork.Periods
+                .GetAll()
+                .Where(x => x.UserId == userId)
+                .Select(period => _mapper.Map<PeriodDto>(period))
+                .ToList();
+
+            return new CollectionResult<PeriodDto>()
+            {
+                Count = allUserPeriods.Count(),
+                Data = allUserPeriods
+            };
+        }
+
         public async Task<BaseResult<PeriodDto>> CreateNewPeriod(int userId)
         {
             var isUserExist = _unitOfWork.Users.GetAll().Any(x => x.Id == userId);
@@ -140,7 +155,7 @@ namespace MyFinances.Application.Services
 
             int alreadyLoaded = (currentPage - 1) * step;
 
-            IQueryable<Period> allUserPeriods = _unitOfWork.Periods.GetAll();
+            IQueryable<Period> allUserPeriods = _unitOfWork.Periods.GetAll().Where(x => x.UserId == userId);
 
             if (order.Equals("desc"))
                 allUserPeriods = allUserPeriods.OrderBy(x => x.Year).ThenBy(x => x.Month);

@@ -44,6 +44,14 @@ namespace MyFinances.Api.Controllers
             return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
         }
 
+        [HttpGet("all/{userId}")]
+        public async Task<IResult> AllPeriodsByUserId(int userId)
+        {
+            var response = await _periodService.AllPeriodsByUserId(userId);
+
+            return response.IsSuccess ? Results.Ok(response) : response.ToProblemDetails();
+        }
+
         [HttpPost("add/{userId}")]
         public async Task<IResult> CreateNewPeriod(int userId)
         {
