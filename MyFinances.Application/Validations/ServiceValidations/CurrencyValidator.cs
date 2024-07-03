@@ -10,7 +10,7 @@ namespace MyFinances.Application.Validations.ServiceValidations
     {
         public BaseResult ValidateOnExpired(Currency? currency)
         {
-            int updateTimeHours = 3;
+            int updateTimeHours = 5;
 
             if (currency == null)
                 return new BaseResult()
