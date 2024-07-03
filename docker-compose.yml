@@ -7,19 +7,20 @@ services:
       context: .
       dockerfile: MyFinances.Api/Dockerfile
     depends_on:
-        - postgres_db
+        - mysql_db
 
-  postgres_db:
-    container_name: postgres
-    image: postgres:latest
+  mysql_db:
+    container_name: mysql
+    image: mysql:latest
+    cap_add:
+      - SYS_NICE
     environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: MyFinances
+        MYSQL_DATABASE: MyFinances
+        MYSQL_ROOT_PASSWORD: root
     ports:
-        - "5432:5432"
+        - "3306:3306"
     volumes:
-        - postgres-data:/var/lib/postgresql/data
+        - "mysql_data:/var/lib/mysql"
 
 volumes:
-    postgres-data:   
+    mysql_data:
