@@ -17,10 +17,8 @@ namespace MyFinances.DAL.DI
             services.AddSingleton<DateInterceptor>();
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
-                //options.UseNpgsql(connectionString);
+                options.UseNpgsql(connectionString);
 
-                var mysqlVersion = MySqlServerVersion.AutoDetect(connectionString);
-                options.UseMySql(connectionString, mysqlVersion);
                 options.AddInterceptors(sp.GetRequiredService<DateInterceptor>());
             });
 
