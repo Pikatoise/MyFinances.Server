@@ -12,7 +12,7 @@ namespace MyFinances.DAL.DI
     {
         public static void AddDataAccessLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("conn");
+            var connectionString = configuration.GetConnectionString("postgresql");
 
             services.AddSingleton<DateInterceptor>();
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
