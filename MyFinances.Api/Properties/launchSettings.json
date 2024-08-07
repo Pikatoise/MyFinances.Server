@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://+:433;http://+:80"
+      "applicationUrl": "https://+:433;http://+:81"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -31,11 +31,10 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
       "environmentVariables": {
-        "ASPNETCORE_HTTPS_PORTS": "8081",
-        "ASPNETCORE_HTTP_PORTS": "8080",
+        "ASPNETCORE_HTTPS_PORTS": "81",
+        "ASPNETCORE_HTTP_PORTS": "80",
         "ASPNETCORE_ENVIRONMENT": "Production"
       },
-      "publishAllPorts": true,
       "useSSL": true
     }
   },

@@ -6,8 +6,12 @@ services:
     build:
       context: .
       dockerfile: MyFinances.Api/Dockerfile
+    ports:
+       - "5000:80" 
     depends_on:
         - postgresql_db
+    networks:
+        - app-network
 
   postgresql_db:
     container_name: postgresql_db
@@ -20,6 +24,11 @@ services:
         - "5432:5432"
     volumes:
         - "pgdata:/var/lib/postgresql/data"
+    networks:
+        - app-network
+
+networks:
+  app-network: {}
 
 volumes:
     pgdata: {}
