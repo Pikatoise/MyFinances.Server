@@ -7,10 +7,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=80
       - ASPNETCORE_HTTPS_PORTS=81
       - USER_SECRETS_ID=60aed2af-7ea1-4d1a-a5f4-3c1540d5ed37
-      - ASPNETCORE_URLS=http://+:80 
-    ports:
-      - "8080"
-      - "8081"
+      - ASPNETCORE_URLS=http://+:80
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

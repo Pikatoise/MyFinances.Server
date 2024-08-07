@@ -12,6 +12,8 @@ services:
         - postgresql_db
     networks:
         - app-network
+    env_file:
+        - ./.env
 
   postgresql_db:
     container_name: postgresql_db
