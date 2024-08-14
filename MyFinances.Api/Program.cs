@@ -26,6 +26,11 @@ namespace MyFinances.Api
             builder.Configuration.AddEnvironmentVariables();
 
             builder.Services.AddMemoryCache();
+            builder.Services.AddStackExchangeRedisCache(redisOptions =>
+            {
+                string connection = builder.Configuration.GetConnectionString("redis")!;
+                redisOptions.Configuration = connection;
+            });
 
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.DefaultSection));
 

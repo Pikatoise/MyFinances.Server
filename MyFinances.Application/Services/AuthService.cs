@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using MyFinances.Domain.DTO;
 using MyFinances.Domain.DTO.User;
@@ -12,6 +12,7 @@ using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 using MyFinances.Domain.Settings;
+using Newtonsoft.Json;
 using Serilog;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -29,7 +30,7 @@ namespace MyFinances.Application.Services
         IRoleValidator roleValidator,
         IValidator<LoginUserDto> loginDtoValidator,
         IValidator<RegisterUserDto> registerDtoValidator,
-        IMemoryCache memoryCache): IAuthService
+        IDistributedCache distributedCache): IAuthService
     {
         private readonly ILogger _logger = logger;
         private readonly IMapper _mapper = mapper;
@@ -41,7 +42,7 @@ namespace MyFinances.Application.Services
         private readonly IRoleValidator _roleValidator = roleValidator;
         private readonly IValidator<LoginUserDto> _loginDtoValidator = loginDtoValidator;
         private readonly IValidator<RegisterUserDto> _registerDtoValidator = registerDtoValidator;
-        private readonly IMemoryCache _memoryCache = memoryCache;
+        private readonly IDistributedCache _distributedCache = distributedCache;
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)
         {
@@ -79,10 +80,10 @@ namespace MyFinances.Application.Services
 
             string cacheKey = $"userToken-{dto.Login}";
 
-            BaseResult<TokenDto>? cachedToken = _memoryCache.Get<BaseResult<TokenDto>>(cacheKey);
+            string? cachedToken = await _distributedCache.GetStringAsync(cacheKey);
 
-            if (cachedToken != null)
-                return cachedToken;
+            if (!string.IsNullOrEmpty(cachedToken))
+                return JsonConvert.DeserializeObject<BaseResult<TokenDto>>(cachedToken);
 
             var userToken = await _unitOfWork.UserTokens
                 .GetAll()
@@ -126,8 +127,14 @@ namespace MyFinances.Application.Services
                 }
             };
 
-            _memoryCache.CreateEntry(cacheKey);
-            _memoryCache.Set(cacheKey, result, TimeSpan.FromMinutes(2));
+            await _distributedCache.SetStringAsync(
+                cacheKey,
+                JsonConvert.SerializeObject(result),
+                new DistributedCacheEntryOptions()
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2)
+                }
+            );
 
             return result;
         }
