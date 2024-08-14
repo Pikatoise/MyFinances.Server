@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using MyFinances.Domain.DTO;
 using MyFinances.Domain.DTO.User;
@@ -27,7 +28,8 @@ namespace MyFinances.Application.Services
         IOptions<JwtSettings> options,
         IRoleValidator roleValidator,
         IValidator<LoginUserDto> loginDtoValidator,
-        IValidator<RegisterUserDto> registerDtoValidator): IAuthService
+        IValidator<RegisterUserDto> registerDtoValidator,
+        IMemoryCache memoryCache): IAuthService
     {
         private readonly ILogger _logger = logger;
         private readonly IMapper _mapper = mapper;
@@ -39,6 +41,7 @@ namespace MyFinances.Application.Services
         private readonly IRoleValidator _roleValidator = roleValidator;
         private readonly IValidator<LoginUserDto> _loginDtoValidator = loginDtoValidator;
         private readonly IValidator<RegisterUserDto> _registerDtoValidator = registerDtoValidator;
+        private readonly IMemoryCache _memoryCache = memoryCache;
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)
         {
@@ -55,8 +58,8 @@ namespace MyFinances.Application.Services
             }
 
             var user = await _unitOfWork.Users.GetAll()
-                .Include(x => x.Roles)
-                .FirstOrDefaultAsync(u => u.Login.Equals(dto.Login));
+                    .Include(x => x.Roles)
+                    .FirstOrDefaultAsync(u => u.Login.Equals(dto.Login));
 
             var resultValidationUserOnNull = _authValidator.ValidateOnNull(user);
 
@@ -73,6 +76,13 @@ namespace MyFinances.Application.Services
                 {
                     Failure = resultValidationPasswordVerifying.Failure
                 };
+
+            string cacheKey = $"userToken-{dto.Login}";
+
+            BaseResult<TokenDto>? cachedToken = _memoryCache.Get<BaseResult<TokenDto>>(cacheKey);
+
+            if (cachedToken != null)
+                return cachedToken;
 
             var userToken = await _unitOfWork.UserTokens
                 .GetAll()
@@ -106,7 +116,7 @@ namespace MyFinances.Application.Services
 
             await _unitOfWork.SaveChangesAsync();
 
-            return new BaseResult<TokenDto>()
+            var result = new BaseResult<TokenDto>()
             {
                 Data = new TokenDto()
                 {
@@ -115,6 +125,11 @@ namespace MyFinances.Application.Services
                     RefreshToken = refreshToken,
                 }
             };
+
+            _memoryCache.CreateEntry(cacheKey);
+            _memoryCache.Set(cacheKey, result, TimeSpan.FromMinutes(2));
+
+            return result;
         }
 
         public async Task<BaseResult<UserDto>> Register(RegisterUserDto dto)

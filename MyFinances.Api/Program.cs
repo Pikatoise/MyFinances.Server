@@ -25,6 +25,8 @@ namespace MyFinances.Api
             builder.Configuration.AddUserSecrets<Program>();
             builder.Configuration.AddEnvironmentVariables();
 
+            builder.Services.AddMemoryCache();
+
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.DefaultSection));
 
             builder.Services.AddAuth(builder);
