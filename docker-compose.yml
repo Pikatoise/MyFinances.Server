@@ -10,10 +10,26 @@ services:
        - "5000:80" 
     depends_on:
         - postgresql_db
+        - rabbitmq_broker
     networks:
         - app-network
     env_file:
         - ./.env
+
+  rabbitmq_broker:
+    hostname: rabbitmq_broker
+    container_name: rabbitmq_broker
+    image: rabbitmq:3-management
+    environment:
+        RABBITMQ_DEFAULT_USER: root
+        RABBITMQ_DEFAULT_PASS: root
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - app-network
+    volumes: 
+      - rabbitmqdata:/var/lib/rabbitmq/
 
   postgresql_db:
     container_name: postgresql_db
@@ -34,3 +50,4 @@ networks:
 
 volumes:
     pgdata: {}
+    rabbitmqdata: {}

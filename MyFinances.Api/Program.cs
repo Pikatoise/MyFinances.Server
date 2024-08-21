@@ -3,6 +3,7 @@ using MyFinances.Api.Middlewares;
 using MyFinances.Application.DI;
 using MyFinances.DAL.DI;
 using MyFinances.Domain.Settings;
+using MyFinances.RabbitMQ.DI;
 using Serilog;
 
 namespace MyFinances.Api
@@ -41,6 +42,9 @@ namespace MyFinances.Api
             builder.Services.AddSwagger();
 
             builder.Services.AddDataAccessLayer(builder.Configuration);
+
+            builder.Services.AddMassTransitWithRabbit(builder.Configuration);
+
             builder.Services.AddApplication();
 
             var app = builder.Build();

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MyFinances.Domain.DTO;
@@ -11,6 +12,7 @@ using MyFinances.Domain.Interfaces.Services;
 using MyFinances.Domain.Interfaces.Validations;
 using MyFinances.Domain.Result;
 using MyFinances.Domain.Settings;
+using MyFinances.Domain.Transactions;
 using Serilog;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -27,7 +29,8 @@ namespace MyFinances.Application.Services
         IOptions<JwtSettings> options,
         IRoleValidator roleValidator,
         IValidator<LoginUserDto> loginDtoValidator,
-        IValidator<RegisterUserDto> registerDtoValidator): IAuthService
+        IValidator<RegisterUserDto> registerDtoValidator,
+        IPublishEndpoint publishEndpoint): IAuthService
     {
         private readonly ILogger _logger = logger;
         private readonly IMapper _mapper = mapper;
@@ -39,6 +42,7 @@ namespace MyFinances.Application.Services
         private readonly IRoleValidator _roleValidator = roleValidator;
         private readonly IValidator<LoginUserDto> _loginDtoValidator = loginDtoValidator;
         private readonly IValidator<RegisterUserDto> _registerDtoValidator = registerDtoValidator;
+        private readonly IPublishEndpoint _publishEndpoint = publishEndpoint;
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)
         {
@@ -105,6 +109,12 @@ namespace MyFinances.Application.Services
             }
 
             await _unitOfWork.SaveChangesAsync();
+
+            await _publishEndpoint.Publish(new LoginTransaction()
+            {
+                UserId = user.Id,
+                UserLogin = user.Login
+            });
 
             return new BaseResult<TokenDto>()
             {
